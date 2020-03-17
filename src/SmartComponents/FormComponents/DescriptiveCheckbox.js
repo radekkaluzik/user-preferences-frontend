@@ -5,23 +5,52 @@ import PropTypes from 'prop-types';
 import './descriptiveCheckbox.scss';
 
 // eslint-disable-next-line no-unused-vars
-const DescriptiveCheckbox = ({ name, label, description, isDanger, FieldProvider, formOptions, ...rest }) => (
-    <Checkbox
-        { ...rest }
-        id={ `descriptive-checkbox-${name}` }
-        className="pref-c__descriptive-checkbox"
-        label={ <span className={ classNames('pref-c__checkbox-label', { 'pref-c__checkbox-label-error': isDanger }) }>{label}</span> }
-        description={ <span className="pref-c__checkbox-description">{description}</span> }
-    />
-);
+const DescriptiveCheckbox = ({ name, label, description, isDanger, FieldProvider, isGlobal, ...rest }) => {
+    return (
+        <FieldProvider name={ name } data={ {
+            isClearable: true
+        } } type="checkbox" { ...rest } render={ ({ input: { onChange, ...input }}) => (
+            <Checkbox
+                { ...input }
+                isChecked={ input.checked }
+                id={ `descriptive-checkbox-${name}` }
+                onChange={ (...props) => {
+                    const { formOptions } = rest;
+                    if (isGlobal) {
+                        formOptions.batch(() => {
+                            formOptions.getRegisteredFields().forEach((field) => {
+                                if (typeof formOptions.getFieldState(field).value === 'boolean') {
+                                    formOptions.getFieldState(field).change(false);
+                                }
+                            });
+                        });
+                    } else {
+                        formOptions.getFieldState('unsubscribe.from-all').change(false);
+                    }
+
+                    onChange(...props);
+                } }
+                data-type="descriptive-checkbox"
+                className="pref-c__descriptive-checkbox"
+                label={ <span className={ classNames(
+                    'pref-c__checkbox-label',
+                    { 'pref-c__checkbox-label-error': isDanger || isGlobal }
+                ) }>{label}</span> }
+                description={ <span className="pref-c__checkbox-description">{description}</span> }
+            />
+        ) }
+        />
+    );
+};
 
 DescriptiveCheckbox.propTypes = {
-    FieldProvider: PropTypes.any.apply,
+    FieldProvider: PropTypes.any,
     formOptions: PropTypes.any,
     name: PropTypes.string,
     label: PropTypes.string,
     description: PropTypes.string,
-    isDanger: PropTypes.bool
+    isDanger: PropTypes.bool,
+    isGlobal: PropTypes.bool
 };
 
 DescriptiveCheckbox.defaultProps = {

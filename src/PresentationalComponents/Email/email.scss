@@ -2,23 +2,32 @@
 // Found in Routes.js as the rootClass
 
 .pref-email {
-  
-  .pref-email_head {
-    font-size: var(--pf-global--FontSize--xl);
-    padding-bottom: 16px;
-  }
+    .pf-c-data-list {
+        border: 0;
+    
+        .pref-c-title {
+            // min and max width, because data lists
+            min-width: 155px;
+            max-width: 155px;
+        }
+        .pf-c-data-list__item:last-of-type { border: 0; }
+    }
 
-  .pref-email_subheader {
-    margin-top: 8px;
-    font-size: var(--pf-global--FontSize--md);
-    font-weight: var(--pf-global--FontWeight--normal);
-  }
+    .pref-email__info {
+        .pf-c-card__body .pf-l-flex .pref-email_loader span {
+            margin-left: var(--pf-global--spacer--3xl);
+        }
+    }
 
-  .pref-email_bold {
-    font-weight: var(--pf-global--FontWeight--bold);
-  }
-  
-  .pref-email_loader {
-    min-width: 180px;
-  }
+    .pref-email_form .pf-c-form .pf-c-data-list {
+        .pf-c-data-list__item-row { padding-left: 0; }
+    }
+
+    .pref-email_subheader {
+        margin-top: 8px;
+        font-size: var(--pf-global--FontSize--md);
+        font-weight: var(--pf-global--FontWeight--normal);
+    }
+
+    .pref-u-bold { font-weight: var(--pf-global--FontWeight--bold); }
 }

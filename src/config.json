@@ -1,0 +1,18 @@
+{
+    "email-preference": {
+        "general": {
+            "title": "General",
+            "localFile": "data/general.json"
+        },
+        "insights": {
+            "title": "Insights"
+        },
+        "custom-policies": {
+            "title": "Custom policies"
+        },
+        "unsubscribe": {
+            "title": "",
+            "localFile": "data/unsubscribe.json"
+        }
+    }
+}

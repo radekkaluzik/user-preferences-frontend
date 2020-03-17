@@ -26,6 +26,7 @@ globals:
   shallow: true
   React: true
 rules:
+  template-curly-spacing: off
   array-bracket-spacing:
     - error
     - always
@@ -52,6 +53,8 @@ rules:
       MemberExpression: 0
       ImportDeclaration: 1
       ObjectExpression: 1
+      ignoredNodes:
+        - TemplateLiteral
   react/jsx-curly-spacing:
     - error
     - always

@@ -1,5 +1,7 @@
 import ReducerRegistry from '@redhat-cloud-services/frontend-components-utilities/files/ReducerRegistry';
 import promiseMiddleware from 'redux-promise-middleware';
+export { default as emailPreferences } from './email-preferences';
+import { notificationsMiddleware } from '@redhat-cloud-services/frontend-components-notifications/';
 
 let registry;
 
@@ -10,6 +12,7 @@ export function init (...middleware) {
 
     registry = new ReducerRegistry({}, [
         promiseMiddleware,
+        notificationsMiddleware({ autoDismiss: true }),
         ...middleware
     ]);
 

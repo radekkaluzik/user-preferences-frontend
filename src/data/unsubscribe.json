@@ -1,0 +1,9 @@
+[{
+    "fields": [ {
+        "name": "unsubscribe.from-all",
+        "isGlobal": true,
+        "label": "Unsubscribe from all",
+        "component": "descriptiveCheckbox"
+      }
+    ]
+}]

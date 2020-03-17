@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataListLayout checkbox tests should render correctly 1`] = `
+<DataListLayout
+  formOptions={
+    Object {
+      "renderForm": [Function],
+    }
+  }
+  label="test label"
+  sections={
+    Array [
+      Object {
+        "fields": Array [
+          Object {
+            "fields": Array [],
+          },
+        ],
+        "label": "test",
+      },
+    ]
+  }
+>
+  <DataList
+    aria-label="test label"
+  >
+    <ul
+      aria-label="test label"
+      className="pf-c-data-list"
+    >
+      <DataListItem
+        aria-labelledby="simple-item1"
+        key="0"
+      >
+        <li
+          aria-labelledby="simple-item1"
+          className="pf-c-data-list__item"
+          id=""
+        >
+          <DataListRow
+            fields={Array []}
+            fieldsKey={0}
+            formOptions={
+              Object {
+                "renderForm": [Function],
+              }
+            }
+            key=".$0-0"
+            label="test"
+            rowid="simple-item1"
+          >
+            <DataListItemRow>
+              <div
+                className="pf-c-data-list__item-row"
+              >
+                <DataListItemCells
+                  dataListCells={
+                    Array [
+                      <DataListCell
+                        className="pref-c-title pref-u-bold"
+                        isFilled={false}
+                      >
+                        test
+                      </DataListCell>,
+                      <DataListCell
+                        isFilled={true}
+                      >
+                        test
+                      </DataListCell>,
+                    ]
+                  }
+                  key=".0"
+                  rowid=""
+                >
+                  <div
+                    className="pf-c-data-list__item-content"
+                  >
+                    <DataListCell
+                      className="pref-c-title pref-u-bold"
+                      isFilled={false}
+                      key="0-title"
+                    >
+                      <div
+                        className="pf-c-data-list__cell pf-m-no-fill pref-c-title pref-u-bold"
+                      >
+                        test
+                      </div>
+                    </DataListCell>
+                    <DataListCell
+                      isFilled={true}
+                      key="0-content"
+                    >
+                      <div
+                        className="pf-c-data-list__cell"
+                      >
+                        test
+                      </div>
+                    </DataListCell>
+                  </div>
+                </DataListItemCells>
+              </div>
+            </DataListItemRow>
+          </DataListRow>
+        </li>
+      </DataListItem>
+    </ul>
+  </DataList>
+</DataListLayout>
+`;

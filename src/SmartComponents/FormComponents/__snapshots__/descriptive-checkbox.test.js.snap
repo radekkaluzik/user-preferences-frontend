@@ -2,59 +2,74 @@
 
 exports[`Descriptive checkbox tests should render correctly 1`] = `
 <DescriptiveCheckbox
+  FieldProvider={[Function]}
   isDanger={false}
   label="test label"
   name=""
 >
-  <Checkbox
-    className="pref-c__descriptive-checkbox"
-    description={
-      <span
-        className="pref-c__checkbox-description"
-      />
+  <FieldProvider
+    data={
+      Object {
+        "isClearable": true,
+      }
     }
-    id="descriptive-checkbox-"
-    isChecked={false}
-    isDisabled={false}
-    isValid={true}
-    label={
-      <span
-        className="pref-c__checkbox-label"
-      >
-        test label
-      </span>
-    }
-    onChange={[Function]}
+    name=""
+    render={[Function]}
+    type="checkbox"
   >
-    <div
-      className="pf-c-check pref-c__descriptive-checkbox"
-    >
-      <input
-        aria-invalid={false}
-        className="pf-c-check__input"
-        disabled={false}
-        id="descriptive-checkbox-"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <label
-        className="pf-c-check__label"
-        htmlFor="descriptive-checkbox-"
-      >
+    <Checkbox
+      className="pref-c__descriptive-checkbox"
+      data-type="descriptive-checkbox"
+      description={
+        <span
+          className="pref-c__checkbox-description"
+        />
+      }
+      id="descriptive-checkbox-"
+      isChecked={false}
+      isDisabled={false}
+      isValid={true}
+      label={
         <span
           className="pref-c__checkbox-label"
         >
           test label
         </span>
-      </label>
+      }
+      onChange={[Function]}
+    >
       <div
-        className="pf-c-check__description"
+        className="pf-c-check pref-c__descriptive-checkbox"
       >
-        <span
-          className="pref-c__checkbox-description"
+        <input
+          aria-invalid={false}
+          checked={false}
+          className="pf-c-check__input"
+          data-type="descriptive-checkbox"
+          disabled={false}
+          id="descriptive-checkbox-"
+          onChange={[Function]}
+          type="checkbox"
         />
+        <label
+          className="pf-c-check__label"
+          htmlFor="descriptive-checkbox-"
+        >
+          <span
+            className="pref-c__checkbox-label"
+          >
+            test label
+          </span>
+        </label>
+        <div
+          className="pf-c-check__description"
+        >
+          <span
+            className="pref-c__checkbox-description"
+          />
+        </div>
       </div>
-    </div>
-  </Checkbox>
+    </Checkbox>
+  </FieldProvider>
 </DescriptiveCheckbox>
 `;

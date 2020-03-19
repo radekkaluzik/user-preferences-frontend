@@ -31,12 +31,12 @@ const DescriptiveCheckbox = ({ name, label, description, isDanger, FieldProvider
                     onChange(...props);
                 } }
                 data-type="descriptive-checkbox"
-                className="pref-c__descriptive-checkbox"
+                className="pref-c-descriptive-checkbox"
                 label={ <span className={ classNames(
-                    'pref-c__checkbox-label',
-                    { 'pref-c__checkbox-label-error': isDanger || isGlobal }
+                    'pref-c-checkbox-label',
+                    { 'pref-c-checkbox-label-error': isDanger || isGlobal }
                 ) }>{label}</span> }
-                description={ <span className="pref-c__checkbox-description">{description}</span> }
+                { ...description && { description: <span className="pref-c-checkbox-description">{description}</span> } }
             />
         ) }
         />

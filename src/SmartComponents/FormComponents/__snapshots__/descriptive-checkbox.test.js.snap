@@ -18,20 +18,15 @@ exports[`Descriptive checkbox tests should render correctly 1`] = `
     type="checkbox"
   >
     <Checkbox
-      className="pref-c__descriptive-checkbox"
+      className="pref-c-descriptive-checkbox"
       data-type="descriptive-checkbox"
-      description={
-        <span
-          className="pref-c__checkbox-description"
-        />
-      }
       id="descriptive-checkbox-"
       isChecked={false}
       isDisabled={false}
       isValid={true}
       label={
         <span
-          className="pref-c__checkbox-label"
+          className="pref-c-checkbox-label"
         >
           test label
         </span>
@@ -39,7 +34,7 @@ exports[`Descriptive checkbox tests should render correctly 1`] = `
       onChange={[Function]}
     >
       <div
-        className="pf-c-check pref-c__descriptive-checkbox"
+        className="pf-c-check pref-c-descriptive-checkbox"
       >
         <input
           aria-invalid={false}
@@ -56,18 +51,11 @@ exports[`Descriptive checkbox tests should render correctly 1`] = `
           htmlFor="descriptive-checkbox-"
         >
           <span
-            className="pref-c__checkbox-label"
+            className="pref-c-checkbox-label"
           >
             test label
           </span>
         </label>
-        <div
-          className="pf-c-check__description"
-        >
-          <span
-            className="pref-c__checkbox-description"
-          />
-        </div>
       </div>
     </Checkbox>
   </FieldProvider>

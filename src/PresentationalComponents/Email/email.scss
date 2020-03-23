@@ -1,7 +1,12 @@
 // js generates class '.page__{rootClass}' that wraps the content in your page added to the root tag
 // Found in Routes.js as the rootClass
+@import '~@redhat-cloud-services/frontend-components-utilities/files/Utilities/_mixins.scss';
 
 .pref-email {
+    .pref-email__subs-info {
+        padding-bottom: 0;
+    }
+
     .pf-c-data-list {
         border: 0;
     
@@ -9,12 +14,20 @@
             // min and max width, because data lists
             min-width: 155px;
             max-width: 155px;
+
+            @include rem('padding-top', 22px);
         }
         .pf-c-data-list__item:last-of-type { border: 0; }
 
         .pf-c-data-list__item-content {
-            .pf-c-data-list__cell:first-of-type {
-                padding: var(--pf-global--spacer--sm) 0;
+            .pf-c-data-list__cell{
+                > * {
+                    padding-bottom: var(--pf-global--spacer--md);
+
+                    &:last-child {
+                        padding-bottom: 0;
+                    }
+                }
             }
         }
     }

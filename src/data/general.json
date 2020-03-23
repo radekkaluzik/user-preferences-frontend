@@ -6,6 +6,15 @@
         "initialValue": true,
         "initializeOnMount": true,
         "description": "Be notified about known maintenance windows, new features and marketing annoucements for cloud.redhat.com"
+      }, {
+        "component": "text-field",
+        "label": "First name",
+        "name": "first-name"
+      },
+      {
+        "component": "text-field",
+        "label": "Last name",
+        "name": "last-name"
       }
     ]
 }]

@@ -81,7 +81,7 @@ const Email = () => {
     const store = useSelector(({ emailPreferences }) => emailPreferences);
 
     // eslint-disable-next-line no-unused-vars
-    const saveValues = ({ general, unsubscribe, ...values }) => {
+    const saveValues = ({ unsubscribe, ...values }) => {
         Object.entries(email).forEach(([ application, { localFile, schema }]) => {
             if (!localFile && !schema && store?.[application]?.schema && Object.keys(store?.[application]?.schema).length > 0) {
                 dispatch(saveEmailValues({ application, values }));
@@ -128,7 +128,7 @@ const Email = () => {
                     </StackItem>
                     <StackItem>
                         <Card>
-                            <CardHeader className="pref-email__info-head">
+                            <CardHeader className="pref-email__info-head pref-email__subs-info">
                                 <TextContent>
                                     <Text component={ TextVariants.h2 }>Email subscriptions</Text>
                                 </TextContent>

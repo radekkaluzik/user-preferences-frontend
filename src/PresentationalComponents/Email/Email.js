@@ -15,13 +15,17 @@ import {
     CardHeader,
     TextContent,
     Text,
-    TextVariants } from '@patternfly/react-core';
+    TextVariants,
+    Spinner,
+    Bullseye
+} from '@patternfly/react-core';
 import FormRender from '@data-driven-forms/react-form-renderer';
 import PropTypes from 'prop-types';
 import { DESCRIPTIVE_CHECKBOX, DATA_LIST, LOADER, DescriptiveCheckbox, DataListLayout, Loader } from '../../SmartComponents/FormComponents';
 import config from '../../config.json';
 import { emailPreferences, register } from '../../store';
-import { getEmailSchema, saveEmailValues } from '../../actions';
+import { saveEmailValues } from '../../actions';
+import { calculateEmailConfig, getSection } from '../../Utilities/functions';
 
 const FormButtons = ({ submitting, pristine, onCancel }) => (
     <div>
@@ -39,14 +43,6 @@ const FormButtons = ({ submitting, pristine, onCancel }) => (
     </div>
 );
 
-const getSchema = (app) => {
-    return !app || !app.loaded ? [{
-        fields: [{
-            component: LOADER
-        }]
-    }] : app.schema;
-};
-
 FormButtons.propTypes = {
     submitting: PropTypes.bool,
     pristine: PropTypes.bool,
@@ -55,34 +51,28 @@ FormButtons.propTypes = {
 };
 
 const Email = () => {
-    const email = config['email-preference'];
+    const [ emailConfig, setEmailConfig ] = useState({});
     const [ currentUser, setCurrentUser ] = useState({});
     const [ isLoaded, setLoaded ] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        register(emailPreferences);
-        insights.chrome.auth.getUser().then(
-            (data) => {
-                setCurrentUser(data.identity.user);
-                setLoaded(true);
-            }
-        );
-        Object.entries(email).forEach(async ([ key, { localFile }]) => {
-            if (localFile) {
-                const newMapper = (await import(`../../${localFile}`)).default;
-                dispatch(getEmailSchema({ schema: newMapper, application: key }));
-            } else {
-                dispatch(getEmailSchema({ application: key }));
-            }
-        });
+        (async () => {
+            register(emailPreferences);
+            const { identity } = await insights.chrome.auth.getUser();
+            setCurrentUser(identity.user);
+            setEmailConfig((await calculateEmailConfig(config, dispatch)));
+            setLoaded(true);
+        })();
     }, []);
 
     const store = useSelector(({ emailPreferences }) => emailPreferences);
 
     // eslint-disable-next-line no-unused-vars
     const saveValues = ({ unsubscribe, ...values }) => {
-        Object.entries(email).forEach(([ application, { localFile, schema }]) => {
+        Object.entries(emailConfig)
+        .filter(([ , { isVisible }]) => isVisible === true)
+        .forEach(([ application, { localFile, schema }]) => {
             if (!localFile && !schema && store?.[application]?.schema && Object.keys(store?.[application]?.schema).length > 0) {
                 dispatch(saveEmailValues({ application, values }));
             }
@@ -91,6 +81,19 @@ const Email = () => {
 
     const cancelEmail = () => {
         console.log('cancel pressed');
+    };
+
+    const calculateSection = (key, schema) => {
+        return getSection(key, schema, store?.[key], (isVisible) => {
+            const { [key]: currSchema, ...rest } = emailConfig;
+            setEmailConfig({
+                ...isVisible && { [key]: {
+                    ...currSchema,
+                    isVisible
+                }},
+                ...rest
+            });
+        });
     };
 
     return (
@@ -135,7 +138,7 @@ const Email = () => {
                                 <div className="pref-email_subheader">Select the cloud.redhat.com emails you want to receive.</div>
                             </CardHeader>
                             <CardBody className="pref-email_form">
-                                <FormRender
+                                {isLoaded ? <FormRender
                                     keepDirtyOnReinitialize
                                     formFieldsMapper={ {
                                         ...formFieldsMapper,
@@ -148,16 +151,15 @@ const Email = () => {
                                         fields: [{
                                             name: 'email-preferences',
                                             component: DATA_LIST,
-                                            sections: Object.entries(email).map(([ key, schema ]) => ({
-                                                label: schema?.title,
-                                                name: key,
-                                                fields: schema?.fields || getSchema(store?.[key])
-                                            }))
+                                            sections: Object.entries(emailConfig)
+                                            .map(([ key, schema ]) => calculateSection(key, schema))
                                         }]
                                     } }
                                     renderFormButtons={ props => <FormButtons { ...props } onCancel={ cancelEmail } /> }
                                     onSubmit={ saveValues }
-                                />
+                                /> : <Bullseye>
+                                    <Spinner />
+                                </Bullseye>}
                             </CardBody>
                         </Card>
                     </StackItem>

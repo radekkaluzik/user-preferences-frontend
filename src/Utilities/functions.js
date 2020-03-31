@@ -15,7 +15,7 @@ export const calculatePermissions = (permissions) => {
 };
 
 export const calculateEmailConfig = async ({ 'email-preference': config }, dispatch) => {
-    const email = await Promise.all(Object.entries(config).map(async ([ key, { permissions, localFile, ...rest }]) => {
+    const email = await Promise.all(Object.entries(config).map(async ([ key, { permissions, url, localFile, ...rest }]) => {
         const isVisible = permissions ? calculatePermissions(permissions) : true;
         (async () => {
             const schemaVisible = await Promise.resolve(isVisible);
@@ -24,7 +24,7 @@ export const calculateEmailConfig = async ({ 'email-preference': config }, dispa
                     const newMapper = (await import(`../${localFile}`)).default;
                     dispatch(getEmailSchema({ schema: newMapper, application: key }));
                 } else {
-                    dispatch(getEmailSchema({ application: key }));
+                    dispatch(getEmailSchema({ application: key, url }));
                 }
             }
         })();

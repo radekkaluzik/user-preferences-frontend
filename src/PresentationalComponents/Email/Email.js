@@ -72,9 +72,9 @@ const Email = () => {
     const saveValues = ({ unsubscribe, ...values }) => {
         Object.entries(emailConfig)
         .filter(([ , { isVisible }]) => isVisible === true)
-        .forEach(([ application, { localFile, schema }]) => {
+        .forEach(([ application, { localFile, schema, url }]) => {
             if (!localFile && !schema && store?.[application]?.schema && Object.keys(store?.[application]?.schema).length > 0) {
-                dispatch(saveEmailValues({ application, values }));
+                dispatch(saveEmailValues({ application, values, url }));
             }
         });
     };

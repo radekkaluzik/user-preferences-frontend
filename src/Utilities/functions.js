@@ -9,7 +9,7 @@ export const getSchema = (app) => {
 
 export const calculatePermissions = (permissions) => {
     return Promise.all(
-        (Array.isArray(permissions) ? permissions : [ permissions ])
+        [ permissions ].flat()
         .map(({ method, args }) => insights.chrome?.visibilityFunctions?.[method]?.(...args || []))
     ).then((visibility) => visibility.every(Boolean));
 };

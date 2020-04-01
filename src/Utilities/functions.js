@@ -3,16 +3,12 @@ import { Skeleton } from '@redhat-cloud-services/frontend-components';
 import { getEmailSchema } from '../actions';
 import { loaderField } from './constants';
 
-export const getSchema = (app) => {
-    return !app || !app.loaded ? loaderField : app.schema;
-};
+export const getSchema = (app) => !app || !app.loaded ? loaderField : app.schema;
 
-export const calculatePermissions = (permissions) => {
-    return Promise.all(
-        [ permissions ].flat()
-        .map(({ method, args }) => insights.chrome?.visibilityFunctions?.[method]?.(...args || []))
-    ).then((visibility) => visibility.every(Boolean));
-};
+export const calculatePermissions = (permissions) => Promise.all(
+    [ permissions ].flat()
+    .map(({ method, args }) => insights.chrome?.visibilityFunctions?.[method]?.(...args || []))
+).then((visibility) => visibility.every(Boolean));
 
 export const calculateEmailConfig = (
     { 'email-preference': config } = { 'email-preference': {}},

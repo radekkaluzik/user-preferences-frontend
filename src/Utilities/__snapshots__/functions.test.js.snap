@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getSection should return loader 1`] = `
+<Skeleton
+  isDark={false}
+  size="md"
+>
+  <div
+    className="ins-c-skeleton ins-c-skeleton__md"
+  >
+     
+  </div>
+</Skeleton>
+`;

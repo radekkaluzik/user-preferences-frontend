@@ -1,7 +1,8 @@
 {
     "email-preference": {
         "insights": {
-            "title": "Insights"
+            "title": "Insights",
+            "url": "/user-preferences/"
         },
         "policies": {
             "title": "Policies"

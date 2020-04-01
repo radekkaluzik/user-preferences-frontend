@@ -2,9 +2,9 @@ import { getApplicationSchema, saveValues as save } from './api';
 import { ACTION_TYPES } from './constants';
 import config from './config.json';
 
-export const getEmailSchema = ({ application, apiVersion, resourceType = 'email-preference', schema }) => ({
+export const getEmailSchema = ({ application, apiVersion, resourceType = 'email-preference', schema, url }) => ({
     type: ACTION_TYPES.GET_EMAIL_SCHEMA,
-    payload: schema || getApplicationSchema(application, apiVersion, resourceType),
+    payload: schema || getApplicationSchema(application, apiVersion, resourceType, url),
     meta: {
         appName: application,
         notifications: {
@@ -17,9 +17,9 @@ export const getEmailSchema = ({ application, apiVersion, resourceType = 'email-
     }
 });
 
-export const saveEmailValues = ({ application, values, apiVersion, resourceType = 'email-preference' }) => ({
+export const saveEmailValues = ({ application, values, apiVersion, resourceType = 'email-preference', url }) => ({
     type: ACTION_TYPES.SAVE_EMAIL_SCHEMA,
-    payload: save(application, values, apiVersion, resourceType),
+    payload: save(application, values, apiVersion, resourceType, url),
     meta: {
         notifications: {
             fulfilled: {

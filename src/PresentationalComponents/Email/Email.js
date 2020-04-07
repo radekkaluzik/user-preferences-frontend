@@ -129,9 +129,7 @@ const Email = () => {
                                     <a
                                         rel="noopener noreferrer"
                                         target="_blank"
-                                        href={
-                                            `https://www.${insights.chrome.isProd ? '' : 'qa.'}redhat.com/wapps/ugc/protected/personalInfo.html`
-                                        }>
+                                        href={ `https://www.${insights.chrome.isProd ? '' : 'qa.'}redhat.com/wapps/ugc/protected/personalInfo.html` }>
                                         Not correct?
                                     </a>
                                 </Flex>

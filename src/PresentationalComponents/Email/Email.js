@@ -130,7 +130,7 @@ const Email = () => {
                                         rel="noopener noreferrer"
                                         target="_blank"
                                         href={
-                                            `https://www.${insights.chrome.isBeta() ? 'qa.' : ''}redhat.com/wapps/ugc/protected/personalInfo.html`
+                                            `https://www.${insights.chrome.isProd ? '' : 'qa.'}redhat.com/wapps/ugc/protected/personalInfo.html`
                                         }>
                                         Not correct?
                                     </a>

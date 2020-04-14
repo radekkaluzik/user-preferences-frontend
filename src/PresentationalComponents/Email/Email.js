@@ -74,7 +74,7 @@ const Email = () => {
     const store = useSelector(({ emailPreferences }) => emailPreferences);
 
     // eslint-disable-next-line no-unused-vars
-    const saveValues = ({ unsubscribe, ...values }, formApi) => {
+    const saveValues = ({ unsubscribe, ...values }) => {
         Object.entries(emailConfig)
         .filter(([ , { isVisible }]) => isVisible === true)
         .forEach(([ application, { localFile, schema, url }]) => {
@@ -82,19 +82,21 @@ const Email = () => {
                 dispatch(saveEmailValues({ application, values, url }));
             }
         });
-        formApi.initialize(values);
     };
 
     const calculateSection = (key, schema) => {
         return getSection(key, schema, store?.[key], (isVisible) => {
-            const { [key]: currSchema, ...rest } = emailConfig;
-            setEmailConfig({
-                ...isVisible && { [key]: {
-                    ...currSchema,
+            const { ...config } = emailConfig;
+            if (isVisible === false) {
+                delete config[key];
+            } else {
+                config[key] = {
+                    ...config[key],
                     isVisible
-                }},
-                ...rest
-            });
+                };
+            }
+
+            setEmailConfig(config);
         });
     };
 

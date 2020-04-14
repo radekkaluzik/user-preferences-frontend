@@ -5,7 +5,13 @@
             "url": "/user-preferences/"
         },
         "policies": {
-            "title": "Policies"
+            "title": "Policies",
+            "permissions": [
+              {
+                  "method": "hasPermissions",
+                  "args": [["policies:*:*"]]
+              }
+          ]
         },
         "unsubscribe": {
             "title": "",

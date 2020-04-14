@@ -7,6 +7,7 @@ import {
     DataListCell
 } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
+import { useFieldApi, useFormApi } from  '@data-driven-forms/react-form-renderer';
 
 class DataListRow extends Component {
     state = {
@@ -48,25 +49,29 @@ DataListRow.propTypes = {
 };
 
 // eslint-disable-next-line no-unused-vars
-const DataListLayout = ({ sections, label, name, FormSpyProvider, FieldProvider, formOptions, validate, ...props }) => (
-    <DataList aria-label={ label || name } { ...props }>
-        {sections.map(({ label, fields }, key) => {
-            const actualFields = Array.isArray(fields) ? fields : [ fields ];
-            return (
-                actualFields.length > 0 && <DataListItem name={ name } key={ key } aria-labelledby="simple-item1">
-                    {actualFields.map(({ fields: fieldsToRender }, fieldsKey) => (
-                        <DataListRow key={ `${key}-${fieldsKey}` }
-                            fieldsKey={ fieldsKey }
-                            label={ label }
-                            fields={ fieldsToRender }
-                            formOptions={ formOptions }
-                        />
-                    ))}
-                </DataListItem>
-            );
-        })}
-    </DataList>
-);
+const DataListLayout = (props) => {
+    const { sections, label, name } = useFieldApi(props);
+    const formOptions = useFormApi();
+    return (
+        <DataList aria-label={ label || name } { ...props }>
+            {sections.map(({ label, fields }, key) => {
+                const actualFields = Array.isArray(fields) ? fields : [ fields ];
+                return (
+                    actualFields.length > 0 && <DataListItem name={ name } key={ key } aria-labelledby="simple-item1">
+                        {actualFields.map(({ fields: fieldsToRender }, fieldsKey) => (
+                            <DataListRow key={ `${key}-${fieldsKey}` }
+                                fieldsKey={ fieldsKey }
+                                label={ label }
+                                fields={ fieldsToRender }
+                                formOptions={ formOptions }
+                            />
+                        ))}
+                    </DataListItem>
+                );
+            })}
+        </DataList>
+    );
+};
 
 DataListLayout.propTypes = {
     sections: PropTypes.array,

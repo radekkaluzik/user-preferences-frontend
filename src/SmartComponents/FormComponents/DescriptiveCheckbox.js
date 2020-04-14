@@ -2,45 +2,43 @@ import React from 'react';
 import { Checkbox } from '@patternfly/react-core';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { useFieldApi, useFormApi } from  '@data-driven-forms/react-form-renderer';
 import './descriptiveCheckbox.scss';
 
 // eslint-disable-next-line no-unused-vars
-const DescriptiveCheckbox = ({ name, label, title, description, isDanger, FieldProvider, isGlobal, ...rest }) => {
-    return (
-        <FieldProvider name={ name } data={ {
-            isClearable: true
-        } } type="checkbox" { ...rest } render={ ({ input: { onChange, ...input }}) => (
-            <Checkbox
-                { ...input }
-                isChecked={ input.checked }
-                id={ `descriptive-checkbox-${name}` }
-                onChange={ (...props) => {
-                    const { formOptions } = rest;
-                    if (isGlobal) {
-                        formOptions.batch(() => {
-                            formOptions.getRegisteredFields().forEach((field) => {
-                                if (typeof formOptions.getFieldState(field).value === 'boolean') {
-                                    formOptions.getFieldState(field).change(false);
-                                }
-                            });
-                        });
-                    } else {
-                        formOptions.getFieldState('unsubscribe.from-all').change(false);
-                    }
+const DescriptiveCheckbox = (props) => {
+    const { name, label, description, isDanger, isGlobal, input: { onChange, ...input }} = useFieldApi({
+        ...props,
+        type: 'checkbox'
+    });
+    const formOptions = useFormApi();
+    return <Checkbox
+        { ...input }
+        isChecked={ input.checked }
+        id={ `descriptive-checkbox-${name}` }
+        onChange={ (...props) => {
+            if (isGlobal) {
+                formOptions.batch(() => {
+                    formOptions.getRegisteredFields().forEach((field) => {
+                        if (typeof formOptions.getFieldState(field).value === 'boolean') {
+                            formOptions.getFieldState(field).change(false);
+                        }
+                    });
+                });
+            } else {
+                formOptions.getFieldState('unsubscribe.from-all').change(false);
+            }
 
-                    onChange(...props);
-                } }
-                data-type="descriptive-checkbox"
-                className="pref-c-descriptive-checkbox"
-                label={ <span className={ classNames(
-                    'pref-c-checkbox-label',
-                    { 'pref-c-checkbox-label-error': isDanger || isGlobal }
-                ) }>{label || title}</span> }
-                { ...description && { description: <span className="pref-c-checkbox-description">{description}</span> } }
-            />
-        ) }
-        />
-    );
+            onChange(...props);
+        } }
+        data-type="descriptive-checkbox"
+        className="pref-c-descriptive-checkbox"
+        label={ <span className={ classNames(
+            'pref-c-checkbox-label',
+            { 'pref-c-checkbox-label-error': isDanger || isGlobal }
+        ) }>{label || title}</span> }
+        { ...description && { description: <span className="pref-c-checkbox-description">{description}</span> } }
+    />;
 };
 
 DescriptiveCheckbox.propTypes = {

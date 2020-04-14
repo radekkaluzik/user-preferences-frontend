@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import './email.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { formFieldsMapper, layoutMapper } from '@data-driven-forms/pf4-component-mapper';
+import { componentMapper, FormTemplate } from '@data-driven-forms/pf4-component-mapper';
 import { Main, PageHeader, PageHeaderTitle, Skeleton } from '@redhat-cloud-services/frontend-components';
 import { isEmpty } from 'lodash';
 import {
@@ -32,6 +32,7 @@ import { calculateEmailConfig, getSection, distributeSuccessError, dispatchMessa
 
 const FormButtons = ({ pristine, dirtyFieldsSinceLastSubmit, submitSucceeded, reset }) => {
     const noChanges = isEmpty(dirtyFieldsSinceLastSubmit) || !submitSucceeded && pristine;
+    console.log(pristine, dirtyFieldsSinceLastSubmit, submitSucceeded, reset);
     return (
         <div>
             <Button
@@ -171,13 +172,17 @@ const Email = () => {
                             </CardHeader>
                             <CardBody className="pref-email_form">
                                 {isLoaded ? <FormRender
-                                    formFieldsMapper={ {
-                                        ...formFieldsMapper,
+                                    componentMapper={ {
+                                        ...componentMapper,
                                         [DESCRIPTIVE_CHECKBOX]: DescriptiveCheckbox,
                                         [LOADER]: Loader,
                                         [DATA_LIST]: DataListLayout
                                     } }
-                                    layoutMapper={ layoutMapper }
+                                    FormTemplate={ props =>
+                                        <FormTemplate
+                                            { ...props }
+                                            FormButtons={ props => <FormButtons { ...props } /> }
+                                        /> }
                                     schema={ {
                                         fields: [{
                                             name: 'email-preferences',
@@ -186,7 +191,6 @@ const Email = () => {
                                             .map(([ key, schema ]) => calculateSection(key, schema))
                                         }]
                                     } }
-                                    renderFormButtons={ props => <FormButtons { ...props } /> }
                                     onSubmit={ saveValues }
                                 /> : <Bullseye>
                                     <Spinner />

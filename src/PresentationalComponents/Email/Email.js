@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import './email.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { formFieldsMapper, layoutMapper } from '@data-driven-forms/pf4-component-mapper';
@@ -10,15 +10,17 @@ import {
     CardBody,
     Stack,
     StackItem,
-    Flex,
-    FlexItem,
-    FlexModifiers,
     CardHeader,
     TextContent,
     Text,
     TextVariants,
     Spinner,
-    Bullseye
+    Bullseye,
+    DataList,
+    DataListItem,
+    DataListItemRow,
+    DataListItemCells,
+    DataListCell
 } from '@patternfly/react-core';
 import FormRender from '@data-driven-forms/react-form-renderer';
 import PropTypes from 'prop-types';
@@ -100,6 +102,8 @@ const Email = () => {
         });
     };
 
+    const personalInfoUrl = `https://www.${insights.chrome.isProd ? '' : 'qa.'}redhat.com/wapps/ugc/protected/personalInfo.html`;
+
     return (
         <React.Fragment>
             <PageHeader>
@@ -115,26 +119,36 @@ const Email = () => {
                                 </TextContent>
                             </CardHeader>
                             <CardBody>
-                                <Flex>
-                                    <FlexItem
-                                        className="pref-u-bold"
-                                        breakpointMods={ [{ modifier: FlexModifiers['spacer-3xl'] }] }>
-                                        Email address
-                                    </FlexItem>
-                                    <FlexItem className="pref-email_loader" breakpointMods={ [{ modifier: FlexModifiers['spacer-md'] }] }>
-                                        { isLoaded ? (
-                                            <span>{currentUser.email}</span>
-                                        ) : (
-                                            <Skeleton size='lg'></Skeleton>
-                                        )}
-                                    </FlexItem>
-                                    <a
-                                        rel="noopener noreferrer"
-                                        target="_blank"
-                                        href={ `https://www.${insights.chrome.isProd ? '' : 'qa.'}redhat.com/wapps/ugc/protected/personalInfo.html` }>
-                                        Not correct?
-                                    </a>
-                                </Flex>
+                                <DataList>
+                                    <DataListItem>
+                                        <DataListItemRow>
+                                            <DataListItemCells dataListCells={ [
+                                                <DataListCell isFilled={ false } className="pref-c-title pref-u-bold" key="email-title">
+                                                    Email address
+                                                </DataListCell>,
+                                                <DataListCell
+                                                    isFilled
+                                                    key="email-value"
+                                                    className="pref-email__info-user-email"
+                                                >
+                                                    { isLoaded ? (
+                                                        <Fragment>
+                                                            <span>{currentUser.email}</span>
+                                                            <a
+                                                                rel="noopener noreferrer"
+                                                                target="_blank"
+                                                                href={ personalInfoUrl }>
+                                                            Not correct?
+                                                            </a>
+                                                        </Fragment>
+                                                    ) : (
+                                                        <Skeleton size='lg'></Skeleton>
+                                                    )}
+                                                </DataListCell>
+                                            ] }/>
+                                        </DataListItemRow>
+                                    </DataListItem>
+                                </DataList>
                             </CardBody>
                         </Card>
                     </StackItem>

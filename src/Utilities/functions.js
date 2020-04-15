@@ -57,13 +57,13 @@ export const getSection = (key, schema = {}, storeSchema, success = () => {}) =>
 };
 
 export const concatApps = (apps = []) => {
-    return apps.reduce((acc, title, currentIndex) => (
-        `${acc}${title}${
-            currentIndex < apps.length - 1 ?
-                currentIndex < apps.length - 2 ? ',' : ' and'
-                : ''
-        } `
-    ), '');
+    return `${
+        apps.slice(0, apps.length - (apps.length > 1)).join(', ')
+    }${
+        apps.length >= 2 ?
+            ` and ${apps[apps.length - 1]}`
+            : ''
+    }`;
 };
 
 export const distributeSuccessError = (promisses = []) => {
@@ -83,15 +83,13 @@ export const dispatchMessages = (dispatch = () => undefined, success = [], error
         dispatch(addNotification({
             dismissable: false,
             variant: 'success',
-            title: 'Preferences successfully saved',
-            description: `User's configuration email for ${concatApps(success)} were successfully saved.`
+            title: `Email preferences for ${concatApps(success)} successfully saved`
         }));
 
         dispatch(addNotification({
             dismissable: false,
             variant: 'danger',
-            title: 'Preferences unsuccessfully saved',
-            description: `User's configuration email for ${concatApps(error)} were unsuccessfully saved.`
+            title: `Email preferences for ${concatApps(error)} unsuccessfully saved`
         }));
     }
 

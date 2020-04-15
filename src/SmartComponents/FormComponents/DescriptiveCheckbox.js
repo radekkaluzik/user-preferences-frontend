@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import './descriptiveCheckbox.scss';
 
 // eslint-disable-next-line no-unused-vars
-const DescriptiveCheckbox = ({ name, label, description, isDanger, FieldProvider, isGlobal, ...rest }) => {
+const DescriptiveCheckbox = ({ name, label, title, description, isDanger, FieldProvider, isGlobal, ...rest }) => {
     return (
         <FieldProvider name={ name } data={ {
             isClearable: true
@@ -35,7 +35,7 @@ const DescriptiveCheckbox = ({ name, label, description, isDanger, FieldProvider
                 label={ <span className={ classNames(
                     'pref-c-checkbox-label',
                     { 'pref-c-checkbox-label-error': isDanger || isGlobal }
-                ) }>{label}</span> }
+                ) }>{label || title}</span> }
                 { ...description && { description: <span className="pref-c-checkbox-description">{description}</span> } }
             />
         ) }
@@ -48,6 +48,7 @@ DescriptiveCheckbox.propTypes = {
     formOptions: PropTypes.any,
     name: PropTypes.string,
     label: PropTypes.string,
+    title: PropTypes.string,
     description: PropTypes.string,
     isDanger: PropTypes.bool,
     isGlobal: PropTypes.bool

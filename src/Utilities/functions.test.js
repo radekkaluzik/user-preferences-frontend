@@ -173,17 +173,17 @@ describe('concatApps', () => {
 
     it('should concat one app', () => {
         const apps = concatApps([ 'one' ]);
-        expect(apps).toBe('one ');
+        expect(apps).toBe('one');
     });
 
     it('should concat two apps', () => {
         const apps = concatApps([ 'one', 'two' ]);
-        expect(apps).toBe('one and two ');
+        expect(apps).toBe('one and two');
     });
 
     it('should concat multiple apps', () => {
         const apps = concatApps([ 'one', 'two', 'three' ]);
-        expect(apps).toBe('one, two and three ');
+        expect(apps).toBe('one, two and three');
     });
 });
 
@@ -273,16 +273,14 @@ describe('dispatchMessages', () => {
         expect(dispatch.mock.calls[0][0]).toMatchObject({
             payload: {
                 dismissable: false,
-                title: 'Preferences successfully saved',
-                description: `User's configuration email for some, message and multiple  were successfully saved.`,
+                title: 'Email preferences for some, message and multiple successfully saved',
                 variant: 'success'
             }
         });
         expect(dispatch.mock.calls[1][0]).toMatchObject({
             payload: {
                 dismissable: false,
-                title: 'Preferences unsuccessfully saved',
-                description: `User's configuration email for some, message and multiple  were unsuccessfully saved.`,
+                title: 'Email preferences for some, message and multiple unsuccessfully saved',
                 variant: 'danger'
             }
         });

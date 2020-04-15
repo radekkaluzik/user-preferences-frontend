@@ -17,6 +17,6 @@ export const getApplicationSchema = (application, apiVersion = 'v1', resourceTyp
     instance.get(`/api/${application}/${apiVersion}${url || `/user-config/${resourceType}`}`)
 );
 
-export const saveValues = async (application, values, apiVersion = 'v1', resourceType = '', url) => {
-    instance.post(`/api/${application}/${apiVersion}${url || `/user-config/${resourceType}`}`, values);
-};
+export const saveValues = async (application, values, apiVersion = 'v1', resourceType = '', url) => (
+    instance.post(`/api/${application}/${apiVersion}${url || `/user-config/${resourceType}`}`, values)
+);

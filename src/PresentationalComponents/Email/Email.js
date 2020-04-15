@@ -26,7 +26,7 @@ import { DESCRIPTIVE_CHECKBOX, DATA_LIST, LOADER, DescriptiveCheckbox, DataListL
 import config from '../../config.json';
 import { emailPreferences, register } from '../../store';
 import { saveEmailValues } from '../../actions';
-import { calculateEmailConfig, getSection } from '../../Utilities/functions';
+import { calculateEmailConfig, getSection, distributeSuccessError, dispatchMessages } from '../../Utilities/functions';
 
 const FormButtons = ({ pristine, dirtyFieldsSinceLastSubmit, submitSucceeded, reset }) => {
     const noChanges = isEmpty(dirtyFieldsSinceLastSubmit) || !submitSucceeded && pristine;
@@ -74,14 +74,20 @@ const Email = () => {
     const store = useSelector(({ emailPreferences }) => emailPreferences);
 
     // eslint-disable-next-line no-unused-vars
-    const saveValues = ({ unsubscribe, ...values }) => {
-        Object.entries(emailConfig)
+    const saveValues = async ({ unsubscribe, ...values }) => {
+        const promises = Object.entries(emailConfig)
         .filter(([ , { isVisible }]) => isVisible === true)
-        .forEach(([ application, { localFile, schema, url }]) => {
+        .map(([ application, { localFile, title, schema, url }]) => {
             if (!localFile && !schema && store?.[application]?.schema && Object.keys(store?.[application]?.schema).length > 0) {
-                dispatch(saveEmailValues({ application, values, url }));
+                const action = saveEmailValues({ application, values, url, title });
+                dispatch(action);
+
+                return action.payload;
             }
-        });
+        }).filter(Boolean);
+
+        const { success, error } = await distributeSuccessError(promises);
+        dispatchMessages(dispatch, success, error);
     };
 
     const calculateSection = (key, schema) => {

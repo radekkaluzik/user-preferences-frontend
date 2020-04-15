@@ -56,8 +56,8 @@ export const getSection = (key, schema = {}, storeSchema, success = () => {}) =>
     }
 };
 
-export const concatApps = (apps) => {
-    return apps.reduce((acc, { title }, currentIndex) => (
+export const concatApps = (apps = []) => {
+    return apps.reduce((acc, title, currentIndex) => (
         `${acc}${title}${
             currentIndex < apps.length - 1 ?
                 currentIndex < apps.length - 2 ? ',' : ' and'
@@ -66,19 +66,19 @@ export const concatApps = (apps) => {
     ), '');
 };
 
-export const distributeSuccessError = (promisses) =>{
-    return Promise.allSettled(promisses).then((apps) => {
-        return apps.reduce((acc, { value, reason }) => ({
+export const distributeSuccessError = (promisses = []) => {
+    return Promise.allSettled(promisses.map(({ promise } = {}) => promise)).then((apps) => {
+        return apps.reduce((acc, { value }, index) => ({
             ...acc,
             [value ? 'success' : 'error']: [
                 ...acc[value ? 'success' : 'error'],
-                value || reason
+                promisses[index]?.meta?.title
             ]
         }), { success: [], error: []});
     });
 };
 
-export const dispatchMessages = (dispatch, success, error = []) => {
+export const dispatchMessages = (dispatch = () => undefined, success = [], error = []) => {
     if (error.length !== 0 && success.length !== 0) {
         dispatch(addNotification({
             dismissable: false,

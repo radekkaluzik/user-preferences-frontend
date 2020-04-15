@@ -77,12 +77,15 @@ const Email = () => {
     const saveValues = async ({ unsubscribe, ...values }) => {
         const promises = Object.entries(emailConfig)
         .filter(([ , { isVisible }]) => isVisible === true)
-        .map(([ application, { localFile, title, schema, url }]) => {
+        .map(([ application, { localFile, schema, url }]) => {
             if (!localFile && !schema && store?.[application]?.schema && Object.keys(store?.[application]?.schema).length > 0) {
-                const action = saveEmailValues({ application, values, url, title });
+                const action = saveEmailValues({ application, values, url });
                 dispatch(action);
 
-                return action.payload;
+                return {
+                    promise: action.payload,
+                    meta: action.meta
+                };
             }
         }).filter(Boolean);
 

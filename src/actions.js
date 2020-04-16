@@ -21,14 +21,8 @@ export const saveEmailValues = ({ application, values, apiVersion, resourceType 
     type: ACTION_TYPES.SAVE_EMAIL_SCHEMA,
     payload: save(application, values, apiVersion, resourceType, url),
     meta: {
-        notifications: {
-            fulfilled: {
-                variant: 'success',
-                title: 'User\'s configuration for email saved',
-                // eslint-disable-next-line max-len
-                description: `User's configuration email for ${config['email-preference']?.[application]?.title} application were replaced with new values.`
-            }
-        },
-        appName: application
+        appName: application,
+        title: config['email-preference']?.[application]?.title,
+        noError: true
     }
 });

@@ -1,6 +1,14 @@
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import { getSchema, getSection, calculatePermissions, calculateEmailConfig } from './functions';
+import {
+    getSchema,
+    getSection,
+    calculatePermissions,
+    calculateEmailConfig,
+    concatApps,
+    distributeSuccessError,
+    dispatchMessages
+} from './functions';
 import { loaderField } from './constants';
 import { mock } from '../__mock__/schemaLoader';
 
@@ -153,6 +161,128 @@ describe('calculateEmailConfig', () => {
                 }
             });
             done();
+        });
+    });
+});
+
+describe('concatApps', () => {
+    it('should concat no app', () => {
+        const apps = concatApps();
+        expect(apps).toBe('');
+    });
+
+    it('should concat one app', () => {
+        const apps = concatApps([ 'one' ]);
+        expect(apps).toBe('one');
+    });
+
+    it('should concat two apps', () => {
+        const apps = concatApps([ 'one', 'two' ]);
+        expect(apps).toBe('one and two');
+    });
+
+    it('should concat multiple apps', () => {
+        const apps = concatApps([ 'one', 'two', 'three' ]);
+        expect(apps).toBe('one, two and three');
+    });
+});
+
+describe('distributeSuccessError', () => {
+    const promiseSuccess = { promise: Promise.resolve(3) };
+    let promiseError;
+    try {
+        promiseError = { promise: new Promise((resolve, reject) => setTimeout(reject, 100, 'foo')) };
+    } catch (e) {
+        (() => {})();
+    }
+
+    it('should not fail with empty', async () => {
+        const { success, error } = await distributeSuccessError();
+        expect(success.length).toBe(0);
+        expect(error.length).toBe(0);
+    });
+
+    it('should not fail with false', async () => {
+        const { success, error } = await distributeSuccessError([ false ]);
+        expect(success.length).toBe(0);
+        expect(error.length).toBe(1);
+    });
+
+    it('should have one success and error', async () => {
+        const { success, error } = await distributeSuccessError([ promiseSuccess, promiseError ]);
+        expect(success.length).toBe(1);
+        expect(error.length).toBe(1);
+    });
+
+    it('should have 2 successes and no error', async () => {
+        const { success, error } = await distributeSuccessError([ promiseSuccess, promiseSuccess ]);
+        expect(success.length).toBe(2);
+        expect(error.length).toBe(0);
+    });
+
+    it('should have 2 errors and no success', async () => {
+        const { success, error } = await distributeSuccessError([ promiseError, promiseError ]);
+        expect(success.length).toBe(0);
+        expect(error.length).toBe(2);
+    });
+});
+
+describe('dispatchMessages', () => {
+    it('should not fail with no messages', () => {
+        const dispatch = jest.fn();
+        dispatchMessages();
+        expect(dispatch).not.toHaveBeenCalled();
+    });
+
+    it('should not fail with no messages', () => {
+        const dispatch = jest.fn();
+        dispatchMessages(dispatch);
+        expect(dispatch).not.toHaveBeenCalled();
+    });
+
+    it('should dispatch one success', () => {
+        const dispatch = jest.fn();
+        dispatchMessages(dispatch, [ 'some', 'message', 'multiple' ]);
+        expect(dispatch).toHaveBeenCalled();
+        expect(dispatch.mock.calls[0][0]).toMatchObject({
+            payload: {
+                dismissable: false,
+                title: 'Preferences successfully saved',
+                variant: 'success'
+            }
+        });
+    });
+
+    it('should dispatch one danger', () => {
+        const dispatch = jest.fn();
+        dispatchMessages(dispatch, [], [ 'some', 'message', 'multiple' ]);
+        expect(dispatch).toHaveBeenCalled();
+        expect(dispatch.mock.calls[0][0]).toMatchObject({
+            payload: {
+                dismissable: false,
+                title: 'Preferences unsuccessfully saved',
+                variant: 'danger'
+            }
+        });
+    });
+
+    it('should dispatch one danger and one error', () => {
+        const dispatch = jest.fn();
+        dispatchMessages(dispatch, [ 'some', 'message', 'multiple' ], [ 'some', 'message', 'multiple' ]);
+        expect(dispatch).toHaveBeenCalled();
+        expect(dispatch.mock.calls[0][0]).toMatchObject({
+            payload: {
+                dismissable: false,
+                title: 'Email preferences for some, message and multiple successfully saved',
+                variant: 'success'
+            }
+        });
+        expect(dispatch.mock.calls[1][0]).toMatchObject({
+            payload: {
+                dismissable: false,
+                title: 'Email preferences for some, message and multiple unsuccessfully saved',
+                variant: 'danger'
+            }
         });
     });
 });

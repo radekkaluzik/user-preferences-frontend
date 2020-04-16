@@ -12,7 +12,7 @@ const App = (props) => {
         (async () => {
             const user = await insights.chrome.auth.getUser();
             if (!user) {
-                history.replace('./');
+                location.href = './';
             }
         })();
 

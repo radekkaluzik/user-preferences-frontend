@@ -67,7 +67,7 @@ export const concatApps = (apps = []) => {
 };
 
 export const distributeSuccessError = (promisses = []) => {
-    return Promise.allSettled(promisses.map(({ promise } = {}) => promise)).then((apps) => {
+    return Promise.allSettled(promisses.map(({ promise }) => promise)).then((apps) => {
         return apps.reduce((acc, { value }, index) => ({
             ...acc,
             [value ? 'success' : 'error']: [

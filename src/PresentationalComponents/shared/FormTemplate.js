@@ -1,22 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 import PropTypes from 'prop-types';
 import { Button } from '@patternfly/react-core';
 import { isEmpty } from 'lodash';
+import { FormSpy } from '@data-driven-forms/react-form-renderer';
 
-const FormTemplate = ({ formFields }) => {
-    const [ noChanges, setNoChanges ] = useState(true);
-    const { handleSubmit, reset, subscribe } = useFormApi();
-    subscribe(({ dirtyFieldsSinceLastSubmit, pristine, submitSucceeded }) => {
-        const empty = isEmpty(dirtyFieldsSinceLastSubmit) || !submitSucceeded && pristine;
-        if (noChanges !== empty) {
-            setNoChanges(empty);
-        }
-    }, {
-        pristine: true,
-        submitSucceeded: true,
-        dirtyFieldsSinceLastSubmit: true
-    });
+const FormTemplate = ({ formFields, dirtyFieldsSinceLastSubmit, submitSucceeded, pristine }) => {
+    const { handleSubmit, reset } = useFormApi();
+    const noChanges = isEmpty(dirtyFieldsSinceLastSubmit) || !submitSucceeded && pristine;
     return (
         <form onSubmit={ handleSubmit }>
             { formFields }
@@ -38,7 +29,22 @@ const FormTemplate = ({ formFields }) => {
 };
 
 FormTemplate.propTypes = {
-    formFields: PropTypes.any
+    formFields: PropTypes.any,
+    dirtyFieldsSinceLastSubmit: PropTypes.arrayOf(PropTypes.shape({
+        [PropTypes.string]: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.bool ])
+    })),
+    submitSucceeded: PropTypes.bool,
+    pristine: PropTypes.bool
 };
 
-export default FormTemplate;
+const FormTemplateWithSpies = (formProps) => (
+    <FormSpy subscription={ {
+        pristine: true,
+        submitSucceeded: true,
+        dirtyFieldsSinceLastSubmit: true
+    } }>
+        { (props) => <FormTemplate { ...props } { ...formProps }/> }
+    </FormSpy>
+);
+
+export default FormTemplateWithSpies;

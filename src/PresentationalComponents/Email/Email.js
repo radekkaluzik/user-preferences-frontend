@@ -1,11 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import './email.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { componentMapper, FormTemplate } from '@data-driven-forms/pf4-component-mapper';
+import { componentMapper } from '@data-driven-forms/pf4-component-mapper';
 import { Main, PageHeader, PageHeaderTitle, Skeleton } from '@redhat-cloud-services/frontend-components';
-import { isEmpty } from 'lodash';
 import {
-    Button,
     Card,
     CardBody,
     Stack,
@@ -23,40 +21,12 @@ import {
     DataListCell
 } from '@patternfly/react-core';
 import FormRender from '@data-driven-forms/react-form-renderer';
-import PropTypes from 'prop-types';
 import { DESCRIPTIVE_CHECKBOX, DATA_LIST, LOADER, DescriptiveCheckbox, DataListLayout, Loader } from '../../SmartComponents/FormComponents';
 import config from '../../config.json';
 import { emailPreferences, register } from '../../store';
 import { saveEmailValues } from '../../actions';
 import { calculateEmailConfig, getSection, distributeSuccessError, dispatchMessages } from '../../Utilities/functions';
-
-const FormButtons = ({ pristine, dirtyFieldsSinceLastSubmit, submitSucceeded, reset }) => {
-    const noChanges = isEmpty(dirtyFieldsSinceLastSubmit) || !submitSucceeded && pristine;
-    console.log(pristine, dirtyFieldsSinceLastSubmit, submitSucceeded, reset);
-    return (
-        <div>
-            <Button
-                className="pref-email__form-button"
-                type="submit"
-                isDisabled={ noChanges }
-                variant="primary">Submit</Button>
-            <Button
-                variant="link"
-                isDisabled={ noChanges }
-                onClick={ () => reset() }>
-                Cancel
-            </Button>
-        </div>
-    );
-};
-
-FormButtons.propTypes = {
-    reset: PropTypes.func,
-    dirtyFieldsSinceLastSubmit: PropTypes.Object,
-    onCancel: PropTypes.func,
-    pristine: PropTypes.bool,
-    submitSucceeded: PropTypes.bool
-};
+import FormTemplate from '../shared/FormTemplate';
 
 const Email = () => {
     const [ emailConfig, setEmailConfig ] = useState({});
@@ -178,11 +148,7 @@ const Email = () => {
                                         [LOADER]: Loader,
                                         [DATA_LIST]: DataListLayout
                                     } }
-                                    FormTemplate={ props =>
-                                        <FormTemplate
-                                            { ...props }
-                                            FormButtons={ props => <FormButtons { ...props } /> }
-                                        /> }
+                                    FormTemplate={ FormTemplate }
                                     schema={ {
                                         fields: [{
                                             name: 'email-preferences',

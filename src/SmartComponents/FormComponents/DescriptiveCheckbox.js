@@ -7,7 +7,7 @@ import './descriptiveCheckbox.scss';
 
 // eslint-disable-next-line no-unused-vars
 const DescriptiveCheckbox = (props) => {
-    const { name, label, description, isDanger, isGlobal, input: { onChange, ...input }} = useFieldApi({
+    const { label, title, description, isDanger, isGlobal, input: { onChange, ...input }} = useFieldApi({
         ...props,
         type: 'checkbox'
     });
@@ -15,7 +15,7 @@ const DescriptiveCheckbox = (props) => {
     return <Checkbox
         { ...input }
         isChecked={ input.checked }
-        id={ `descriptive-checkbox-${name}` }
+        id={ `descriptive-checkbox-${input.name}` }
         onChange={ (...props) => {
             if (isGlobal) {
                 formOptions.batch(() => {

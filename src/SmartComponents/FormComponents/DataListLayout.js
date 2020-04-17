@@ -29,7 +29,7 @@ class DataListRow extends Component {
                 <DataListCell isFilled key={ `${fieldsKey}-content` }>
                     { hasError ?
                         'Error while mapping fields, please check your schema if it has valid component types' :
-                        formOptions.renderForm(fields, formOptions)
+                        formOptions?.renderForm(fields, formOptions)
                     }
                 </DataListCell>
             ] } />

@@ -32,7 +32,13 @@
         }
 
         .pf-c-data-list__item-row { padding-left: 0; }
-        .pref-email__info-user-email { padding-left: 19px;  }
+        .pref-email__info-user-email {
+            padding-left: 19px;
+
+            a {
+                padding-left: var(--pf-global--gutter);
+            }
+        }
     }
 
     .pref-email_subheader {
@@ -50,8 +56,27 @@
 
 @media screen and (max-width: 768px) {
     .pref-email {
+
+        .pf-c-data-list .pref-email__info-user-email {
+            padding-left: 0;
+
+
+            &.pf-c-data-list__cell span {
+                padding-bottom: var(--pf-global--spacer--sm);
+            }
+
+            > * {
+                display: block;
+            }
+
+
+            a {
+                padding-left: 0;
+            }
+        }
+
         .pref-email__info {
-            .pf-c-card__body .pf-l-flex{
+            .pf-c-card__body .pf-l-flex {
                 > div:first-of-type {
                     flex-grow: 0;
                     flex-basis: 100%;
@@ -64,13 +89,6 @@
         .pf-c-data-list__item:last-of-type {
             .pf-c-data-list__cell:last-of-type {
                 padding-top: var(--pf-global--spacer--lg);
-            }
-        }
-        .pf-c-data-list .pref-email__info-user-email {
-            padding-left: 0;
-
-            > * {
-                display: block;
             }
         }
     }

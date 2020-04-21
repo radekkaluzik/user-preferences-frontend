@@ -21,12 +21,12 @@ const DescriptiveCheckbox = (props) => {
                 formOptions.batch(() => {
                     formOptions.getRegisteredFields().forEach((field) => {
                         if (typeof formOptions.getFieldState(field).value === 'boolean') {
-                            formOptions.getFieldState(field).change(false);
+                            formOptions.change(field, false);
                         }
                     });
                 });
             } else {
-                formOptions.getFieldState('unsubscribe.from-all').change(false);
+                formOptions.change('unsubscribe.from-all', false);
             }
 
             onChange(...props);

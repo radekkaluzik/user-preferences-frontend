@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import './email.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { componentMapper } from '@data-driven-forms/pf4-component-mapper';
+import { componentMapper, FormTemplate } from '@data-driven-forms/pf4-component-mapper';
 import { Main, PageHeader, PageHeaderTitle, Skeleton } from '@redhat-cloud-services/frontend-components';
 import {
     Card,
@@ -26,7 +26,7 @@ import config from '../../config.json';
 import { emailPreferences, register } from '../../store';
 import { saveEmailValues } from '../../actions';
 import { calculateEmailConfig, getSection, distributeSuccessError, dispatchMessages } from '../../Utilities/functions';
-import FormTemplate from '../shared/FormTemplate';
+import FormButtons from '../shared/FormButtons';
 
 const Email = () => {
     const [ emailConfig, setEmailConfig ] = useState({});
@@ -148,7 +148,7 @@ const Email = () => {
                                         [LOADER]: Loader,
                                         [DATA_LIST]: DataListLayout
                                     } }
-                                    FormTemplate={ FormTemplate }
+                                    FormTemplate={ (props) => <FormTemplate { ...props } FormButtons={ FormButtons } /> }
                                     schema={ {
                                         fields: [{
                                             name: 'email-preferences',

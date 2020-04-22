@@ -1,8 +1,9 @@
 {
     "email-preference": {
-        "insights": {
-            "title": "Insights",
-            "url": "/user-preferences/"
+        "advisor": {
+            "title": "Advisor",
+            "url": "/user-preferences/",
+            "apiName": "insights"
         },
         "policies": {
             "title": "Policies",

@@ -50,9 +50,9 @@ const Email = () => {
     const saveValues = async ({ unsubscribe, ...values }) => {
         const promises = Object.entries(emailConfig)
         .filter(([ , { isVisible }]) => isVisible === true)
-        .map(([ application, { localFile, schema, url }]) => {
+        .map(([ application, { localFile, schema, url, apiName }]) => {
             if (!localFile && !schema && store?.[application]?.schema && Object.keys(store?.[application]?.schema).length > 0) {
-                const action = saveEmailValues({ application, values, url });
+                const action = saveEmailValues({ application, values, url, apiName });
                 dispatch(action);
 
                 return {

@@ -8,10 +8,6 @@ This application is for forms for users to change their preferences. If you want
 
 We rely heavily on library called [Data driven forms](https://data-driven-forms.org/), where we use schema to render components in form. Please go to their documentation if you want to enable new user preferences for your application.
 
-## Expected pahts
-
-In order to properly deliver DDF schema please expose the schema on URL `/api/${appName}/v1/user-config/${prefType}` where appName and prefType comes from `config.json`.
-
 ## Custom components
 
 We have designed a few custom components to be used when working with data driven forms to properly show some information on screen.
@@ -41,6 +37,29 @@ The list of all methods can be found [insights-chrome#permissions](https://githu
               ]
           }
         },
+    }
+}
+```
+
+## Application config
+
+To enable your form parts in user preferences we need at least the application name and its title.
+
+By default this application will try to fetch DDF schema on `/api/${appName}/v1/user-config/${prefType}` where `appName` is ket from `config.json` and `prefType` is defined by each preference. If however you want to change the URL where you serve this schema you are free to do so by setting these fields in your app config.
+
+* `apiName` - this will serve as `appName` when fetching DDF schema `/api/${apiName}/${apiVersion}/user-config/${prefType}`
+* `url` - this will completely change how URL is structured `api/${appName}/v1/${url}`
+* `apiVersion` - this will change version of your API so the URL will look like `/api/${appName}/${apiVersion}/user-config/${prefType}`
+
+And of course you can combine these values together so if your schema is being served on `/api/example/v2/some-custom/url/with/nested/parts` your config should look like (no need to match object key with apiName)
+
+```JSON
+{
+    "example-app": {
+        "title": "Example app",
+        "url": "/some-custom/url/with/nested/parts",
+        "apiName": "example",
+        "apiVersion": "v2"
     }
 }
 ```

@@ -1,11 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import './email.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { formFieldsMapper, layoutMapper } from '@data-driven-forms/pf4-component-mapper';
+import { componentMapper, FormTemplate } from '@data-driven-forms/pf4-component-mapper';
 import { Main, PageHeader, PageHeaderTitle, Skeleton } from '@redhat-cloud-services/frontend-components';
-import { isEmpty } from 'lodash';
 import {
-    Button,
     Card,
     CardBody,
     Stack,
@@ -23,39 +21,12 @@ import {
     DataListCell
 } from '@patternfly/react-core';
 import FormRender from '@data-driven-forms/react-form-renderer';
-import PropTypes from 'prop-types';
 import { DESCRIPTIVE_CHECKBOX, DATA_LIST, LOADER, DescriptiveCheckbox, DataListLayout, Loader } from '../../SmartComponents/FormComponents';
 import config from '../../config.json';
 import { emailPreferences, register } from '../../store';
 import { saveEmailValues } from '../../actions';
 import { calculateEmailConfig, getSection, distributeSuccessError, dispatchMessages } from '../../Utilities/functions';
-
-const FormButtons = ({ pristine, dirtyFieldsSinceLastSubmit, submitSucceeded, reset }) => {
-    const noChanges = isEmpty(dirtyFieldsSinceLastSubmit) || !submitSucceeded && pristine;
-    return (
-        <div>
-            <Button
-                className="pref-email__form-button"
-                type="submit"
-                isDisabled={ noChanges }
-                variant="primary">Submit</Button>
-            <Button
-                variant="link"
-                isDisabled={ noChanges }
-                onClick={ () => reset() }>
-                Cancel
-            </Button>
-        </div>
-    );
-};
-
-FormButtons.propTypes = {
-    reset: PropTypes.func,
-    dirtyFieldsSinceLastSubmit: PropTypes.Object,
-    onCancel: PropTypes.func,
-    pristine: PropTypes.bool,
-    submitSucceeded: PropTypes.bool
-};
+import FormButtons from '../shared/FormButtons';
 
 const Email = () => {
     const [ emailConfig, setEmailConfig ] = useState({});
@@ -79,9 +50,9 @@ const Email = () => {
     const saveValues = async ({ unsubscribe, ...values }) => {
         const promises = Object.entries(emailConfig)
         .filter(([ , { isVisible }]) => isVisible === true)
-        .map(([ application, { localFile, schema, url }]) => {
+        .map(([ application, { localFile, schema, url, apiName }]) => {
             if (!localFile && !schema && store?.[application]?.schema && Object.keys(store?.[application]?.schema).length > 0) {
-                const action = saveEmailValues({ application, values, url });
+                const action = saveEmailValues({ application, values, url, apiName });
                 dispatch(action);
 
                 return {
@@ -171,13 +142,13 @@ const Email = () => {
                             </CardHeader>
                             <CardBody className="pref-email_form">
                                 {isLoaded ? <FormRender
-                                    formFieldsMapper={ {
-                                        ...formFieldsMapper,
+                                    componentMapper={ {
+                                        ...componentMapper,
                                         [DESCRIPTIVE_CHECKBOX]: DescriptiveCheckbox,
                                         [LOADER]: Loader,
                                         [DATA_LIST]: DataListLayout
                                     } }
-                                    layoutMapper={ layoutMapper }
+                                    FormTemplate={ (props) => <FormTemplate { ...props } FormButtons={ FormButtons } /> }
                                     schema={ {
                                         fields: [{
                                             name: 'email-preferences',
@@ -186,7 +157,6 @@ const Email = () => {
                                             .map(([ key, schema ]) => calculateSection(key, schema))
                                         }]
                                     } }
-                                    renderFormButtons={ props => <FormButtons { ...props } /> }
                                     onSubmit={ saveValues }
                                 /> : <Bullseye>
                                     <Spinner />

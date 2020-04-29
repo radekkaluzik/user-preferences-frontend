@@ -2,12 +2,57 @@
 
 exports[`DataListLayout checkbox tests should render correctly 1`] = `
 <DataListLayout
+  __versions={
+    Object {
+      "final-form": "4.19.1",
+      "react-final-form": "6.4.0",
+    }
+  }
+  clearedValue={true}
+  dirty={false}
+  dirtyFields={Object {}}
+  dirtyFieldsSinceLastSubmit={Object {}}
+  dirtySinceLastSubmit={false}
+  errors={Object {}}
+  form={
+    Object {
+      "batch": [Function],
+      "blur": [Function],
+      "change": [Function],
+      "destroyOnUnregister": false,
+      "focus": [Function],
+      "getFieldState": [Function],
+      "getRegisteredFields": [Function],
+      "getState": [Function],
+      "initialize": [Function],
+      "isValidationPaused": [Function],
+      "mutators": Object {},
+      "pauseValidation": [Function],
+      "registerField": [Function],
+      "reset": [Function],
+      "resetFieldState": [Function],
+      "resumeValidation": [Function],
+      "setConfig": [Function],
+      "submit": [Function],
+      "subscribe": [Function],
+    }
+  }
   formOptions={
     Object {
       "renderForm": [Function],
     }
   }
+  handleSubmit={[Function]}
+  hasSubmitErrors={false}
+  hasValidationErrors={false}
+  invalid={false}
   label="test label"
+  modified={
+    Object {
+      "undefined": false,
+    }
+  }
+  pristine={true}
   sections={
     Array [
       Object {
@@ -20,13 +65,187 @@ exports[`DataListLayout checkbox tests should render correctly 1`] = `
       },
     ]
   }
+  submitFailed={false}
+  submitSucceeded={false}
+  submitting={false}
+  touched={
+    Object {
+      "undefined": false,
+    }
+  }
+  valid={true}
+  validating={false}
+  values={Object {}}
+  visited={
+    Object {
+      "undefined": false,
+    }
+  }
 >
   <DataList
+    __versions={
+      Object {
+        "final-form": "4.19.1",
+        "react-final-form": "6.4.0",
+      }
+    }
     aria-label="test label"
+    clearedValue={true}
+    dirty={false}
+    dirtyFields={Object {}}
+    dirtyFieldsSinceLastSubmit={Object {}}
+    dirtySinceLastSubmit={false}
+    errors={Object {}}
+    form={
+      Object {
+        "batch": [Function],
+        "blur": [Function],
+        "change": [Function],
+        "destroyOnUnregister": false,
+        "focus": [Function],
+        "getFieldState": [Function],
+        "getRegisteredFields": [Function],
+        "getState": [Function],
+        "initialize": [Function],
+        "isValidationPaused": [Function],
+        "mutators": Object {},
+        "pauseValidation": [Function],
+        "registerField": [Function],
+        "reset": [Function],
+        "resetFieldState": [Function],
+        "resumeValidation": [Function],
+        "setConfig": [Function],
+        "submit": [Function],
+        "subscribe": [Function],
+      }
+    }
+    formOptions={
+      Object {
+        "renderForm": [Function],
+      }
+    }
+    handleSubmit={[Function]}
+    hasSubmitErrors={false}
+    hasValidationErrors={false}
+    invalid={false}
+    label="test label"
+    modified={
+      Object {
+        "undefined": false,
+      }
+    }
+    pristine={true}
+    sections={
+      Array [
+        Object {
+          "fields": Array [
+            Object {
+              "fields": Array [],
+            },
+          ],
+          "label": "test",
+        },
+      ]
+    }
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    touched={
+      Object {
+        "undefined": false,
+      }
+    }
+    valid={true}
+    validating={false}
+    values={Object {}}
+    visited={
+      Object {
+        "undefined": false,
+      }
+    }
   >
     <ul
+      __versions={
+        Object {
+          "final-form": "4.19.1",
+          "react-final-form": "6.4.0",
+        }
+      }
       aria-label="test label"
       className="pf-c-data-list"
+      clearedValue={true}
+      dirty={false}
+      dirtyFields={Object {}}
+      dirtyFieldsSinceLastSubmit={Object {}}
+      dirtySinceLastSubmit={false}
+      errors={Object {}}
+      form={
+        Object {
+          "batch": [Function],
+          "blur": [Function],
+          "change": [Function],
+          "destroyOnUnregister": false,
+          "focus": [Function],
+          "getFieldState": [Function],
+          "getRegisteredFields": [Function],
+          "getState": [Function],
+          "initialize": [Function],
+          "isValidationPaused": [Function],
+          "mutators": Object {},
+          "pauseValidation": [Function],
+          "registerField": [Function],
+          "reset": [Function],
+          "resetFieldState": [Function],
+          "resumeValidation": [Function],
+          "setConfig": [Function],
+          "submit": [Function],
+          "subscribe": [Function],
+        }
+      }
+      formOptions={
+        Object {
+          "renderForm": [Function],
+        }
+      }
+      handleSubmit={[Function]}
+      hasSubmitErrors={false}
+      hasValidationErrors={false}
+      invalid={false}
+      label="test label"
+      modified={
+        Object {
+          "undefined": false,
+        }
+      }
+      pristine={true}
+      sections={
+        Array [
+          Object {
+            "fields": Array [
+              Object {
+                "fields": Array [],
+              },
+            ],
+            "label": "test",
+          },
+        ]
+      }
+      submitFailed={false}
+      submitSucceeded={false}
+      submitting={false}
+      touched={
+        Object {
+          "undefined": false,
+        }
+      }
+      valid={true}
+      validating={false}
+      values={Object {}}
+      visited={
+        Object {
+          "undefined": false,
+        }
+      }
     >
       <DataListItem
         aria-labelledby="simple-item1"
@@ -40,11 +259,6 @@ exports[`DataListLayout checkbox tests should render correctly 1`] = `
           <DataListRow
             fields={Array []}
             fieldsKey={0}
-            formOptions={
-              Object {
-                "renderForm": [Function],
-              }
-            }
             key=".$0-0"
             label="test"
             rowid="simple-item1"
@@ -64,9 +278,7 @@ exports[`DataListLayout checkbox tests should render correctly 1`] = `
                       </DataListCell>,
                       <DataListCell
                         isFilled={true}
-                      >
-                        test
-                      </DataListCell>,
+                      />,
                     ]
                   }
                   key=".0"
@@ -92,9 +304,7 @@ exports[`DataListLayout checkbox tests should render correctly 1`] = `
                     >
                       <div
                         className="pf-c-data-list__cell"
-                      >
-                        test
-                      </div>
+                      />
                     </DataListCell>
                   </div>
                 </DataListItemCells>

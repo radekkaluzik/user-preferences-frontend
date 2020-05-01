@@ -2,7 +2,7 @@
 
 # user-preferences-frontend
 
-This application is for forms for users to change their preferences. If you want to be part of this application please open PR and update `src/config.json`. Each user preferences page uses this config and it will ayutomatically fetch new data driven form schemas based on it.
+This application is for forms for users to change their preferences. If you want to be part of this application please open PR and update `src/config.json`. Each user preferences page uses this config and it will automatically fetch new data driven form schemas based on it.
 
 ## Data driven forms
 
@@ -12,7 +12,7 @@ We rely heavily on library called [Data driven forms](https://data-driven-forms.
 
 We have designed a few custom components to be used when working with data driven forms to properly show some information on screen.
 
-* `DescriptiveCheckbox` this component is for displaing checkbox with title and description.
+* `DescriptiveCheckbox` this component is for displaying checkbox with title and description.
     - `descriptiveCheckbox` - component name to be used in DDF schema
     - `label` - will be shown as main title
     - `description` - will be shown under `label`

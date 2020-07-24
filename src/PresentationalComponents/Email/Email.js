@@ -90,7 +90,7 @@ const Email = () => {
                 <PageHeaderTitle title='Email preferences'/>
             </PageHeader>
             <Main className="pref-email">
-                <Stack gutter="md">
+                <Stack hasGutter>
                     <StackItem>
                         <Card className="pref-email__info">
                             <CardHeader>

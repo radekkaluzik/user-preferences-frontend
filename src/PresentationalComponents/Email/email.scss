@@ -18,6 +18,11 @@
         .pf-c-data-list__item:last-of-type { border: 0; }
 
         .pf-c-data-list__item-content {
+            &.pref-u-condensed {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+
             .pf-c-data-list__cell{
                 > * {
                     padding-bottom: var(--pf-global--spacer--md);
@@ -49,7 +54,7 @@
 
     div.pref-u-condensed {
         padding-top: var(--pf-global--spacer--sm);
-        padding-bottom: 0px;
+        padding-bottom: 0;
     }
 
     .pref-email__form-button {
@@ -58,7 +63,7 @@
 
     .pref-email__info-head {
         display: block;
-        padding-bottom: 0px;
+        padding-bottom: 0;
     }
 }
 
@@ -103,8 +108,8 @@
         ul.pf-c-data-list {
             .pf-c-data-list__item {
                 div.pf-c-data-list__cell.pref-u-condensed {
-                    padding-top: 0px;
-                    padding-bottom: 0px;
+                    padding-top: 0;
+                    padding-bottom: 0;
                 }
             }
         }

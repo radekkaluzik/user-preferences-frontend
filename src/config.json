@@ -6,7 +6,7 @@
             "apiName": "insights",
             "permissions": [
                 {
-                    "method": "hasPermissions",
+                    "method": "hasLoosePermissions",
                     "args": [[
                         "insights:*:*",
                         "insights:*:read",

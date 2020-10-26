@@ -7,29 +7,31 @@ import { NotificationsPortal } from '@redhat-cloud-services/frontend-components-
 import './App.scss';
 
 const App = (props) => {
-    const history = useHistory();
-    useEffect(() => {
-        (async () => {
-            const user = await insights.chrome.auth.getUser();
-            if (!user) {
-                location.href = './';
-            }
-        })();
+  const history = useHistory();
+  useEffect(() => {
+    (async () => {
+      const user = await insights.chrome.auth.getUser();
+      if (!user) {
+        location.href = './';
+      }
+    })();
 
-        register({ notifications });
-        insights.chrome.init();
-        insights.chrome.identifyApp('user-preferences');
+    register({ notifications });
+    insights.chrome.init();
+    insights.chrome.identifyApp('user-preferences');
 
-        const appNav = insights.chrome.on('APP_NAVIGATION', event => history.push(`/${event.navId}`));
-        return () => appNav();
-    }, []);
-
-    return (
-        <Fragment>
-            <NotificationsPortal />
-            <Routes childProps={ props } />
-        </Fragment>
+    const appNav = insights.chrome.on('APP_NAVIGATION', (event) =>
+      history.push(`/${event.navId}`)
     );
+    return () => appNav();
+  }, []);
+
+  return (
+    <Fragment>
+      <NotificationsPortal />
+      <Routes childProps={props} />
+    </Fragment>
+  );
 };
 
 export default App;

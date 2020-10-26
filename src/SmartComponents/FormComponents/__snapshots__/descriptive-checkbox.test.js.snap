@@ -4,8 +4,8 @@ exports[`Descriptive checkbox tests should render correctly 1`] = `
 <DescriptiveCheckbox
   __versions={
     Object {
-      "final-form": "4.19.1",
-      "react-final-form": "6.4.0",
+      "final-form": "4.20.1",
+      "react-final-form": "6.5.1",
     }
   }
   clearedValue={true}
@@ -39,6 +39,7 @@ exports[`Descriptive checkbox tests should render correctly 1`] = `
       "registerField": [Function],
       "reset": [Function],
       "resetFieldState": [Function],
+      "restart": [Function],
       "resumeValidation": [Function],
       "setConfig": [Function],
       "submit": [Function],
@@ -56,6 +57,7 @@ exports[`Descriptive checkbox tests should render correctly 1`] = `
       "": false,
     }
   }
+  modifiedSinceLastSubmit={false}
   name=""
   pristine={false}
   submitFailed={false}

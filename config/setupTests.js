@@ -9,12 +9,12 @@ global.render = render;
 global.mount = mount;
 global.React = React;
 global.insights = {
-    chrome: {
-        visibilityFunctions: {
-            something: (...args) => Boolean(args && args.length > 0 && args[0])
-        },
-        auth: {
-            getUser: () => Promise.resolve({ identity: {}})
-        }
-    }
+  chrome: {
+    visibilityFunctions: {
+      something: (...args) => Boolean(args && args.length > 0 && args[0]),
+    },
+    auth: {
+      getUser: () => Promise.resolve({ identity: {} }),
+    },
+  },
 };

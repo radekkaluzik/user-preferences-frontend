@@ -2,7 +2,7 @@ import React from 'react';
 import { Skeleton } from '@redhat-cloud-services/frontend-components';
 import { getEmailSchema } from '../actions';
 import { loaderField } from './constants';
-import { addNotification } from '@redhat-cloud-services/frontend-components-notifications/';
+import { addNotification } from '@redhat-cloud-services/frontend-components-notifications';
 
 export const getSchema = (app) =>
   !app || !app.loaded ? loaderField : app.schema;
@@ -43,7 +43,8 @@ export const calculateEmailConfig = (
           const schemaVisible = await Promise.resolve(isVisible);
           if (schemaVisible) {
             if (localFile) {
-              const newMapper = (await import(`../${localFile}`)).default;
+              const newMapper = (await import(`../config/${localFile}`))
+                .default;
               dispatch(getEmailSchema({ schema: newMapper, application: key }));
             } else {
               dispatch(

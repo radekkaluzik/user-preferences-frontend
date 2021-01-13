@@ -2,7 +2,7 @@
 
 # user-preferences-frontend
 
-This application is for forms for users to change their preferences. If you want to be part of this application please open PR and update `src/config.json`. Each user preferences page uses this config and it will automatically fetch new data driven form schemas based on it.
+This application is for forms for users to change their preferences. If you want to be part of this application please open PR and update `src/config/config.json`. Each user preferences page uses this config and it will automatically fetch new data driven form schemas based on it.
 
 ## Data driven forms
 

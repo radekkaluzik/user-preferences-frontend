@@ -37,7 +37,7 @@ import {
   DataListLayout,
   Loader,
 } from '../../SmartComponents/FormComponents';
-import config from '../../config.json';
+import config from '../../config/config.json';
 import { emailPreferences, register } from '../../store';
 import { saveEmailValues } from '../../actions';
 import {
@@ -66,7 +66,6 @@ const Email = () => {
 
   const store = useSelector(({ emailPreferences }) => emailPreferences);
 
-  // eslint-disable-next-line no-unused-vars
   const saveValues = async ({ unsubscribe, ...values }) => {
     const promises = Object.entries(emailConfig)
       .filter(([, { isVisible }]) => isVisible === true)

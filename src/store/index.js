@@ -13,7 +13,7 @@ export function init(...middleware) {
   registry = new ReducerRegistry({}, [
     promiseMiddleware,
     notificationsMiddleware({ autoDismiss: true }),
-    ...middleware,
+    ...middleware.filter((item) => typeof item !== 'undefined'),
   ]);
 
   //If you want to register all of your reducers, this is good place.

@@ -1,6 +1,6 @@
 import { getApplicationSchema, saveValues as save } from './api';
 import { ACTION_TYPES } from './constants';
-import config from './config.json';
+import config from './config/config.json';
 
 export const getEmailSchema = ({
   application,

@@ -5,6 +5,7 @@ const { config: webpackConfig, plugins } = config({
   debug: true,
   https: true,
   modules: ['userPreferences'],
+  ...(process.env.BETA ? { deployment: 'beta/apps' } : {}),
 });
 
 const modulesConfig = require('@redhat-cloud-services/frontend-components-config/federated-modules')(

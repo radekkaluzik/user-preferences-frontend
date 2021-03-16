@@ -1,4 +1,4 @@
-import instance from '@redhat-cloud-services/frontend-components-utilities/files/interceptors';
+import instance from '@redhat-cloud-services/frontend-components-utilities/interceptors';
 export { instance };
 
 instance.interceptors.response.use((response) => {

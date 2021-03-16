@@ -1,8 +1,8 @@
 import React from 'react';
-import { Skeleton } from '@redhat-cloud-services/frontend-components';
+import { Skeleton } from '@redhat-cloud-services/frontend-components/Skeleton';
 import { getEmailSchema } from '../actions';
 import { loaderField } from './constants';
-import { addNotification } from '@redhat-cloud-services/frontend-components-notifications';
+import { addNotification } from '@redhat-cloud-services/frontend-components-notifications/redux';
 
 export const getSchema = (app) =>
   !app || !app.loaded ? loaderField : app.schema;

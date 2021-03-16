@@ -4,8 +4,8 @@ exports[`Descriptive checkbox tests should render correctly 1`] = `
 <DescriptiveCheckbox
   __versions={
     Object {
-      "final-form": "4.20.1",
-      "react-final-form": "6.5.1",
+      "final-form": "4.20.2",
+      "react-final-form": "6.5.2",
     }
   }
   clearedValue={true}

@@ -2,8 +2,8 @@ import React, { Fragment, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Routes } from './Routes';
 import { register } from './store';
-import { notifications } from '@redhat-cloud-services/frontend-components-notifications';
-import { NotificationsPortal } from '@redhat-cloud-services/frontend-components-notifications/';
+import { notificationsReducer } from '@redhat-cloud-services/frontend-components-notifications/redux';
+import NotificationsPortal from '@redhat-cloud-services/frontend-components-notifications/NotificationPortal';
 import './App.scss';
 
 const App = (props) => {
@@ -16,7 +16,7 @@ const App = (props) => {
       }
     })();
 
-    register({ notifications });
+    register({ notifications: notificationsReducer });
     insights.chrome.init();
     insights.chrome.identifyApp('user-preferences');
 

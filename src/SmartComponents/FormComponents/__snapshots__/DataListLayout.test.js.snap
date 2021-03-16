@@ -4,8 +4,8 @@ exports[`DataListLayout checkbox tests should render correctly 1`] = `
 <DataListLayout
   __versions={
     Object {
-      "final-form": "4.20.1",
-      "react-final-form": "6.5.1",
+      "final-form": "4.20.2",
+      "react-final-form": "6.5.2",
     }
   }
   clearedValue={true}
@@ -87,11 +87,12 @@ exports[`DataListLayout checkbox tests should render correctly 1`] = `
   <DataList
     __versions={
       Object {
-        "final-form": "4.20.1",
-        "react-final-form": "6.5.1",
+        "final-form": "4.20.2",
+        "react-final-form": "6.5.2",
       }
     }
     aria-label="test label"
+    className=""
     clearedValue={true}
     dirty={false}
     dirtyFields={Object {}}
@@ -127,10 +128,12 @@ exports[`DataListLayout checkbox tests should render correctly 1`] = `
         "renderForm": [Function],
       }
     }
+    gridBreakpoint="md"
     handleSubmit={[Function]}
     hasSubmitErrors={false}
     hasValidationErrors={false}
     invalid={false}
+    isCompact={false}
     label="test label"
     modified={
       Object {
@@ -151,6 +154,7 @@ exports[`DataListLayout checkbox tests should render correctly 1`] = `
         },
       ]
     }
+    selectedDataListItemId=""
     submitFailed={false}
     submitSucceeded={false}
     submitting={false}
@@ -167,16 +171,17 @@ exports[`DataListLayout checkbox tests should render correctly 1`] = `
         "undefined": false,
       }
     }
+    wrapModifier={null}
   >
     <ul
       __versions={
         Object {
-          "final-form": "4.20.1",
-          "react-final-form": "6.5.1",
+          "final-form": "4.20.2",
+          "react-final-form": "6.5.2",
         }
       }
       aria-label="test label"
-      className="pf-c-data-list"
+      className="pf-c-data-list pf-m-grid-md"
       clearedValue={true}
       dirty={false}
       dirtyFields={Object {}}
@@ -255,6 +260,9 @@ exports[`DataListLayout checkbox tests should render correctly 1`] = `
     >
       <DataListItem
         aria-labelledby="simple-item1"
+        className=""
+        id=""
+        isExpanded={false}
         key="0"
       >
         <li

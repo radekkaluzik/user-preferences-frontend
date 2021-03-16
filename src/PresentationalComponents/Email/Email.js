@@ -5,12 +5,12 @@ import {
   componentMapper,
   FormTemplate,
 } from '@data-driven-forms/pf4-component-mapper';
+import { Main } from '@redhat-cloud-services/frontend-components/Main';
 import {
-  Main,
   PageHeader,
   PageHeaderTitle,
-  Skeleton,
-} from '@redhat-cloud-services/frontend-components';
+} from '@redhat-cloud-services/frontend-components/PageHeader';
+import { Skeleton } from '@redhat-cloud-services/frontend-components/Skeleton';
 import {
   Card,
   CardBody,
@@ -28,7 +28,7 @@ import {
   DataListItemCells,
   DataListCell,
 } from '@patternfly/react-core';
-import FormRender from '@data-driven-forms/react-form-renderer';
+import FormRender from '@data-driven-forms/react-form-renderer/form-renderer';
 import {
   DESCRIPTIVE_CHECKBOX,
   DATA_LIST,

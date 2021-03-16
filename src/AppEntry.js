@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { init } from './store';
 import App from './App';
-import { getBaseName } from '@redhat-cloud-services/frontend-components-utilities/files/cjs/helpers';
+import { getBaseName } from '@redhat-cloud-services/frontend-components-utilities/helpers';
 import PropTypes from 'prop-types';
 
 const UserReferences = ({ logger }) => (

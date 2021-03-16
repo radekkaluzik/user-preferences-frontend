@@ -18,7 +18,7 @@ const App = (props) => {
 
     register({ notifications: notificationsReducer });
     insights.chrome.init();
-    insights.chrome.identifyApp('user-preferences');
+    insights.chrome.identifyApp('email');
 
     const appNav = insights.chrome.on('APP_NAVIGATION', (event) =>
       history.push(`/${event.navId}`)

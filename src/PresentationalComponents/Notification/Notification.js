@@ -49,19 +49,26 @@ const Notification = () => {
   }, []);
 
   useEffect(() => {
-    if (bundleName) {
-      dispatch(getNotificationSchema({ bundleName }));
-    }
+    (async () => {
+      await insights.chrome.auth.getUser();
+      if (bundleName) {
+        dispatch(getNotificationSchema({ bundleName }));
+      }
+    })();
   }, [bundleName]);
 
   const { isLoaded, schema } = useMemo(() => {
     if (store?.loaded) {
       const schema = { ...store.schema };
-      schema.fields = [...schema.fields];
-      schema.fields[0].sections = [...schema.fields[0].sections];
-      schema.fields[0].sections.push({
-        fields: unsubscribe,
-      });
+      if (schema.fields) {
+        schema.fields = [...schema.fields];
+        schema.fields[0].sections = [...schema.fields[0].sections];
+        schema.fields[0].sections.push({
+          fields: unsubscribe,
+        });
+      } else {
+        schema.fields = [];
+      }
 
       return {
         isLoaded: true,

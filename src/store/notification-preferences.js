@@ -6,31 +6,29 @@ const defaultState = {};
 export const loading = (store, { meta }) => {
   return {
     ...store,
-    [meta.appName]: {
-      schema: [],
-      loaded: false,
-    },
+    bundleName: meta.bundleName,
+    schema: {},
+    loaded: false,
   };
 };
 
 export const getSchema = (store, { payload, meta }) => {
   return {
     ...store,
-    [meta.appName]: {
-      schema: payload || [],
-      loaded: true,
-    },
+    bundleName: meta.bundleName,
+    schema: payload || {},
+    loaded: true,
   };
 };
 
 export default {
-  emailPreferences: applyReducerHash(
+  notificationPreferences: applyReducerHash(
     {
-      [ACTION_TYPES.GET_EMAIL_SCHEMA]: getSchema,
-      [`${ACTION_TYPES.GET_EMAIL_SCHEMA}_FULFILLED`]: getSchema,
-      [`${ACTION_TYPES.GET_EMAIL_SCHEMA}_PENDING`]: loading,
+      [ACTION_TYPES.GET_NOTIFICATION_SCHEMA]: getSchema,
+      [`${ACTION_TYPES.GET_NOTIFICATION_SCHEMA}_FULFILLED`]: getSchema,
+      [`${ACTION_TYPES.GET_NOTIFICATION_SCHEMA}_PENDING`]: loading,
       // eslint-disable-next-line no-unused-vars
-      [`${ACTION_TYPES.GET_EMAIL_SCHEMA}_REJECTED`]: (
+      [`${ACTION_TYPES.GET_NOTIFICATION_SCHEMA}_REJECTED`]: (
         state,
         { payload, ...action }
       ) => getSchema(state, action),

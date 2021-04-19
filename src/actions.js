@@ -2,6 +2,42 @@ import { getApplicationSchema, saveValues as save } from './api';
 import { ACTION_TYPES } from './constants';
 import config from './config/config.json';
 
+const notificationConfigForBundle = (bundleName) =>
+  config['notification-preference']?.[bundleName];
+
+export const getNotificationSchema = ({ bundleName, apiVersion }) => ({
+  type: ACTION_TYPES.GET_NOTIFICATION_SCHEMA,
+  payload: getApplicationSchema(
+    notificationConfigForBundle(bundleName)?.application,
+    apiVersion,
+    notificationConfigForBundle(bundleName)?.resourceType
+  ),
+  meta: {
+    bundleName,
+    notifications: {
+      rejected: {
+        variant: 'danger',
+        title: "Request for user's configuration failed",
+        description: `User's configuration notification for this bundle does not exist.`,
+      },
+    },
+  },
+});
+
+export const saveNotificationValues = ({ bundleName, values, apiVersion }) => ({
+  type: ACTION_TYPES.SAVE_NOTIFICATION_SCHEMA,
+  payload: save(
+    notificationConfigForBundle(bundleName)?.application,
+    values,
+    apiVersion,
+    notificationConfigForBundle(bundleName)?.resourceType
+  ),
+  meta: {
+    bundleName: bundleName,
+    noError: true,
+  },
+});
+
 export const getEmailSchema = ({
   application,
   apiVersion,
@@ -19,7 +55,7 @@ export const getEmailSchema = ({
     notifications: {
       rejected: {
         variant: 'danger',
-        title: "Request for user user's configuration failed",
+        title: "Request for user's configuration failed",
         description: `User's configuration email for ${config['email-preference']?.[application]?.title} application does not exist.`,
       },
     },

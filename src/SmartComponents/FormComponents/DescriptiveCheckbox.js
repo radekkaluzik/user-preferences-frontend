@@ -2,10 +2,8 @@ import React from 'react';
 import { Checkbox } from '@patternfly/react-core';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import {
-  useFieldApi,
-  useFormApi,
-} from '@data-driven-forms/react-form-renderer';
+import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
+import useFieldApi from '@data-driven-forms/react-form-renderer/use-field-api';
 import './descriptiveCheckbox.scss';
 
 // eslint-disable-next-line no-unused-vars

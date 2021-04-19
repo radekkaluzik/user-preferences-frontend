@@ -1,5 +1,5 @@
 import React from 'react';
-import { Skeleton } from '@redhat-cloud-services/frontend-components';
+import { Skeleton } from '@redhat-cloud-services/frontend-components/Skeleton';
 import PropTypes from 'prop-types';
 
 const Loader = ({

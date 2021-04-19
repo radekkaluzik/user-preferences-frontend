@@ -1,9 +1,9 @@
 import React from 'react';
-import { useFormApi } from '@data-driven-forms/react-form-renderer';
+import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
+import FormSpy from '@data-driven-forms/react-form-renderer/form-spy';
 import PropTypes from 'prop-types';
 import { Button } from '@patternfly/react-core';
 import { isEmpty } from 'lodash';
-import { FormSpy } from '@data-driven-forms/react-form-renderer';
 import { ActionGroup } from '@patternfly/react-core';
 
 const FormButtons = ({

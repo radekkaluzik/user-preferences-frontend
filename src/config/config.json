@@ -41,5 +41,17 @@
             "title": "",
             "localFile": "data/unsubscribe.json"
         }
+    },
+    "notification-preference": {
+        "rhel": {
+            "title": "Red Hat Enterprise Linux",
+            "application": "notifications",
+            "resourceType": "notification-preference?bundleName=rhel"
+        },
+        "openshift": {
+            "title": "OpenShift",
+            "application": "notifications",
+            "resourceType": "notification-preference?bundleName=openshift"
+        }
     }
 }

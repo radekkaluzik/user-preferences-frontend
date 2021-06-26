@@ -1,4 +1,3 @@
-import YourInformation from '../shared/YourInformation';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import './notification.scss';
 import { Main } from '@redhat-cloud-services/frontend-components/Main';
@@ -114,9 +113,6 @@ const Notification = () => {
       </PageHeader>
       <Main className="pref-notification">
         <Stack hasGutter>
-          <StackItem>
-            <YourInformation />
-          </StackItem>
           <StackItem>
             <Card ouiaId="user-pref-notification-subscriptions-card">
               <CardHeader className="pf-u-pb-0">

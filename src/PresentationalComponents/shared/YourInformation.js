@@ -16,9 +16,8 @@ import { Skeleton } from '@redhat-cloud-services/frontend-components/Skeleton';
 import useCurrentUser from './useCurrentUser';
 
 const YourInformation = () => {
-  const personalInfoUrl = `https://www.${
-    insights.chrome.isProd ? '' : 'qa.'
-  }redhat.com/wapps/ugc/protected/emailChange.html`;
+  const env = insights.chrome.getEnvironment();
+  const prefix = insights.chrome.isProd ? '' : `${env === 'ci' ? 'qa' : env}.`;
 
   const { isLoaded, currentUser } = useCurrentUser();
 
@@ -54,7 +53,7 @@ const YourInformation = () => {
                         <a
                           rel="noopener noreferrer"
                           target="_blank"
-                          href={personalInfoUrl}
+                          href={`https://www.${prefix}redhat.com/wapps/ugc/protected/emailChange.html`}
                         >
                           Not correct?
                         </a>

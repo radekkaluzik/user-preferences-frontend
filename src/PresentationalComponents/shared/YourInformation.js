@@ -49,7 +49,7 @@ const YourInformation = () => {
                   >
                     {isLoaded ? (
                       <Fragment>
-                        <span>{currentUser.email}</span>
+                        <span className="pf-u-mr-md">{currentUser.email}</span>
                         <a
                           rel="noopener noreferrer"
                           target="_blank"

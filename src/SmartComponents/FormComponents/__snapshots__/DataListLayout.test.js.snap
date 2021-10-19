@@ -4,8 +4,8 @@ exports[`DataListLayout checkbox tests should render correctly 1`] = `
 <DataListLayout
   __versions={
     Object {
-      "final-form": "4.20.2",
-      "react-final-form": "6.5.2",
+      "final-form": "4.20.4",
+      "react-final-form": "6.5.7",
     }
   }
   clearedValue={true}
@@ -87,8 +87,8 @@ exports[`DataListLayout checkbox tests should render correctly 1`] = `
   <DataList
     __versions={
       Object {
-        "final-form": "4.20.2",
-        "react-final-form": "6.5.2",
+        "final-form": "4.20.4",
+        "react-final-form": "6.5.7",
       }
     }
     aria-label="test label"
@@ -176,8 +176,8 @@ exports[`DataListLayout checkbox tests should render correctly 1`] = `
     <ul
       __versions={
         Object {
-          "final-form": "4.20.2",
-          "react-final-form": "6.5.2",
+          "final-form": "4.20.4",
+          "react-final-form": "6.5.7",
         }
       }
       aria-label="test label"
@@ -275,6 +275,7 @@ exports[`DataListLayout checkbox tests should render correctly 1`] = `
             fieldsKey={0}
             formOptions={
               Object {
+                "internalRegisterField": [Function],
                 "renderForm": [Function],
               }
             }

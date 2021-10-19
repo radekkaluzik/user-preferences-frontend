@@ -1,4 +1,13 @@
 const { resolve } = require('path');
+
+
+const webpackProxy = {
+  deployment: process.env.BETA ? 'beta/apps' : 'apps',
+  useProxy: true,
+  env: 'ci-beta',
+  appUrl: process.env.BETA ? '/beta/user-preferences/email' : '/user-preferences/email',
+};
+
 const config = require('@redhat-cloud-services/frontend-components-config');
 const { config: webpackConfig, plugins } = config({
   rootFolder: resolve(__dirname, '../'),
@@ -7,6 +16,7 @@ const { config: webpackConfig, plugins } = config({
   sassPrefix: '.email',
   modules: ['userPreferences'],
   ...(process.env.BETA ? { deployment: 'beta/apps' } : {}),
+  ...(process.env.PROXY && webpackProxy)
 });
 
 const modulesConfig = require('@redhat-cloud-services/frontend-components-config/federated-modules')(

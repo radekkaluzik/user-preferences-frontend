@@ -2,16 +2,17 @@ const { resolve } = require('path');
 const config = require('@redhat-cloud-services/frontend-components-config');
 const { config: webpackConfig, plugins } = config({
   rootFolder: resolve(__dirname, '../'),
-  sassPrefix: '.email',
+  sassPrefix: '.email, .userPreferences',
   modules: ['userPreferences'],
 });
 
-const modulesConfig = require('@redhat-cloud-services/frontend-components-config/federated-modules')(
-  {
-    root: resolve(__dirname, '../'),
-    moduleName: 'userPreferences',
-  }
-);
+const modulesConfig =
+  require('@redhat-cloud-services/frontend-components-config/federated-modules')(
+    {
+      root: resolve(__dirname, '../'),
+      moduleName: 'userPreferences',
+    }
+  );
 
 plugins.push(modulesConfig);
 

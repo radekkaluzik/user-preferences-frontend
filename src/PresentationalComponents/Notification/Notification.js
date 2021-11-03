@@ -1,4 +1,3 @@
-import YourInformation from '../shared/YourInformation';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import './notification.scss';
 import { Main } from '@redhat-cloud-services/frontend-components/Main';
@@ -115,16 +114,12 @@ const Notification = () => {
       <Main className="pref-notification">
         <Stack hasGutter>
           <StackItem>
-            <YourInformation />
-          </StackItem>
-          <StackItem>
             <Card ouiaId="user-pref-notification-subscriptions-card">
               <CardHeader className="pf-u-pb-0">
                 <TextContent>
                   <Text component={TextVariants.h2}>Notifications</Text>
                   <Text component={TextVariants.p}>
-                    Select the cloud.redhat.com notifications you want to
-                    receive.
+                    Select the notifications you want to receive.
                   </Text>
                 </TextContent>
               </CardHeader>

@@ -113,7 +113,7 @@ const Email = () => {
                 <TextContent>
                   <Text component={TextVariants.h2}>Email subscriptions</Text>
                   <Text component={TextVariants.p}>
-                    Select the cloud.redhat.com emails you want to receive.
+                    Select the emails you want to receive.
                   </Text>
                 </TextContent>
               </CardHeader>
@@ -134,10 +134,8 @@ const Email = () => {
                         {
                           name: 'email-preferences',
                           component: DATA_LIST,
-                          sections: Object.entries(
-                            emailConfig
-                          ).map(([key, schema]) =>
-                            calculateSection(key, schema)
+                          sections: Object.entries(emailConfig).map(
+                            ([key, schema]) => calculateSection(key, schema)
                           ),
                         },
                       ],

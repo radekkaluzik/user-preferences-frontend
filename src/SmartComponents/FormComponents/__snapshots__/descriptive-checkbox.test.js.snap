@@ -4,8 +4,8 @@ exports[`Descriptive checkbox tests should render correctly 1`] = `
 <DescriptiveCheckbox
   __versions={
     Object {
-      "final-form": "4.20.2",
-      "react-final-form": "6.5.2",
+      "final-form": "4.20.4",
+      "react-final-form": "6.5.7",
     }
   }
   clearedValue={true}
@@ -96,6 +96,7 @@ exports[`Descriptive checkbox tests should render correctly 1`] = `
     onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
+    ouiaSafe={true}
     type="checkbox"
   >
     <div
@@ -105,6 +106,9 @@ exports[`Descriptive checkbox tests should render correctly 1`] = `
         aria-invalid={false}
         checked={true}
         className="pf-c-check__input"
+        data-ouia-component-id="OUIA-Generated-Checkbox-1"
+        data-ouia-component-type="PF4/Checkbox"
+        data-ouia-safe={true}
         data-type="descriptive-checkbox"
         disabled={false}
         id="descriptive-checkbox-"

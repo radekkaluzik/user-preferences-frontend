@@ -7,22 +7,13 @@ import notificationsMiddleware from '@redhat-cloud-services/frontend-components-
 let registry;
 
 export function init(...middleware) {
-  if (registry) {
-    throw new Error('store already initialized');
+  if (!registry) {
+    registry = new ReducerRegistry({}, [
+      promiseMiddleware,
+      notificationsMiddleware({ autoDismiss: true }),
+      ...middleware.filter((item) => typeof item !== 'undefined'),
+    ]);
   }
-
-  registry = new ReducerRegistry({}, [
-    promiseMiddleware,
-    notificationsMiddleware({ autoDismiss: true }),
-    ...middleware.filter((item) => typeof item !== 'undefined'),
-  ]);
-
-  //If you want to register all of your reducers, this is good place.
-  /*
-   *  registry.register({
-   *    someName: (state, action) => ({...state})
-   *  });
-   */
   return registry;
 }
 

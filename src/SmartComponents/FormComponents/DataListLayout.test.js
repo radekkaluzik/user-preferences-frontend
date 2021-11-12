@@ -13,6 +13,7 @@ describe('DataListLayout checkbox tests', () => {
             value={{
               formOptions: {
                 renderForm: () => null,
+                internalRegisterField: () => undefined,
               },
             }}
           >

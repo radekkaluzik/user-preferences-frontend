@@ -134,10 +134,8 @@ const Email = () => {
                         {
                           name: 'email-preferences',
                           component: DATA_LIST,
-                          sections: Object.entries(
-                            emailConfig
-                          ).map(([key, schema]) =>
-                            calculateSection(key, schema)
+                          sections: Object.entries(emailConfig).map(
+                            ([key, schema]) => calculateSection(key, schema)
                           ),
                         },
                       ],

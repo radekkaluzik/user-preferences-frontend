@@ -37,6 +37,11 @@
             "title": "Console",
             "application": "notifications",
             "resourceType": "notification-preference?bundleName=console"
+        },
+        "application-services": {
+            "title": "Application Services",
+            "application": "notifications",
+            "resourceType": "notification-preference?bundleName=application-services"
         }
     }
 }

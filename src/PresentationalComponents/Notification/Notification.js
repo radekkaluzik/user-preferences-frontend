@@ -14,11 +14,11 @@ import {
   CardHeader,
   Spinner,
   Stack,
+  Split,
+  SplitItem,
   StackItem,
-  Text,
-  TextContent,
-  TextVariants,
 } from '@patternfly/react-core';
+import { useChromePush } from '../../Utilities/functions';
 import componentMapper from '@data-driven-forms/pf4-component-mapper/component-mapper';
 import {
   DATA_LIST,
@@ -33,16 +33,19 @@ import FormButtons from '../shared/FormButtons';
 import FormRender from '@data-driven-forms/react-form-renderer/form-renderer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNotificationSchema, saveNotificationValues } from '../../actions';
+import { notificationConfigForBundle } from '../../Utilities/functions';
 import { notificationPreferences, register } from '../../store';
 import unsubscribe from '../../config/data/unsubscribe.json';
 import { addNotification } from '@redhat-cloud-services/frontend-components-notifications/redux';
 
 const Notification = () => {
   const { bundleName } = useParams();
+  const navigateTo = useChromePush();
   const dispatch = useDispatch();
   const store = useSelector(
     ({ notificationPreferences }) => notificationPreferences
   );
+  const bundleDisplayTitle = notificationConfigForBundle(bundleName)?.title;
 
   useEffect(() => {
     register(notificationPreferences);
@@ -110,7 +113,28 @@ const Notification = () => {
   return (
     <React.Fragment>
       <PageHeader>
-        <PageHeaderTitle title="Notification Insights" />
+        <Split>
+          <SplitItem isFilled>
+            <PageHeaderTitle
+              className="notif-page-header"
+              title={`My Notifications | ${bundleDisplayTitle}`}
+            />
+            <StackItem>
+              This service allows you to opt-in and out of receiving
+              notifications. Your Organization Administrator has configured
+              which notifications you can or can not receive in their
+              <a
+                onClick={(e) =>
+                  navigateTo(e, `/settings/notifications/${bundleName}`)
+                }
+                href={`/settings/notifications/${bundleName}`}
+              >
+                Settings
+              </a>
+              .
+            </StackItem>
+          </SplitItem>
+        </Split>
       </PageHeader>
       <Main className="pref-notification">
         <Stack hasGutter>
@@ -119,15 +143,7 @@ const Notification = () => {
           </StackItem>
           <StackItem>
             <Card ouiaId="user-pref-notification-subscriptions-card">
-              <CardHeader className="pf-u-pb-0">
-                <TextContent>
-                  <Text component={TextVariants.h2}>Notifications</Text>
-                  <Text component={TextVariants.p}>
-                    Select the cloud.redhat.com notifications you want to
-                    receive.
-                  </Text>
-                </TextContent>
-              </CardHeader>
+              <CardHeader className="pf-u-pb-0"></CardHeader>
               <CardBody className="pref-notification_form">
                 {isLoaded ? (
                   <FormRender

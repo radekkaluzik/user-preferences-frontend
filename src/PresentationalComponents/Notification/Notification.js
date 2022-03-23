@@ -121,7 +121,7 @@ const Notification = () => {
             <StackItem>
               This service allows you to opt-in and out of receiving
               notifications. Your Organization Administrator has configured
-              which notifications you can or can not receive in their
+              which notifications you can or can not receive in their 
               <a
                 onClick={(e) =>
                   navigateTo(e, `/settings/notifications/${bundleName}`)

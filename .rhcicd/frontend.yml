@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: user-preferences-frontend
+objects:
+  - apiVersion: cloud.redhat.com/v1alpha1
+    kind: Frontend
+    metadata:
+      name: user-preferences
+    spec:
+      envName: ${ENV_NAME}
+      title: User Preferences
+      deploymentRepo: https://github.com/RedHatInsights/user-preferences-frontend
+      API:
+        versions:
+          - v1
+      frontend:
+        paths:
+          - /apps/user-preferences
+      image: ${IMAGE}:${IMAGE_TAG}
+      navItems:
+        - title: "Email Preferences"
+          expandable: true
+          routes:
+            - appId: "userPreferences"
+              title: "Application Services"
+              href: "/settings/user-preferences/notifications/application-services"
+            - appId: "userPreferences"
+              title: "Openshift"
+              href: "/settings/user-preferences/notifications/openshift"
+            - appId: "userPreferences"
+              title: "Red Hat Enterprise Linux"
+              href: "/settings/user-preferences/notifications/rhel"
+            - appId: "userPreferences"
+              title: "Edge"
+              href: "/settings/user-preferences/notifications/edge"
+            - appId: "userPreferences"
+              title: "Console"
+              href: "/settings/user-preferences/notifications/console"
+      module:
+        manifestLocation: "/apps/user-preferences/fed-mods.json"
+        modules:
+          - id: "user-preferences-email"
+            module: "./RootApp"
+            routes:
+              - pathname: /user-preferences
+              - pathname: /user-preferences/email
+          - id: "user-preferences-notifications"
+            module: "./RootApp"
+            routes:
+              - pathname: "/user-preferences/notifications"      
+
+parameters:
+  - name: ENV_NAME
+    required: true
+  - name: IMAGE_TAG
+    required: true
+  - name: IMAGE
+    value: quay.io/cloudservices/user-preferences-frontend

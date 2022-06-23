@@ -12,20 +12,20 @@ import {
   CardBody,
   CardHeader,
   Spinner,
-  Stack,
   Split,
   SplitItem,
+  Stack,
   StackItem,
 } from '@patternfly/react-core';
 import { useChromePush } from '../../Utilities/functions';
 import componentMapper from '@data-driven-forms/pf4-component-mapper/component-mapper';
 import {
   DATA_LIST,
-  DataListLayout,
   DESCRIPTIVE_CHECKBOX,
+  DataListLayout,
   DescriptiveCheckbox,
-  Loader,
   LOADER,
+  Loader,
 } from '../../SmartComponents/FormComponents';
 import FormTemplate from '@data-driven-forms/pf4-component-mapper/form-template';
 import FormButtons from '../shared/FormButtons';

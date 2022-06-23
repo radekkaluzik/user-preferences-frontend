@@ -1,13 +1,13 @@
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import {
+  calculateEmailConfig,
+  calculatePermissions,
+  concatApps,
+  dispatchMessages,
+  distributeSuccessError,
   getSchema,
   getSection,
-  calculatePermissions,
-  calculateEmailConfig,
-  concatApps,
-  distributeSuccessError,
-  dispatchMessages,
   visibilityFunctions,
 } from './functions';
 import { loaderField } from './constants';

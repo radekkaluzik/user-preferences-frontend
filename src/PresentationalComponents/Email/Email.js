@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './email.scss';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-  componentMapper,
   FormTemplate,
+  componentMapper,
 } from '@data-driven-forms/pf4-component-mapper';
 import { Main } from '@redhat-cloud-services/frontend-components/Main';
 import {
@@ -11,33 +11,33 @@ import {
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
 import {
+  Bullseye,
   Card,
   CardBody,
+  CardHeader,
+  Spinner,
   Stack,
   StackItem,
-  CardHeader,
-  TextContent,
   Text,
+  TextContent,
   TextVariants,
-  Spinner,
-  Bullseye,
 } from '@patternfly/react-core';
 import FormRender from '@data-driven-forms/react-form-renderer/form-renderer';
 import {
-  DESCRIPTIVE_CHECKBOX,
   DATA_LIST,
-  LOADER,
-  DescriptiveCheckbox,
+  DESCRIPTIVE_CHECKBOX,
   DataListLayout,
+  DescriptiveCheckbox,
+  LOADER,
   Loader,
 } from '../../SmartComponents/FormComponents';
 import config from '../../config/config.json';
 import { saveEmailValues } from '../../actions';
 import {
   calculateEmailConfig,
-  getSection,
-  distributeSuccessError,
   dispatchMessages,
+  distributeSuccessError,
+  getSection,
 } from '../../Utilities/functions';
 import FormButtons from '../shared/FormButtons';
 import YourInformation from '../shared/YourInformation';

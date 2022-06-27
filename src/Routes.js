@@ -1,5 +1,5 @@
-import React, { Fragment, lazy, Suspense } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import React, { Fragment, Suspense, lazy } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import pckg from '../package.json';
 
 const Email = lazy(() =>

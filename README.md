@@ -55,7 +55,7 @@ By default this application will try to fetch DDF schema on `/api/${appName}/v1/
 * `url` - this will completely change how URL is structured `api/${appName}/v1/${url}`
 * `apiVersion` - this will change version of your API so the URL will look like `/api/${appName}/${apiVersion}/user-config/${prefType}`
 
-And of course you can combine these values together so if your schema is being served on `/api/example/v2/some-custom/url/with/nested/parts` your config should look like (no need to match object key with apiName)
+And of course you can combine these values together so if your schema is being served on `/api/example/v2/some-custom/url/with/nested/parts` your config should look like (no need to match object key with apiName).
 
 ```JSON
 {

@@ -20,23 +20,29 @@ objects:
       image: ${IMAGE}:${IMAGE_TAG}
       navItems:
         - title: "Email Preferences"
+          exandable: false
+          routes:
+            - appId: "userPreferences"
+              title: "Email Preferences"
+              href: /user-preferences/email
+        - title: "Notifications"
           expandable: true
           routes:
             - appId: "userPreferences"
               title: "Application Services"
-              href: "/settings/user-preferences/notifications/application-services"
+              href: "/user-preferences/notifications/application-services"
             - appId: "userPreferences"
               title: "Openshift"
-              href: "/settings/user-preferences/notifications/openshift"
+              href: "/user-preferences/notifications/openshift"
             - appId: "userPreferences"
               title: "Red Hat Enterprise Linux"
-              href: "/settings/user-preferences/notifications/rhel"
+              href: "/user-preferences/notifications/rhel"
             - appId: "userPreferences"
               title: "Edge"
-              href: "/settings/user-preferences/notifications/edge"
+              href: "/user-preferences/notifications/edge"
             - appId: "userPreferences"
               title: "Console"
-              href: "/settings/user-preferences/notifications/console"
+              href: "/user-preferences/notifications/console"
       module:
         manifestLocation: "/apps/user-preferences/fed-mods.json"
         modules:

@@ -20,11 +20,8 @@ objects:
       image: ${IMAGE}:${IMAGE_TAG}
       navItems:
         - title: "Email Preferences"
-          exandable: false
-          routes:
-            - appId: "userPreferences"
-              title: "Email Preferences"
-              href: /user-preferences/email
+          appId: "userPreferences"
+          href: /user-preferences/email
         - title: "Notifications"
           expandable: true
           routes:

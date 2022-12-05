@@ -1,6 +1,7 @@
 {
     "email-preference": {
         "advisor": {
+            "bundle": "rhel",
             "title": "Advisor",
             "url": "/user-preferences/",
             "apiName": "insights",
@@ -42,11 +43,6 @@
             "title": "Ansible",
             "application": "notifications",
             "resourceType": "notification-preference?bundleName=ansible"
-        },
-        "edge": {
-            "title": "Edge",
-            "application": "notifications",
-            "resourceType": "notification-preference?bundleName=edge"
         },
         "console": {
             "title": "Console",

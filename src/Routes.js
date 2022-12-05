@@ -2,28 +2,21 @@ import React, { Fragment, Suspense, lazy } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import pckg from '../package.json';
 
-const Email = lazy(() =>
+const Notifications = lazy(() =>
   import(
-    /* webpackChunkName: "Email" */ './PresentationalComponents/Email/Email'
-  )
-);
-
-const Notification = lazy(() =>
-  import(
-    /* webpackChunkName: "Notification" */ './PresentationalComponents/Notification/Notification'
+    /* webpackChunkName: "Notifications" */ './PresentationalComponents/Notifications/Notifications'
   )
 );
 
 export const Routes = () => (
   <Suspense fallback={Fragment}>
     <Switch>
-      <Route path={pckg.routes.email} component={Email} rootClass="email" />
       <Route
-        path={pckg.routes.notification}
-        component={Notification}
-        rootClass="notification"
+        path={pckg.routes.notifications}
+        component={Notifications}
+        rootClass="notifications"
       />
-      <Redirect path="*" to={pckg.routes.email} push />
+      <Redirect path="*" to={pckg.routes.notifications} push />
     </Switch>
   </Suspense>
 );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Skeleton } from '@redhat-cloud-services/frontend-components/Skeleton';
-import { getEmailSchema } from '../actions';
+import { getEmailSchema } from '../redux/actions/email-actions';
 import { loaderField } from './constants';
 import config from '../config/config.json';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';

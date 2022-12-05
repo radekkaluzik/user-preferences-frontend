@@ -1,13 +1,13 @@
 import React from 'react';
-import DataListLayout from './DataListLayout';
 import { Form, RendererContext } from '@data-driven-forms/react-form-renderer';
 import { render } from '@testing-library/react';
+import FormButtonWithSpies from './FormButtons';
 
-describe('DataListLayout checkbox tests', () => {
+describe('FormButtons tests', () => {
   it('should render correctly', () => {
     const { container } = render(
       <Form onSubmit={() => undefined}>
-        {(props) => (
+        {() => (
           <RendererContext.Provider
             value={{
               formOptions: {
@@ -17,14 +17,10 @@ describe('DataListLayout checkbox tests', () => {
               },
             }}
           >
-            <DataListLayout
-              label="test label"
-              sections={[{ label: 'test', fields: [{ fields: [] }] }]}
-              formOptions={{
-                renderForm: () => 'test',
-              }}
-              clearedValue
-              {...props}
+            <FormButtonWithSpies
+              dirtyFieldsSinceLastSubmit={{ oepnshift: true }}
+              submitSucceeded
+              pristine
             />
           </RendererContext.Provider>
         )}

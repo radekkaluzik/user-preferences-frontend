@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormButtons tests should render correctly 1`] = `
+<div>
+  <div
+    class="pref-shared--buttons pf-m-9-col-on-md"
+  >
+    <div
+      class="pf-c-form__group pf-m-action pref-shared--actions pf-u-px-lg pf-u-py-md"
+    >
+      <div
+        class="pf-c-form__group-control"
+      >
+        <div
+          class="pf-c-form__actions"
+        >
+          <button
+            aria-disabled="false"
+            class="pf-c-button pf-m-primary"
+            data-ouia-component-id="user-pref__submit-button"
+            data-ouia-component-type="PF4/Button"
+            data-ouia-safe="true"
+            type="submit"
+          >
+            Save
+          </button>
+          <button
+            aria-disabled="false"
+            class="pf-c-button pf-m-link"
+            data-ouia-component-id="user-pref__reset-button"
+            data-ouia-component-type="PF4/Button"
+            data-ouia-safe="true"
+            type="button"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

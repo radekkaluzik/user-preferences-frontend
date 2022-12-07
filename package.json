@@ -1,5 +1,5 @@
 {
-  "name": "insights-frontend-starter-app",
+  "name": "user-preferences-frontend",
   "version": "1.1.0",
   "engines": {
     "node": ">=15.0.0",
@@ -8,24 +8,25 @@
   "private": false,
   "dependencies": {
     "@babel/runtime": "^7.13.10",
-    "@data-driven-forms/pf4-component-mapper": "^3.15.2",
-    "@data-driven-forms/react-form-renderer": "^3.15.2",
-    "@patternfly/react-core": "^4.162.3",
-    "@patternfly/react-icons": "^4.26.4",
-    "@patternfly/react-table": "^4.31.8",
-    "@redhat-cloud-services/frontend-components": "^3.4.8",
-    "@redhat-cloud-services/frontend-components-notifications": "^3.2.4",
-    "@redhat-cloud-services/frontend-components-utilities": "^3.2.5",
+    "@data-driven-forms/pf4-component-mapper": "^3.19.0",
+    "@data-driven-forms/react-form-renderer": "^3.19.0",
+    "@patternfly/react-core": "^4.264.0",
+    "@patternfly/react-icons": "^4.93.0",
+    "@patternfly/react-table": "^4.111.45",
+    "@redhat-cloud-services/frontend-components": "^3.9.25",
+    "@redhat-cloud-services/frontend-components-notifications": "^3.2.12",
+    "@redhat-cloud-services/frontend-components-utilities": "^3.3.8",
     "classnames": "^2.3.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-redux": "^7.2.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.9",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^6.1.2"
   },
   "jest": {
+    "setupFilesAfterEnv": ["@testing-library/jest-dom/extend-expect"],
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,
     "collectCoverageFrom": [
@@ -53,16 +54,14 @@
     "@babel/preset-flow": "^7.12.13",
     "@babel/preset-react": "^7.12.13",
     "@redhat-cloud-services/eslint-config-redhat-cloud-services": "^1.1.0",
-    "@redhat-cloud-services/frontend-components-config": "^4.6.18",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
+    "@redhat-cloud-services/frontend-components-config": "^4.6.33",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^12.1.5",
     "axios-mock-adapter": "^1.19.0",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^26.6.3",
     "babel-plugin-lodash": "^3.3.4",
     "cross-fetch": "^3.1.0",
     "css-loader": "^5.1.3",
-    "enzyme": "^3.11.0",
-    "enzyme-to-json": "^3.6.1",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-loader": "^4.0.2",
@@ -71,6 +70,7 @@
     "jest": "^26.6.3",
     "npm-run-all": "^4.1.5",
     "prop-types": "^15.7.2",
+    "redux-mock-store": "^1.5.4",
     "sass-loader": "^11.0.1",
     "stylelint": "^13.12.0",
     "stylelint-config-recommended-scss": "^4.2.0",
@@ -90,6 +90,8 @@
     "prod": "NODE_ENV=production webpack serve --config config/dev.webpack.config.js",
     "server:ctr": "node src/server/generateServerKey.js",
     "start": "NODE_ENV=development webpack serve --config config/dev.webpack.config.js",
+    "start:proxy": "PROXY=true npm run start",
+    "start:proxy:beta": "BETA=true npm run start:proxy",
     "start:beta": "NODE_ENV=development BETA=true webpack serve --config config/dev.webpack.config.js",
     "build:prod": "NODE_ENV=production webpack --config config/prod.webpack.config.js",
     "deploy": "npm-run-all build:prod lint test",
@@ -97,8 +99,7 @@
     "nightly": "npm run deploy"
   },
   "routes": {
-    "email": "/email",
-    "notification": "/notifications/:bundleName"
+    "notifications": "/notifications"
   },
   "insights": {
     "appname": "user-preferences"

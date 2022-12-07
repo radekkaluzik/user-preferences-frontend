@@ -1,21 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Loader component tests should render correctly 1`] = `
-<Loader
-  name=""
-  size="sm"
->
+<div>
   <div>
-    <Skeleton
-      isDark={false}
-      size="sm"
+    <div
+      class="pf-c-skeleton ins-c-skeleton ins-c-skeleton__sm"
     >
-      <div
-        className="ins-c-skeleton ins-c-skeleton__sm"
-      >
-         
-      </div>
-    </Skeleton>
+      <span
+        class="pf-u-screen-reader"
+      />
+    </div>
   </div>
-</Loader>
+</div>
 `;

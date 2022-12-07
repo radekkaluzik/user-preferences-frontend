@@ -1,0 +1,20 @@
+.pref-shared {
+  &--buttons {
+    grid-area: btn;
+    width: 100%;
+  }
+  &--actions {
+    border-top: 1px solid var(--pf-global--BorderColor--100);
+    background-color: var(--pf-global--BackgroundColor--100);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .pref-shared {
+    &--buttons {
+      position: inherit;
+      width: 100%;
+    }
+  }
+}
+  

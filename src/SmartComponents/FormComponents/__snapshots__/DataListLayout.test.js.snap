@@ -1,339 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DataListLayout checkbox tests should render correctly 1`] = `
-<DataListLayout
-  __versions={
-    Object {
-      "final-form": "4.20.4",
-      "react-final-form": "6.5.7",
-    }
-  }
-  clearedValue={true}
-  dirty={false}
-  dirtyFields={Object {}}
-  dirtyFieldsSinceLastSubmit={Object {}}
-  dirtySinceLastSubmit={false}
-  errors={Object {}}
-  form={
-    Object {
-      "batch": [Function],
-      "blur": [Function],
-      "change": [Function],
-      "destroyOnUnregister": false,
-      "focus": [Function],
-      "getFieldState": [Function],
-      "getRegisteredFields": [Function],
-      "getState": [Function],
-      "initialize": [Function],
-      "isValidationPaused": [Function],
-      "mutators": Object {},
-      "pauseValidation": [Function],
-      "registerField": [Function],
-      "reset": [Function],
-      "resetFieldState": [Function],
-      "restart": [Function],
-      "resumeValidation": [Function],
-      "setConfig": [Function],
-      "submit": [Function],
-      "subscribe": [Function],
-    }
-  }
-  formOptions={
-    Object {
-      "renderForm": [Function],
-    }
-  }
-  handleSubmit={[Function]}
-  hasSubmitErrors={false}
-  hasValidationErrors={false}
-  invalid={false}
-  label="test label"
-  modified={
-    Object {
-      "undefined": false,
-    }
-  }
-  modifiedSinceLastSubmit={false}
-  pristine={true}
-  sections={
-    Array [
-      Object {
-        "fields": Array [
-          Object {
-            "fields": Array [],
-          },
-        ],
-        "label": "test",
-      },
-    ]
-  }
-  submitFailed={false}
-  submitSucceeded={false}
-  submitting={false}
-  touched={
-    Object {
-      "undefined": false,
-    }
-  }
-  valid={true}
-  validating={false}
-  values={Object {}}
-  visited={
-    Object {
-      "undefined": false,
-    }
-  }
->
-  <DataList
-    __versions={
-      Object {
-        "final-form": "4.20.4",
-        "react-final-form": "6.5.7",
-      }
-    }
+<div>
+  <ul
+    __versions="[object Object]"
     aria-label="test label"
-    className=""
-    clearedValue={true}
-    dirty={false}
-    dirtyFields={Object {}}
-    dirtyFieldsSinceLastSubmit={Object {}}
-    dirtySinceLastSubmit={false}
-    errors={Object {}}
-    form={
-      Object {
-        "batch": [Function],
-        "blur": [Function],
-        "change": [Function],
-        "destroyOnUnregister": false,
-        "focus": [Function],
-        "getFieldState": [Function],
-        "getRegisteredFields": [Function],
-        "getState": [Function],
-        "initialize": [Function],
-        "isValidationPaused": [Function],
-        "mutators": Object {},
-        "pauseValidation": [Function],
-        "registerField": [Function],
-        "reset": [Function],
-        "resetFieldState": [Function],
-        "restart": [Function],
-        "resumeValidation": [Function],
-        "setConfig": [Function],
-        "submit": [Function],
-        "subscribe": [Function],
-      }
-    }
-    formOptions={
-      Object {
-        "renderForm": [Function],
-      }
-    }
-    gridBreakpoint="md"
-    handleSubmit={[Function]}
-    hasSubmitErrors={false}
-    hasValidationErrors={false}
-    invalid={false}
-    isCompact={false}
+    class="pf-c-data-list pf-m-grid-md"
+    dirtyfields="[object Object]"
+    dirtyfieldssincelastsubmit="[object Object]"
+    errors="[object Object]"
+    form="[object Object]"
+    formoptions="[object Object]"
     label="test label"
-    modified={
-      Object {
-        "undefined": false,
-      }
-    }
-    modifiedSinceLastSubmit={false}
-    pristine={true}
-    sections={
-      Array [
-        Object {
-          "fields": Array [
-            Object {
-              "fields": Array [],
-            },
-          ],
-          "label": "test",
-        },
-      ]
-    }
-    selectedDataListItemId=""
-    submitFailed={false}
-    submitSucceeded={false}
-    submitting={false}
-    touched={
-      Object {
-        "undefined": false,
-      }
-    }
-    valid={true}
-    validating={false}
-    values={Object {}}
-    visited={
-      Object {
-        "undefined": false,
-      }
-    }
-    wrapModifier={null}
+    modified="[object Object]"
+    sections="[object Object]"
+    touched="[object Object]"
+    values="[object Object]"
+    visited="[object Object]"
   >
-    <ul
-      __versions={
-        Object {
-          "final-form": "4.20.4",
-          "react-final-form": "6.5.7",
-        }
-      }
-      aria-label="test label"
-      className="pf-c-data-list pf-m-grid-md"
-      clearedValue={true}
-      dirty={false}
-      dirtyFields={Object {}}
-      dirtyFieldsSinceLastSubmit={Object {}}
-      dirtySinceLastSubmit={false}
-      errors={Object {}}
-      form={
-        Object {
-          "batch": [Function],
-          "blur": [Function],
-          "change": [Function],
-          "destroyOnUnregister": false,
-          "focus": [Function],
-          "getFieldState": [Function],
-          "getRegisteredFields": [Function],
-          "getState": [Function],
-          "initialize": [Function],
-          "isValidationPaused": [Function],
-          "mutators": Object {},
-          "pauseValidation": [Function],
-          "registerField": [Function],
-          "reset": [Function],
-          "resetFieldState": [Function],
-          "restart": [Function],
-          "resumeValidation": [Function],
-          "setConfig": [Function],
-          "submit": [Function],
-          "subscribe": [Function],
-        }
-      }
-      formOptions={
-        Object {
-          "renderForm": [Function],
-        }
-      }
-      handleSubmit={[Function]}
-      hasSubmitErrors={false}
-      hasValidationErrors={false}
-      invalid={false}
-      label="test label"
-      modified={
-        Object {
-          "undefined": false,
-        }
-      }
-      modifiedSinceLastSubmit={false}
-      pristine={true}
-      sections={
-        Array [
-          Object {
-            "fields": Array [
-              Object {
-                "fields": Array [],
-              },
-            ],
-            "label": "test",
-          },
-        ]
-      }
-      submitFailed={false}
-      submitSucceeded={false}
-      submitting={false}
-      touched={
-        Object {
-          "undefined": false,
-        }
-      }
-      valid={true}
-      validating={false}
-      values={Object {}}
-      visited={
-        Object {
-          "undefined": false,
-        }
-      }
+    <li
+      aria-labelledby="simple-item1"
+      class="pf-c-data-list__item"
+      id=""
     >
-      <DataListItem
-        aria-labelledby="simple-item1"
-        className=""
-        id=""
-        isExpanded={false}
-        key="0"
+      <div
+        class="pf-c-data-list__item-row"
       >
-        <li
-          aria-labelledby="simple-item1"
-          className="pf-c-data-list__item"
-          id=""
+        <div
+          class="pf-c-data-list__item-content"
         >
-          <DataListRow
-            fields={Array []}
-            fieldsKey={0}
-            formOptions={
-              Object {
-                "internalRegisterField": [Function],
-                "renderForm": [Function],
-              }
-            }
-            key=".$0-0"
-            label="test"
-            rowid="simple-item1"
+          <div
+            class="pf-c-data-list__cell pf-m-no-fill pref-c-title pref-u-bold"
           >
-            <DataListItemRow>
-              <div
-                className="pf-c-data-list__item-row"
-              >
-                <DataListItemCells
-                  dataListCells={
-                    Array [
-                      <DataListCell
-                        className="pref-c-title pref-u-bold"
-                        isFilled={false}
-                      >
-                        test
-                      </DataListCell>,
-                      <DataListCell
-                        isFilled={true}
-                      />,
-                    ]
-                  }
-                  key=".0"
-                  rowid=""
-                >
-                  <div
-                    className="pf-c-data-list__item-content"
-                  >
-                    <DataListCell
-                      className="pref-c-title pref-u-bold"
-                      isFilled={false}
-                      key="0-title"
-                    >
-                      <div
-                        className="pf-c-data-list__cell pf-m-no-fill pref-c-title pref-u-bold"
-                      >
-                        test
-                      </div>
-                    </DataListCell>
-                    <DataListCell
-                      isFilled={true}
-                      key="0-content"
-                    >
-                      <div
-                        className="pf-c-data-list__cell"
-                      />
-                    </DataListCell>
-                  </div>
-                </DataListItemCells>
-              </div>
-            </DataListItemRow>
-          </DataListRow>
-        </li>
-      </DataListItem>
-    </ul>
-  </DataList>
-</DataListLayout>
+            test
+          </div>
+          <div
+            class="pf-c-data-list__cell"
+          />
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
 `;

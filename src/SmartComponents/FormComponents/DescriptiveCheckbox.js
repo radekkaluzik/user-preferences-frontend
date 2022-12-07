@@ -10,7 +10,10 @@ import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 // eslint-disable-next-line no-unused-vars
 const DescriptiveCheckbox = (props) => {
   const {
+    group,
+    section,
     label,
+    beforeOnChange,
     title,
     description,
     isDanger,
@@ -28,20 +31,16 @@ const DescriptiveCheckbox = (props) => {
       {...input}
       isChecked={checked}
       id={`descriptive-checkbox-${input.name}`}
-      onChange={(...props) => {
-        if (isGlobal) {
-          formOptions.batch(() => {
-            formOptions.getRegisteredFields().forEach((field) => {
-              if (typeof formOptions.getFieldState(field).value === 'boolean') {
-                formOptions.change(field, false);
-              }
-            });
-          });
-        } else {
-          formOptions.change('unsubscribe.from-all', false);
-        }
-
-        onChange(...props);
+      onChange={(checked, event, ...rest) => {
+        beforeOnChange(
+          isGlobal,
+          checked,
+          formOptions,
+          group,
+          section,
+          props.name
+        );
+        onChange(checked, event, ...rest);
       }}
       data-type="descriptive-checkbox"
       className="pref-c-descriptive-checkbox"
@@ -73,6 +72,8 @@ const DescriptiveCheckbox = (props) => {
 DescriptiveCheckbox.propTypes = {
   FieldProvider: PropTypes.any,
   formOptions: PropTypes.any,
+  group: PropTypes.string,
+  section: PropTypes.string,
   name: PropTypes.string,
   label: PropTypes.string,
   title: PropTypes.string,

@@ -1,5 +1,3 @@
-import { mount } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import {
   calculateEmailConfig,
   calculatePermissions,
@@ -12,6 +10,7 @@ import {
 } from './functions';
 import { loaderField } from './constants';
 import { mock } from '../__mock__/schemaLoader';
+import { render } from '@testing-library/react';
 
 describe('getSchema', () => {
   it('should return loader', () => {
@@ -53,8 +52,8 @@ describe('getSection', () => {
 
   it('should return loader', () => {
     const section = getSection();
-    const wrapper = mount(section.label);
-    expect(toJson(wrapper)).toMatchSnapshot();
+    const { container } = render(section.label);
+    expect(container).toMatchSnapshot();
     expect(section).toMatchObject({ fields: loaderField });
   });
 

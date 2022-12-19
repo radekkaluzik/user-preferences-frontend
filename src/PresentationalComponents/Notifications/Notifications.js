@@ -125,7 +125,7 @@ const Notifications = () => {
       .then(() => {
         dispatch(
           addNotification({
-            dismissable: false,
+            dismissable: true,
             variant: 'success',
             title: 'Notification preferences successfully saved',
           })
@@ -134,7 +134,7 @@ const Notifications = () => {
       .catch(() => {
         dispatch(
           addNotification({
-            dismissable: false,
+            dismissable: true,
             variant: 'danger',
             title: 'Notification preferences unsuccessfully saved',
           })

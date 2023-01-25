@@ -1,8 +1,9 @@
 module.exports = {
-  appUrl: '/user-preferences/email',
+  appUrl: '/user-preferences/notifications',
   debug: true,
   useProxy: true,
   proxyVerbose: true,
+  sassPrefix: '.email, .userPreferences',
   /**
    * Change to false after your app is registered in configuration files
    */

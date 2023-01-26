@@ -4,6 +4,7 @@ import ReducerRegistry, {
 } from '@redhat-cloud-services/frontend-components-utilities/ReducerRegistry';
 import promiseMiddleware from 'redux-promise-middleware';
 import notificationsMiddleware from '@redhat-cloud-services/frontend-components-notifications/notificationsMiddleware';
+import { notificationsReducer as notifications } from '@redhat-cloud-services/frontend-components-notifications/redux';
 import reduxLogger from 'redux-logger';
 import emailReducer, {
   emailInitialState,
@@ -33,6 +34,7 @@ registry.register({
     notificationsReducer,
     notificationsInitialState
   ),
+  notifications,
 });
 
 export default registry;

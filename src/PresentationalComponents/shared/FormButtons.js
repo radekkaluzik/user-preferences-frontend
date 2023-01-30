@@ -15,8 +15,11 @@ const FormButtons = ({
   const { reset } = useFormApi();
   const noChanges =
     isEmpty(dirtyFieldsSinceLastSubmit) || (!submitSucceeded && pristine);
-  return (
-    <div className="pref-shared--buttons pf-m-9-col-on-md">
+  return noChanges ? null : (
+    <div
+      id="user-pref__form-buttons"
+      className="pref-shared--buttons pf-m-9-col-on-md"
+    >
       <ActionGroup className="pref-shared--actions pf-u-px-lg pf-u-py-md">
         <Button
           type="submit"

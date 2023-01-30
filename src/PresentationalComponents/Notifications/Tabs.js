@@ -35,20 +35,22 @@ const FormTabs = ({ fields, titleRef }) => {
     const container = document.getElementById('notifications-container');
     const gridElement = document.getElementById('notifications-grid');
     const menu = document.getElementById('notifications-menu-content');
-    const buttonsHeight =
-      document
-        .getElementById('user-pref__form-buttons')
-        ?.getBoundingClientRect().height || 0;
-    gridElement.style.height = `${
-      container.getBoundingClientRect().height - buttonsHeight
-    }px`;
-    menu.style.maxHeight = `${
-      container.getBoundingClientRect().height -
-      titleRef.current.getBoundingClientRect().height -
-      searchRef.current.getBoundingClientRect().height -
-      buttonsHeight -
-      1
-    }px`;
+    if (menu?.style && gridElement?.style) {
+      const buttonsHeight =
+        document
+          .getElementById('user-pref__form-buttons')
+          ?.getBoundingClientRect()?.height || 0;
+      gridElement.style.height = `${
+        container.getBoundingClientRect().height - buttonsHeight
+      }px`;
+      menu.style.maxHeight = `${
+        container.getBoundingClientRect().height -
+        titleRef.current.getBoundingClientRect().height -
+        searchRef.current.getBoundingClientRect().height -
+        buttonsHeight -
+        1
+      }px`;
+    }
   };
 
   useEffect(() => {

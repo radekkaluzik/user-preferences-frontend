@@ -145,12 +145,12 @@ describe('Notifications tests', () => {
         </Provider>
       );
     });
-    expect(getByText(wrapper.container, 'Save')).toBeDisabled();
+    expect(queryByText(wrapper.container, 'Save')).toEqual(null);
     fireEvent.click(getAllByRole(wrapper.container, 'checkbox').at(0));
     fireEvent.click(getAllByRole(wrapper.container, 'checkbox').at(1));
     expect(getByText(wrapper.container, 'Save')).toBeEnabled();
     fireEvent.click(getByText(wrapper.container, 'Save'));
-    expect(getByText(wrapper.container, 'Save')).toBeDisabled();
+    expect(queryByText(wrapper.container, 'Save')).toEqual(null);
     expect(saveNotificationValues).toHaveBeenCalledTimes(1);
     expect(saveNotificationValues).toHaveBeenCalledWith({
       bundleName: 'application-services',

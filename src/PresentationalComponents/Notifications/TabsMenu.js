@@ -39,7 +39,7 @@ const TabsMenu = ({ searchRef, search, setSearch, fields, onClick }) => {
 
   const { bundle, app } = useMemo(
     () => getNavFromURL(history, fields, {}),
-    [history.location.search]
+    [history?.location.search]
   );
 
   return (

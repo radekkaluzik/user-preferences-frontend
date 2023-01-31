@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   Button,
   ButtonVariant,
@@ -17,7 +17,9 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { getNavFromURL } from './urlSync';
 
 const renderEmptyState = (setSearch) => (
   <EmptyState variant={EmptyStateVariant.small} className="pf-u-mt-lg">
@@ -32,45 +34,55 @@ const renderEmptyState = (setSearch) => (
   </EmptyState>
 );
 
-const TabsMenu = ({ searchRef, search, setSearch, fields, onClick }) => (
-  <Menu isPlain isScrollable>
-    <MenuInput ref={searchRef} className="pf-u-mx-sm">
-      <TextInput
-        aria-label="Filter menu items"
-        placeholder="Search applications"
-        iconVariant="search"
-        type="search"
-        onChange={(value) => setSearch(value)}
-        value={search}
-      />
-    </MenuInput>
-    <Divider />
-    <MenuContent id="notifications-menu-content">
-      {fields.some((bundle) => bundle.fields.length > 0)
-        ? fields.map(({ fields, title, name: bundleName }) =>
-            fields.length > 0 ? (
-              <MenuGroup
-                label={title}
-                className="pf-u-px-sm"
-                key={`menu-group-${bundleName}`}
-              >
-                <MenuList>
-                  {fields.map(({ label, name: sectionName }) => (
-                    <MenuItem
-                      onClick={(e) => onClick(e, bundleName, sectionName)}
-                      key={`menu-item-${bundleName}-${sectionName}`}
-                    >
-                      {label}
-                    </MenuItem>
-                  ))}
-                </MenuList>
-              </MenuGroup>
-            ) : null
-          )
-        : renderEmptyState(setSearch)}
-    </MenuContent>
-  </Menu>
-);
+const TabsMenu = ({ searchRef, search, setSearch, fields, onClick }) => {
+  const history = useHistory();
+
+  const { bundle, app } = useMemo(
+    () => getNavFromURL(history, fields, {}),
+    [history?.location.search]
+  );
+
+  return (
+    <Menu isPlain isScrollable>
+      <MenuInput ref={searchRef} className="pf-u-mx-sm">
+        <TextInput
+          aria-label="Filter menu items"
+          placeholder="Search applications"
+          iconVariant="search"
+          type="search"
+          onChange={(value) => setSearch(value)}
+          value={search}
+        />
+      </MenuInput>
+      <Divider />
+      <MenuContent id="notifications-menu-content">
+        {fields.some((bundle) => bundle.fields.length > 0)
+          ? fields.map(({ fields, title, name: bundleName }) =>
+              fields.length > 0 ? (
+                <MenuGroup
+                  label={title}
+                  className="pf-u-px-sm"
+                  key={`menu-group-${bundleName}`}
+                >
+                  <MenuList>
+                    {fields.map(({ label, name: sectionName }) => (
+                      <MenuItem
+                        onClick={(e) => onClick(e, bundleName, sectionName)}
+                        key={`menu-item-${bundleName}-${sectionName}`}
+                        isFocused={bundle === bundleName && app === sectionName}
+                      >
+                        {label}
+                      </MenuItem>
+                    ))}
+                  </MenuList>
+                </MenuGroup>
+              ) : null
+            )
+          : renderEmptyState(setSearch)}
+      </MenuContent>
+    </Menu>
+  );
+};
 
 TabsMenu.propTypes = {
   fields: PropTypes.array.isRequired,

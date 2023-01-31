@@ -4,6 +4,7 @@ exports[`FormButtons tests should render correctly 1`] = `
 <div>
   <div
     class="pref-shared--buttons pf-m-9-col-on-md"
+    id="user-pref__form-buttons"
   >
     <div
       class="pf-c-form__group pf-m-action pref-shared--actions pf-u-px-lg pf-u-py-md"

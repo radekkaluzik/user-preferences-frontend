@@ -7,7 +7,6 @@ import { useFormState } from 'react-final-form';
 import { getNavFromURL, setNavToURL } from './urlSync';
 import TabsMenu from './TabsMenu';
 import config from '../../config/config.json';
-import isEmpty from 'lodash/isEmpty';
 
 const renderPageHeading = (bundleTitle, sectionTitle) => (
   <React.Fragment>
@@ -43,13 +42,14 @@ const FormTabs = ({ fields, titleRef }) => {
       gridElement.style.height = `${
         container.getBoundingClientRect().height - buttonsHeight
       }px`;
-      menu.style.maxHeight = `${
+      const menuMaxHeight =
         container.getBoundingClientRect().height -
         titleRef.current.getBoundingClientRect().height -
         searchRef.current.getBoundingClientRect().height -
-        buttonsHeight -
-        1
-      }px`;
+        (menuMaxHeight < menu.scrollHeight ? buttonsHeight : 0) -
+        1;
+      menu.style.maxHeight = `${menuMaxHeight}px`;
+      menu.style.height = `${menuMaxHeight - buttonsHeight}px`;
     }
   };
 

@@ -29,4 +29,14 @@
         color: var(--pf-global--warning-color--200);
         font-weight: var(--pf-global--FontWeight--bold);
     }
+
+    .pref-c-checkbox-info {
+        svg {
+            color: var(--pf-global--info-color--100);
+        }
+
+        font-size: var(--pf-global--FontSize--md);
+        color: var(--pf-global--info-color--200);
+        font-weight: var(--pf-global--FontWeight--bold);
+    }
 }

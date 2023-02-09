@@ -5,7 +5,10 @@ import PropTypes from 'prop-types';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import useFieldApi from '@data-driven-forms/react-form-renderer/use-field-api';
 import './descriptiveCheckbox.scss';
-import { ExclamationTriangleIcon } from '@patternfly/react-icons';
+import {
+  ExclamationTriangleIcon,
+  InfoCircleIcon,
+} from '@patternfly/react-icons';
 
 // eslint-disable-next-line no-unused-vars
 const DescriptiveCheckbox = (props) => {
@@ -19,6 +22,7 @@ const DescriptiveCheckbox = (props) => {
     isDanger,
     isGlobal,
     checkedWarning,
+    infoMessage,
     input: { onChange, checked, ...input },
   } = useFieldApi({
     ...props,
@@ -56,7 +60,14 @@ const DescriptiveCheckbox = (props) => {
       description={
         <div>
           {description && (
-            <span className="pref-c-checkbox-description">{description}</span>
+            <>
+              <span className="pref-c-checkbox-description">{description}</span>
+            </>
+          )}
+          {!checked && checkedWarning && (
+            <span className="pref-c-checkbox-info">
+              <InfoCircleIcon /> {infoMessage}
+            </span>
           )}
           {checked && checkedWarning && (
             <span className="pref-c-checkbox-warning">

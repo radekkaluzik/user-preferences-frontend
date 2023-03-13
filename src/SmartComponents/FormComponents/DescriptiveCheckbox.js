@@ -64,7 +64,7 @@ const DescriptiveCheckbox = (props) => {
               <span className="pref-c-checkbox-description">{description}</span>
             </>
           )}
-          {!checked && checkedWarning && (
+          {!checked && infoMessage && (
             <span className="pref-c-checkbox-info">
               <InfoCircleIcon /> {infoMessage}
             </span>

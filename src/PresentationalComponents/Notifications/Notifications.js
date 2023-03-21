@@ -74,11 +74,11 @@ const Notifications = () => {
     })();
   }, []);
 
-  const saveValues = (values, form) => {
+  const saveValues = (values, formApi) => {
     const notifToSubmit = Object.entries(notifPref).reduce((acc, curr) => {
       const temp = curr[1].sections
         .filter((item) =>
-          Object.entries(form.getState().dirtyFields).some(
+          Object.entries(formApi.getState().dirtyFields).some(
             ([key, value]) =>
               key.includes(curr[0]) &&
               key.includes(item.name) &&
@@ -118,7 +118,7 @@ const Notifications = () => {
       )
     );
     // temporary submitting of RHEL Advisor email pref.
-    if (form.getState().dirtyFields['is_subscribed']) {
+    if (formApi.getState().dirtyFields['is_subscribed']) {
       const { url, apiName } = emailConfig['advisor'];
       const action = saveEmailValues({
         application: 'advisor',
@@ -128,6 +128,7 @@ const Notifications = () => {
       });
       promises.push(dispatch(action));
     }
+    formApi.initialize(values);
     Promise.all(promises)
       .then(() => {
         dispatch(

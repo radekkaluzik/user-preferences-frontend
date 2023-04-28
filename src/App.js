@@ -5,7 +5,10 @@ import { useChrome } from '@redhat-cloud-services/frontend-components/useChrome'
 import './App.scss';
 
 const App = (props) => {
-  const { auth } = useChrome();
+  const { auth, updateDocumentTitle } = useChrome();
+
+  updateDocumentTitle?.('User Preferences');
+
   useEffect(() => {
     (async () => {
       const user = await auth.getUser();

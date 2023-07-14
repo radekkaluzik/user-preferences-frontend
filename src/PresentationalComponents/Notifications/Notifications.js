@@ -17,6 +17,8 @@ import {
   notificationConfigForBundle,
 } from '../../Utilities/functions';
 import {
+  BUTTON,
+  BulkSelectButton,
   DATA_LIST,
   DESCRIPTIVE_CHECKBOX,
   DataListLayout,
@@ -28,7 +30,7 @@ import config from '../../config/config.json';
 import FormTabs from './Tabs';
 import FormTabGroup from './TabGroup';
 import { prepareFields } from './utils';
-import { UNSUBSCRIBE_ALL } from '../../Utilities/constants';
+import { BULK_SELECT_BUTTON } from '../../Utilities/constants';
 import FormTemplate from './NotificationTemplate';
 import './notifications.scss';
 import { useChrome } from '@redhat-cloud-services/frontend-components/useChrome';
@@ -108,7 +110,10 @@ const Notifications = () => {
                   (acc, [key, value]) => ({
                     ...acc,
                     [key]: {
-                      notifications: omit(value.notifications, UNSUBSCRIBE_ALL),
+                      notifications: omit(
+                        value.notifications,
+                        BULK_SELECT_BUTTON
+                      ),
                     },
                   }),
                   {}
@@ -168,11 +173,11 @@ const Notifications = () => {
               <a href={`/settings/notifications`}>Settings</a>.
             </Text>
           </div>
-
           <FormRenderer
             componentMapper={{
               ...componentMapper,
               [DESCRIPTIVE_CHECKBOX]: DescriptiveCheckbox,
+              [BUTTON]: BulkSelectButton,
               [LOADER]: Loader,
               [DATA_LIST]: DataListLayout,
               tabs: FormTabs,

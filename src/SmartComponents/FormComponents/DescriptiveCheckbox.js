@@ -2,7 +2,6 @@ import React from 'react';
 import { Checkbox } from '@patternfly/react-core';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import useFieldApi from '@data-driven-forms/react-form-renderer/use-field-api';
 import './descriptiveCheckbox.scss';
 import {
@@ -13,14 +12,10 @@ import {
 // eslint-disable-next-line no-unused-vars
 const DescriptiveCheckbox = (props) => {
   const {
-    group,
-    section,
     label,
-    beforeOnChange,
     title,
     description,
     isDanger,
-    isGlobal,
     checkedWarning,
     infoMessage,
     input: { onChange, checked, ...input },
@@ -28,7 +23,6 @@ const DescriptiveCheckbox = (props) => {
     ...props,
     type: 'checkbox',
   });
-  const formOptions = useFormApi();
 
   return (
     <Checkbox
@@ -36,14 +30,6 @@ const DescriptiveCheckbox = (props) => {
       isChecked={checked}
       id={`descriptive-checkbox-${input.name}`}
       onChange={(checked, event, ...rest) => {
-        beforeOnChange(
-          isGlobal,
-          checked,
-          formOptions,
-          group,
-          section,
-          props.name
-        );
         onChange(checked, event, ...rest);
       }}
       data-type="descriptive-checkbox"
@@ -51,7 +37,7 @@ const DescriptiveCheckbox = (props) => {
       label={
         <span
           className={classNames('pref-c-checkbox-label', {
-            'pref-c-checkbox-label-error': isDanger || isGlobal,
+            'pref-c-checkbox-label-error': isDanger,
           })}
         >
           {label || title}

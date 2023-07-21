@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Bulk Select Button tests should render correctly 1`] = `
+<div>
+  <div>
+    <button
+      aria-disabled="false"
+      class="pf-c-button pf-m-secondary pref-c-bulk-select-button"
+      data-ouia-component-id="OUIA-Generated-Button-secondary-1"
+      data-ouia-component-type="PF4/Button"
+      data-ouia-safe="true"
+      id="button-"
+      name=""
+      type="button"
+      value="[object Object]"
+    >
+      Deselect All
+    </button>
+  </div>
+</div>
+`;

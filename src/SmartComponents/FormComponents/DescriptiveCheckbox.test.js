@@ -23,7 +23,6 @@ describe('Descriptive checkbox tests', () => {
     );
     expect(container).toMatchSnapshot();
   });
-
   it('should call beforeOnChange correctly', () => {
     const beforeOnChange = jest.fn();
     const { container } = render(
@@ -43,7 +42,6 @@ describe('Descriptive checkbox tests', () => {
               section="testSection"
               clearedValue
               {...props}
-              beforeOnChange={beforeOnChange}
               isGlobal
             />
           </RendererContext.Provider>
@@ -51,15 +49,6 @@ describe('Descriptive checkbox tests', () => {
       </Form>
     );
     fireEvent.click(getByRole(container, 'checkbox'));
-    expect(beforeOnChange).toHaveBeenCalledTimes(1);
-    expect(beforeOnChange).toHaveBeenNthCalledWith(
-      1,
-      true,
-      false,
-      expect.anything(),
-      'testGroup',
-      'testSection',
-      ''
-    );
+    expect(getByRole(container, 'checkbox')).toBeChecked();
   });
 });

@@ -18,7 +18,10 @@ const BulkSelectButton = (props) => {
     type: 'button',
   });
   useEffect(() => {
-    if (dirtyFieldsRef !== formOptions.getState().dirtyFields) {
+    if (
+      JSON.stringify(dirtyFieldsRef.current) !==
+      JSON.stringify(formOptions.getState().dirtyFields)
+    ) {
       let notIsSubscribed;
       formOptions.batch(() => {
         formOptions.getRegisteredFields().forEach((field) => {
@@ -35,6 +38,7 @@ const BulkSelectButton = (props) => {
         });
       });
       formOptions.change(input.name, notIsSubscribed ?? false);
+      dirtyFieldsRef.current = formOptions.getState().dirtyFields;
     }
   });
 

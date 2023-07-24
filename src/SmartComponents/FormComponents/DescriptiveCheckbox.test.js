@@ -24,7 +24,6 @@ describe('Descriptive checkbox tests', () => {
     expect(container).toMatchSnapshot();
   });
   it('should call beforeOnChange correctly', () => {
-    const beforeOnChange = jest.fn();
     const { container } = render(
       <Form onSubmit={() => undefined}>
         {(props) => (

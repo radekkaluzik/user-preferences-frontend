@@ -28,6 +28,6 @@ describe('Bulk Select Button tests', () => {
         )}
       </Form>
     );
-    expect(container).toBeVisible();
+    expect(container).toMatchSnapshot();
   });
 });

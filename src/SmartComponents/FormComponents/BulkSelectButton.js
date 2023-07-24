@@ -59,10 +59,10 @@ const BulkSelectButton = (props) => {
               !field.includes(BULK_SELECT_BUTTON)
             ) {
               formOptions.change(field, input.value);
-              formOptions.change(input.name, !input.value);
             }
           });
         });
+        formOptions.change(input.name, !input.value);
       }}
     >
       {input.value == true ? 'Select all' : 'Deselect All'}

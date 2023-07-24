@@ -173,6 +173,7 @@ const Notifications = () => {
               <a href={`/settings/notifications`}>Settings</a>.
             </Text>
           </div>
+
           <FormRenderer
             componentMapper={{
               ...componentMapper,

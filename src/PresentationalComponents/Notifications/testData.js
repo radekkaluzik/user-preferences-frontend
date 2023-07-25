@@ -52,7 +52,7 @@ export const userPrefInitialState = {
               isGlobal: true,
               label: 'Unsubscribe from all',
               initialValue: false,
-              component: 'descriptiveCheckbox',
+              component: 'bulkSelectButton',
             },
           ],
         },

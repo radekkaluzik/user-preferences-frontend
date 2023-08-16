@@ -6,20 +6,19 @@ import { useHistory } from 'react-router-dom';
 import { useFormState } from 'react-final-form';
 import { getNavFromURL, setNavToURL } from './urlSync';
 import TabsMenu from './TabsMenu';
-import config from '../../config/config.json';
 
 const renderPageHeading = (bundleTitle, sectionTitle) => (
   <React.Fragment>
     <Title headingLevel="h3" size="xl" className="pf-u-pb-xs">
       {`${sectionTitle} | ${bundleTitle}`}
     </Title>
-    <Text className="pf-u-mb-xl">
+    <Text className="pf-u-mb-md">
       Configure your {sectionTitle} notifications.
     </Text>
   </React.Fragment>
 );
 
-const FormTabs = ({ fields, titleRef }) => {
+const FormTabs = ({ fields, titleRef, bundles }) => {
   const history = useHistory();
   const formOptions = useFormApi();
   const searchRef = useRef(null);
@@ -112,7 +111,7 @@ const FormTabs = ({ fields, titleRef }) => {
       <div className="pref-notifications--inputs">
         <React.Fragment>
           {renderPageHeading(
-            config['notification-preference'][navConfig.current.bundle]?.title,
+            bundles[navConfig.current.bundle]?.label,
             fields
               .reduce((acc, curr) => [...acc, ...curr.fields], [])
               .filter(
@@ -153,10 +152,8 @@ const FormTabs = ({ fields, titleRef }) => {
 
 FormTabs.propTypes = {
   fields: PropTypes.array.isRequired,
-  dataType: PropTypes.any,
-  validate: PropTypes.any,
-  component: PropTypes.any,
   titleRef: PropTypes.any,
+  bundles: PropTypes.shape({ label: PropTypes.string }),
 };
 
 export default React.memo(FormTabs);

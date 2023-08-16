@@ -1,6 +1,13 @@
 import { GET_EMAIL_SCHEMA } from '../action-types';
+import config from '../../config/config.json';
 
-export const emailInitialState = {};
+export const emailInitialState = Object.keys(config['email-preference']).reduce(
+  (acc, curr) => ({
+    ...acc,
+    [curr]: { loaded: false },
+  }),
+  {}
+);
 
 export const setLoadingState = (store, { meta }) => {
   return {

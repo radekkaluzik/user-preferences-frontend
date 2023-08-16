@@ -2,79 +2,65 @@ import React, { useEffect, useRef, useState } from 'react';
 import omit from 'lodash/omit';
 import { FormRenderer } from '@data-driven-forms/react-form-renderer';
 import { componentMapper } from '@data-driven-forms/pf4-component-mapper';
-import { Text } from '@patternfly/react-core';
+import { Bullseye, Spinner, Text } from '@patternfly/react-core';
+import { useChrome } from '@redhat-cloud-services/frontend-components/useChrome';
 import { PageHeaderTitle } from '@redhat-cloud-services/frontend-components/PageHeader';
 import { addNotification } from '@redhat-cloud-services/frontend-components-notifications/redux';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  getNotificationSchemas,
+  getNotificationsSchema,
   saveNotificationValues,
 } from '../../redux/actions/notifications-actions';
 import { saveEmailValues } from '../../redux/actions/email-actions';
-import { getApplicationSchema } from '../../api';
+import { calculateEmailConfig } from '../../Utilities/functions';
 import {
-  calculateEmailConfig,
-  notificationConfigForBundle,
-} from '../../Utilities/functions';
-import {
-  BUTTON,
+  BULK_SELECT_BUTTON,
   BulkSelectButton,
   DATA_LIST,
   DESCRIPTIVE_CHECKBOX,
   DataListLayout,
   DescriptiveCheckbox,
+  FORM_TABS,
+  INPUT_GROUP,
+  InputGroup,
   LOADER,
   Loader,
+  TAB_GROUP,
 } from '../../SmartComponents/FormComponents';
 import config from '../../config/config.json';
 import FormTabs from './Tabs';
 import FormTabGroup from './TabGroup';
 import { prepareFields } from './utils';
-import { BULK_SELECT_BUTTON } from '../../Utilities/constants';
 import FormTemplate from './NotificationTemplate';
 import './notifications.scss';
-import { useChrome } from '@redhat-cloud-services/frontend-components/useChrome';
 
 const Notifications = () => {
   const { auth } = useChrome();
   const dispatch = useDispatch();
   const titleRef = useRef(null);
-  const [isLoading, setLoading] = useState(false);
   const [emailConfig, setEmailConfig] = useState({});
 
   const emailPref = useSelector(({ emailReducer }) => emailReducer);
-  const { bundles: notifPref } = useSelector(({ notificationsReducer }) => ({
-    bundles: {},
-    ...notificationsReducer,
-  }));
+  const { bundles: notifPref, loaded } = useSelector(
+    ({ notificationsReducer }) => ({
+      ...notificationsReducer,
+      bundles: Object.entries(notificationsReducer?.bundles || {})?.reduce(
+        (acc, [key, value]) => ({
+          ...acc,
+          ...(config['notification-preference'].includes(key)
+            ? { [key]: value }
+            : {}),
+        }),
+        {}
+      ),
+    })
+  );
 
   useEffect(() => {
-    setLoading(true);
     (async () => {
       await auth.getUser();
-      setEmailConfig(await calculateEmailConfig(config, dispatch));
-      const promises = Object.keys(config['notification-preference']).map(
-        (bundleName) =>
-          getApplicationSchema(
-            notificationConfigForBundle(bundleName)?.application,
-            undefined,
-            notificationConfigForBundle(bundleName)?.resourceType
-          ).then((data) => ({
-            data,
-            bundleName,
-          }))
-      );
-      Promise.all(promises).then((values) => {
-        const newValues = values.reduce(
-          (acc, { data, bundleName }) => ({
-            ...acc,
-            [bundleName]: data?.fields[0],
-          }),
-          {}
-        );
-        dispatch(getNotificationSchemas(newValues));
-        setLoading(false);
-      });
+      setEmailConfig(calculateEmailConfig(config, dispatch));
+      dispatch(getNotificationsSchema());
     })();
   }, []);
 
@@ -157,7 +143,7 @@ const Notifications = () => {
       });
   };
 
-  return !isLoading ? (
+  return loaded && Object.values(emailPref).every((value) => value.loaded) ? (
     <div id="notifications-container" className="pref-notifications--container">
       <div className="pref-notifications--wrapper">
         <div id="notifications-grid" className="pref-notifications--grid">
@@ -178,19 +164,21 @@ const Notifications = () => {
             componentMapper={{
               ...componentMapper,
               [DESCRIPTIVE_CHECKBOX]: DescriptiveCheckbox,
-              [BUTTON]: BulkSelectButton,
+              [BULK_SELECT_BUTTON]: BulkSelectButton,
               [LOADER]: Loader,
               [DATA_LIST]: DataListLayout,
-              tabs: FormTabs,
-              tabGroup: FormTabGroup,
+              [INPUT_GROUP]: InputGroup,
+              [FORM_TABS]: FormTabs,
+              [TAB_GROUP]: FormTabGroup,
             }}
             FormTemplate={FormTemplate}
             schema={{
               fields: [
                 {
-                  component: 'tabs',
+                  component: FORM_TABS,
                   name: 'notifTabs',
                   titleRef,
+                  bundles: notifPref,
                   fields: prepareFields(notifPref, emailPref, emailConfig),
                 },
               ],
@@ -200,7 +188,11 @@ const Notifications = () => {
         </div>
       </div>
     </div>
-  ) : null;
+  ) : (
+    <Bullseye>
+      <Spinner />
+    </Bullseye>
+  );
 };
 
 export default Notifications;

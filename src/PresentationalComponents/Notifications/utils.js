@@ -1,66 +1,109 @@
-import { BULK_SELECT_BUTTON } from '../../Utilities/constants';
-import config from '../../config/config.json';
+import omit from 'lodash/omit';
+import {
+  BULK_SELECT_BUTTON,
+  INPUT_GROUP,
+  TAB_GROUP,
+} from '../../SmartComponents/FormComponents/componentTypes';
 
 export const prepareFields = (notifPref, emailPref, emailConfig) =>
-  Object.entries(notifPref).reduce(
-    (acc, [key, value]) => [
+  Object.entries(notifPref).reduce((acc, [bundleKey, bundleData]) => {
+    return [
       ...acc,
       {
-        title: config['notification-preference'][key].title,
-        name: key,
-        fields: value.sections.reduce((acc, section) => {
-          let unsubscribeAllInactive = true;
-          const fields = [
-            ...section.fields[0].fields.map((field) => {
-              unsubscribeAllInactive =
-                unsubscribeAllInactive && field.initialValue;
-              return {
-                ...field,
-                group: key,
-                section: section.name,
-                category: 'notification-preference',
-              };
-            }),
-            ...Object.entries(emailPref).reduce(
-              (acc, emailSection) => [
-                ...acc,
-                ...(emailSection[0] === section.name &&
-                emailConfig[emailSection[0]]?.bundle === key
-                  ? emailSection?.[1]?.schema?.[0]?.fields?.map((field) => {
+        title: bundleData?.label,
+        name: bundleKey,
+        fields: Object.entries(bundleData.applications).reduce(
+          (acc, [appKey, appData]) => {
+            let unsubscribeAllInactive = true;
+            const fields = [
+              ...Object.entries(emailPref).reduce(
+                (acc, emailSection) => [
+                  ...acc,
+                  ...(emailSection[0] === appKey &&
+                  emailConfig[emailSection[0]]?.bundle === bundleKey
+                    ? [
+                        {
+                          label: 'Reports',
+                          name: 'email-reports',
+                          component: INPUT_GROUP,
+                          level: 1,
+                          fields: emailSection[1].schema[0]?.fields.map(
+                            (field) => {
+                              unsubscribeAllInactive =
+                                unsubscribeAllInactive && field.initialValue;
+                              return {
+                                ...omit(field, [
+                                  'infoMessage',
+                                  'checkedWarning',
+                                ]),
+                                group: bundleKey,
+                                section: appKey,
+                                category: 'email-preference',
+                              };
+                            }
+                          ),
+                        },
+                      ] || []
+                    : []),
+                ],
+                []
+              ),
+              {
+                label: 'Event notifications',
+                description:
+                  'Select how would you like to receive notifications for each event.',
+                name: 'event-notifications',
+                component: INPUT_GROUP,
+                level: 1,
+                fields: [
+                  ...appData.eventTypes.map((eventType, idx) => ({
+                    label: eventType.label,
+                    name: `${eventType.name}-${idx}`,
+                    component: INPUT_GROUP,
+                    fields: eventType.fields.map((field) => {
                       unsubscribeAllInactive =
                         unsubscribeAllInactive && field.initialValue;
                       return {
-                        ...field,
-                        group: key,
-                        section: section.name,
-                        category: 'email-preference',
+                        ...omit(field, [
+                          'description',
+                          'infoMessage',
+                          'checkedWarning',
+                        ]),
+                        group: bundleKey,
+                        section: appKey,
+                        category: 'notification-preference',
                       };
-                    }) || []
-                  : []),
-              ],
-              []
-            ),
-          ];
-          return [
-            ...acc,
-            {
-              ...section,
-              bundle: key,
-              component: 'tabGroup',
-              fields: [
-                {
-                  name: `bundles[${key}].applications[${section.name}].notifications[${BULK_SELECT_BUTTON}]`,
-                  group: key,
-                  section: section.name,
-                  initialValue: !unsubscribeAllInactive,
-                  component: 'bulkSelectButton',
-                },
-                ...fields,
-              ],
-            },
-          ];
-        }, []),
+                    }),
+                  })),
+                ],
+              },
+            ];
+            return [
+              ...acc,
+              {
+                name: appKey,
+                bundle: bundleKey,
+                label: appData.label,
+                component: TAB_GROUP,
+                fields: [
+                  ...(fields.length <= 1 && fields[0].fields?.length <= 1
+                    ? []
+                    : [
+                        {
+                          name: `bundles[${bundleKey}].applications[${appKey}].notifications[${BULK_SELECT_BUTTON}]`,
+                          group: bundleKey,
+                          section: appKey,
+                          initialValue: !unsubscribeAllInactive,
+                          component: BULK_SELECT_BUTTON,
+                        },
+                      ]),
+                  ...fields,
+                ],
+              },
+            ];
+          },
+          []
+        ),
       },
-    ],
-    []
-  );
+    ];
+  }, []);

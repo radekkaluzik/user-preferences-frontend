@@ -23,26 +23,5 @@
             "localFile": "data/unsubscribe.json"
         }
     },
-    "notification-preference": {
-        "openshift": {
-            "title": "OpenShift",
-            "application": "notifications",
-            "resourceType": "notification-preference?bundleName=openshift"
-        },
-        "rhel": {
-            "title": "Red Hat Enterprise Linux",
-            "application": "notifications",
-            "resourceType": "notification-preference?bundleName=rhel"
-        },
-        "ansible": {
-            "title": "Ansible",
-            "application": "notifications",
-            "resourceType": "notification-preference?bundleName=ansible"
-        },
-        "console": {
-            "title": "Console",
-            "application": "notifications",
-            "resourceType": "notification-preference?bundleName=console"
-        }
-    }
+    "notification-preference": ["openshift", "rhel", "ansible", "console", "application-services"]
 }

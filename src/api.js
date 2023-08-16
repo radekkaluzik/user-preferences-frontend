@@ -23,6 +23,11 @@ export const getApplicationSchema = (
     `/api/${application}/${apiVersion}${url || `/user-config/${resourceType}`}`
   );
 
+export const getNotificationsSchema = (apiVersion = 'v1') =>
+  instance.get(
+    `/api/notifications/${apiVersion}/user-config/notification-event-type-preference`
+  );
+
 export const saveValues = async (
   application,
   values,

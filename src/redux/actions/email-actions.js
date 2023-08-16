@@ -1,6 +1,5 @@
 import { getApplicationSchema, saveValues as save } from '../../api';
 import { ACTION_TYPES } from '../action-types';
-import config from '../../config/config.json';
 
 export const getEmailSchema = ({
   application,
@@ -20,7 +19,7 @@ export const getEmailSchema = ({
       rejected: {
         variant: 'danger',
         title: "Request for user's configuration failed",
-        description: `User's configuration email for ${config['email-preference']?.[application]?.title} application does not exist.`,
+        description: `User's configuration email for ${application?.label} application does not exist.`,
       },
     },
   },
@@ -38,7 +37,7 @@ export const saveEmailValues = ({
   payload: save(apiName || application, values, apiVersion, resourceType, url),
   meta: {
     appName: application,
-    title: config['email-preference']?.[application]?.title,
+    title: application?.label,
     noError: true,
   },
 });

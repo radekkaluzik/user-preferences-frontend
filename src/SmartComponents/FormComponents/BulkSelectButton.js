@@ -3,7 +3,7 @@ import { Button } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import useFieldApi from '@data-driven-forms/react-form-renderer/use-field-api';
-import { BULK_SELECT_BUTTON } from '../../Utilities/constants';
+import { BULK_SELECT_BUTTON } from './componentTypes';
 import './BulkSelectButton.scss';
 
 const BulkSelectButton = (props) => {

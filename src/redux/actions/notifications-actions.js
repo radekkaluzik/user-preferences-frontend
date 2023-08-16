@@ -1,21 +1,13 @@
-import { getApplicationSchema, saveValues as save } from '../../api';
+import {
+  getNotificationsSchema as getSchema,
+  saveValues as save,
+} from '../../api';
 import { ACTION_TYPES } from '../action-types';
-import { notificationConfigForBundle } from '../../Utilities/functions';
 
-export const getNotificationSchemas = (payload) => ({
-  type: ACTION_TYPES.GET_NOTIFICATION_SCHEMAS,
-  payload,
-});
-
-export const getNotificationSchema = ({ bundleName, apiVersion }) => ({
-  type: ACTION_TYPES.GET_NOTIFICATION_SCHEMA,
-  payload: getApplicationSchema(
-    notificationConfigForBundle(bundleName)?.application,
-    apiVersion,
-    notificationConfigForBundle(bundleName)?.resourceType
-  ),
+export const getNotificationsSchema = (props) => ({
+  type: ACTION_TYPES.GET_NOTIFICATIONS_SCHEMA,
+  payload: getSchema(props),
   meta: {
-    bundleName,
     notifications: {
       rejected: {
         variant: 'danger',
@@ -28,12 +20,7 @@ export const getNotificationSchema = ({ bundleName, apiVersion }) => ({
 
 export const saveNotificationValues = ({ bundleName, values, apiVersion }) => ({
   type: ACTION_TYPES.SAVE_NOTIFICATION_SCHEMA,
-  payload: save(
-    notificationConfigForBundle(bundleName)?.application,
-    values,
-    apiVersion,
-    notificationConfigForBundle(bundleName)?.resourceType
-  ),
+  payload: save('notifications', values, apiVersion),
   meta: {
     bundleName: bundleName,
     noError: true,

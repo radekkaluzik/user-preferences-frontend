@@ -1,6 +1,5 @@
 import React from 'react';
 import { Checkbox } from '@patternfly/react-core';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import useFieldApi from '@data-driven-forms/react-form-renderer/use-field-api';
 import './descriptiveCheckbox.scss';
@@ -9,13 +8,11 @@ import {
   InfoCircleIcon,
 } from '@patternfly/react-icons';
 
-// eslint-disable-next-line no-unused-vars
 const DescriptiveCheckbox = (props) => {
   const {
     label,
     title,
     description,
-    isDanger,
     checkedWarning,
     infoMessage,
     input: { onChange, checked, ...input },
@@ -34,15 +31,7 @@ const DescriptiveCheckbox = (props) => {
       }}
       data-type="descriptive-checkbox"
       className="pref-c-descriptive-checkbox"
-      label={
-        <span
-          className={classNames('pref-c-checkbox-label', {
-            'pref-c-checkbox-label-error': isDanger,
-          })}
-        >
-          {label || title}
-        </span>
-      }
+      label={label || title}
       description={
         <div>
           {description && (
@@ -75,14 +64,11 @@ DescriptiveCheckbox.propTypes = {
   label: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
-  isDanger: PropTypes.bool,
-  isGlobal: PropTypes.bool,
 };
 
 DescriptiveCheckbox.defaultProps = {
   name: '',
   label: '',
-  isDanger: false,
 };
 
 export default DescriptiveCheckbox;

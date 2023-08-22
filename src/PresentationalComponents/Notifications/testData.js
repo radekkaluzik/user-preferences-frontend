@@ -2,15 +2,11 @@ export const userPrefInitialState = {
   notificationsReducer: {
     bundles: {
       console: {
-        name: 'notification-preferences',
-        label: null,
-        component: 'section',
-        sections: [
-          {
-            name: 'sources',
+        label: 'Console',
+        applications: {
+          sources: {
             label: 'Sources',
-            component: null,
-            fields: [
+            eventTypes: [
               {
                 name: null,
                 label: null,
@@ -19,46 +15,23 @@ export const userPrefInitialState = {
                   {
                     name: 'bundles[console].applications[sources].notifications[INSTANT]',
                     label: 'Instant notification',
-                    description: 'Description.',
-                    initialValue: true,
                     component: 'descriptiveCheckbox',
-                    validate: [],
-                    checkedWarning: 'Another warning',
                   },
                   {
                     name: 'is_subscribed',
                     label: 'email test',
-                    description: 'Description.',
-                    initialValue: true,
                     component: 'descriptiveCheckbox',
-                    validate: [],
-                    checkedWarning: 'Another warning',
                   },
                 ],
               },
             ],
           },
-        ],
+        },
       },
     },
+    loaded: true,
   },
   emailReducer: {
-    unsubscribe: {
-      schema: [
-        {
-          fields: [
-            {
-              name: 'unsubscribe.from-all',
-              isGlobal: true,
-              label: 'Unsubscribe from all',
-              initialValue: false,
-              component: 'bulkSelectButton',
-            },
-          ],
-        },
-      ],
-      loaded: true,
-    },
     advisor: {
       schema: [
         {

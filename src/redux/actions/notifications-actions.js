@@ -18,11 +18,7 @@ export const getNotificationsSchema = (props) => ({
   },
 });
 
-export const saveNotificationValues = ({ bundleName, values, apiVersion }) => ({
+export const saveNotificationValues = (values, apiVersion) => ({
   type: ACTION_TYPES.SAVE_NOTIFICATION_SCHEMA,
-  payload: save('notifications', values, apiVersion),
-  meta: {
-    bundleName: bundleName,
-    noError: true,
-  },
+  payload: save(values, apiVersion),
 });

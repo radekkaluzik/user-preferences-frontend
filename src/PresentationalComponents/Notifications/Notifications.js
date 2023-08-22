@@ -65,51 +65,26 @@ const Notifications = () => {
   }, []);
 
   const saveValues = (values, formApi) => {
-    const notifToSubmit = Object.entries(notifPref).reduce((acc, curr) => {
-      const temp = curr[1].sections
-        .filter((item) =>
-          Object.entries(formApi.getState().dirtyFields).some(
-            ([key, value]) =>
-              key.includes(curr[0]) &&
-              key.includes(item.name) &&
-              key.includes('notifications') &&
-              value
-          )
-        )
-        .map((item) => item.name);
-      const tempToSubmit = [...new Set([...(acc?.[curr[0]] || []), ...temp])];
-      return {
-        ...acc,
-        ...(tempToSubmit.length > 0 ? { [curr[0]]: tempToSubmit } : {}),
-      };
-    }, {});
-    const promises = Object.keys(notifToSubmit).map((bundleName) =>
-      dispatch(
-        saveNotificationValues({
-          bundleName,
-          values: {
-            bundles: {
-              [bundleName]: {
-                applications: Object.entries(
-                  values.bundles[bundleName].applications
-                ).reduce(
-                  (acc, [key, value]) => ({
-                    ...acc,
-                    [key]: {
-                      notifications: omit(
-                        value.notifications,
-                        BULK_SELECT_BUTTON
-                      ),
-                    },
-                  }),
-                  {}
-                ),
-              },
-            },
+    const notificationValues = {
+      bundles: Object.entries(values.bundles).reduce(
+        (acc, [bundleName, bundleData]) => ({
+          ...acc,
+          [bundleName]: {
+            applications: Object.entries(bundleData.applications).reduce(
+              (acc, [appName, appData]) => ({
+                ...acc,
+                [appName]: {
+                  eventTypes: omit(appData.eventTypes, BULK_SELECT_BUTTON),
+                },
+              }),
+              {}
+            ),
           },
-        })
-      )
-    );
+        }),
+        {}
+      ),
+    };
+    const promises = [dispatch(saveNotificationValues(notificationValues))];
     // temporary submitting of RHEL Advisor email pref.
     if (formApi.getState().dirtyFields['is_subscribed']) {
       const { url, apiName } = emailConfig['advisor'];
@@ -121,7 +96,6 @@ const Notifications = () => {
       });
       promises.push(dispatch(action));
     }
-    formApi.initialize(values);
     Promise.all(promises)
       .then(() => {
         dispatch(

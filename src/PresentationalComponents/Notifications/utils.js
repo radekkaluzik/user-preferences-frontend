@@ -14,7 +14,7 @@ export const prepareFields = (notifPref, emailPref, emailConfig) =>
         name: bundleKey,
         fields: Object.entries(bundleData.applications).reduce(
           (acc, [appKey, appData]) => {
-            let unsubscribeAllInactive = true;
+            let selectAllActive = true;
             const fields = [
               ...Object.entries(emailPref).reduce(
                 (acc, emailSection) => [
@@ -29,8 +29,8 @@ export const prepareFields = (notifPref, emailPref, emailConfig) =>
                           level: 1,
                           fields: emailSection[1].schema[0]?.fields.map(
                             (field) => {
-                              unsubscribeAllInactive =
-                                unsubscribeAllInactive && field.initialValue;
+                              selectAllActive =
+                                selectAllActive && field.initialValue;
                               return {
                                 ...omit(field, [
                                   'infoMessage',
@@ -61,8 +61,7 @@ export const prepareFields = (notifPref, emailPref, emailConfig) =>
                     name: `${eventType.name}-${idx}`,
                     component: INPUT_GROUP,
                     fields: eventType.fields.map((field) => {
-                      unsubscribeAllInactive =
-                        unsubscribeAllInactive && field.initialValue;
+                      selectAllActive = selectAllActive && field.initialValue;
                       return {
                         ...omit(field, [
                           'description',
@@ -86,17 +85,13 @@ export const prepareFields = (notifPref, emailPref, emailConfig) =>
                 label: appData.label,
                 component: TAB_GROUP,
                 fields: [
-                  ...(fields.length <= 1 && fields[0].fields?.length <= 1
-                    ? []
-                    : [
-                        {
-                          name: `bundles[${bundleKey}].applications[${appKey}].notifications[${BULK_SELECT_BUTTON}]`,
-                          group: bundleKey,
-                          section: appKey,
-                          initialValue: !unsubscribeAllInactive,
-                          component: BULK_SELECT_BUTTON,
-                        },
-                      ]),
+                  {
+                    name: `bundles[${bundleKey}].applications[${appKey}].eventTypes[${BULK_SELECT_BUTTON}]`,
+                    group: bundleKey,
+                    section: appKey,
+                    initialValue: !selectAllActive,
+                    component: BULK_SELECT_BUTTON,
+                  },
                   ...fields,
                 ],
               },

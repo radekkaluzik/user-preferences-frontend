@@ -38,6 +38,5 @@ export const saveEmailValues = ({
   meta: {
     appName: application,
     title: application?.label,
-    noError: true,
   },
 });

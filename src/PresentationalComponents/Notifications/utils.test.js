@@ -4,34 +4,30 @@ describe('prepareFields', () => {
   it('should return correct output', () => {
     const notifPref = {
       rhel: {
-        name: 'notification-preferences',
-        label: null,
-        component: 'section',
-        sections: [
-          {
-            name: 'advisor',
+        label: 'RHEL',
+        applications: {
+          advisor: {
             label: 'Test',
-            component: null,
-            fields: [
+            eventTypes: [
               {
-                name: null,
-                label: null,
-                component: null,
+                name: 'testName',
+                label: 'testLabel',
                 fields: [
                   {
-                    name: 'testName',
                     label: 'Instant notification',
-                    description: 'Test description.',
-                    initialValue: false,
+                    description: 'Instant description',
                     component: 'descriptiveCheckbox',
-                    validate: [],
-                    checkedWarning: 'Test warning.',
+                  },
+                  {
+                    label: 'Drawer notification',
+                    description: 'Drawer description',
+                    component: 'descriptiveCheckbox',
                   },
                 ],
               },
             ],
           },
-        ],
+        },
       },
     };
     const emailPref = {
@@ -68,7 +64,7 @@ describe('prepareFields', () => {
       },
     };
     const expected =
-      '[{"title":"Red Hat Enterprise Linux","name":"rhel","fields":[{"name":"advisor","label":"Test","component":"tabGroup","fields":[{"name":"bundles[rhel].applications[advisor].notifications[BULK_SELECT_BUTTON]","group":"rhel","section":"advisor","initialValue":true,"component":"bulkSelectButton"},{"name":"testName","label":"Instant notification","description":"Test description.","initialValue":false,"component":"descriptiveCheckbox","validate":[],"checkedWarning":"Test warning.","group":"rhel","section":"advisor","category":"notification-preference"},{"name":"is_subscribed","label":"Weekly Report","title":"Weekly report","description":"Subscribe to this account\'s Test Weekly Report email","helperText":"User-specific setting to subscribe a user to the account\'s weekly reports email","component":"descriptiveCheckbox","isRequired":true,"initialValue":false,"isDisabled":false,"group":"rhel","section":"advisor","category":"email-preference"}],"bundle":"rhel"}]}]';
+      '[{"title":"RHEL","name":"rhel","fields":[{"name":"advisor","bundle":"rhel","label":"Test","component":"tabGroup","fields":[{"name":"bundles[rhel].applications[advisor].eventTypes[BULK_SELECT_BUTTON]","group":"rhel","section":"advisor","initialValue":true,"component":"BULK_SELECT_BUTTON"},{"label":"Reports","name":"email-reports","component":"inputGroup","level":1,"fields":[{"name":"is_subscribed","label":"Weekly Report","title":"Weekly report","description":"Subscribe to this account\'s Test Weekly Report email","helperText":"User-specific setting to subscribe a user to the account\'s weekly reports email","component":"descriptiveCheckbox","isRequired":true,"initialValue":false,"isDisabled":false,"group":"rhel","section":"advisor","category":"email-preference"}]},{"label":"Event notifications","description":"Select how would you like to receive notifications for each event.","name":"event-notifications","component":"inputGroup","level":1,"fields":[{"label":"testLabel","name":"testName-0","component":"inputGroup","fields":[{"label":"Instant notification","component":"descriptiveCheckbox","group":"rhel","section":"advisor","category":"notification-preference"},{"label":"Drawer notification","component":"descriptiveCheckbox","group":"rhel","section":"advisor","category":"notification-preference"}]}]}]}]}]';
     const result = prepareFields(notifPref, emailPref, emailConfig);
     expect(JSON.stringify(result)).toEqual(expected);
   });

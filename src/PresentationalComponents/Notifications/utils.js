@@ -26,7 +26,7 @@ export const prepareFields = (notifPref, emailPref, emailConfig) =>
                 ...acc,
                 ...(emailSection[0] === section.name &&
                 emailConfig[emailSection[0]]?.bundle === key
-                  ? emailSection[1].schema[0]?.fields.map((field) => {
+                  ? emailSection?.[1]?.schema?.[0]?.fields?.map((field) => {
                       unsubscribeAllInactive =
                         unsubscribeAllInactive && field.initialValue;
                       return {

@@ -20,5 +20,5 @@ export const getNotificationsSchema = (props) => ({
 
 export const saveNotificationValues = (values, apiVersion) => ({
   type: ACTION_TYPES.SAVE_NOTIFICATION_SCHEMA,
-  payload: save(values, apiVersion),
+  payload: save('notifications', values, apiVersion),
 });

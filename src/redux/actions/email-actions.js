@@ -29,12 +29,11 @@ export const saveEmailValues = ({
   application,
   values,
   apiVersion,
-  resourceType = 'email-preference',
   url,
   apiName,
 }) => ({
   type: ACTION_TYPES.SAVE_EMAIL_SCHEMA,
-  payload: save(apiName || application, values, apiVersion, resourceType, url),
+  payload: save(apiName || application, values, apiVersion, url),
   meta: {
     appName: application,
     title: application?.label,

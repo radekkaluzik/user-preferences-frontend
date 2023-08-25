@@ -28,8 +28,10 @@ export const getNotificationsSchema = (apiVersion = 'v1') =>
     `/api/notifications/${apiVersion}/user-config/notification-event-type-preference`
   );
 
-export const saveValues = async (values, apiVersion = 'v1') =>
+export const saveValues = async (apiName, values, apiVersion = 'v1', url) =>
   instance.post(
-    `/api/notifications/${apiVersion}/user-config/notification-event-type-preference`,
+    `/api/${apiName}/${apiVersion}${
+      url || '/user-config/notification-event-type-preference'
+    }`,
     values
   );

@@ -3,12 +3,11 @@ import { Button } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import useFieldApi from '@data-driven-forms/react-form-renderer/use-field-api';
-import { BULK_SELECT_BUTTON } from './componentTypes';
 import './BulkSelectButton.scss';
 
 const BulkSelectButton = (props) => {
   const formOptions = useFormApi();
-  const { input, group, section } = useFieldApi({
+  const { input, section, onClick } = useFieldApi({
     ...props,
     type: 'button',
   });
@@ -19,22 +18,7 @@ const BulkSelectButton = (props) => {
       variant="secondary"
       {...input}
       id={`bulk-select-${section}`}
-      onClick={() => {
-        formOptions.batch(() => {
-          formOptions.getRegisteredFields().forEach((field) => {
-            if (
-              ((field.includes(group) && field.includes(section)) ||
-                (field === 'is_subscribed' && // a temporary condition for RHEL Advisor email pref.
-                  group === 'rhel' &&
-                  section == 'advisor')) &&
-              !field.includes(BULK_SELECT_BUTTON)
-            ) {
-              formOptions.change(field, input.value);
-            }
-          });
-        });
-        input.onChange(!input.value);
-      }}
+      onClick={() => onClick?.(formOptions, input)}
     >
       {input.value ? 'Select' : 'Deselect'} all
     </Button>
@@ -42,8 +26,8 @@ const BulkSelectButton = (props) => {
 };
 
 BulkSelectButton.propTypes = {
-  group: PropTypes.string,
   section: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default BulkSelectButton;

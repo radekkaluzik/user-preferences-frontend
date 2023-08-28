@@ -4,6 +4,12 @@ import { Form, RendererContext } from '@data-driven-forms/react-form-renderer';
 import { fireEvent, getByRole, render } from '@testing-library/react';
 
 describe('Descriptive checkbox tests', () => {
+  const afterChangeMock = jest.fn();
+
+  afterEach(() => {
+    afterChangeMock.mockReset();
+  });
+
   it('should render correctly', () => {
     const { container } = render(
       <Form onSubmit={() => undefined}>
@@ -39,6 +45,7 @@ describe('Descriptive checkbox tests', () => {
               label="test label"
               group="testGroup"
               section="testSection"
+              afterChange={afterChangeMock}
               clearedValue
               {...props}
               isGlobal
@@ -48,6 +55,7 @@ describe('Descriptive checkbox tests', () => {
       </Form>
     );
     fireEvent.click(getByRole(container, 'checkbox'));
+    expect(afterChangeMock).toHaveBeenCalled();
     expect(getByRole(container, 'checkbox')).toBeChecked();
   });
 });

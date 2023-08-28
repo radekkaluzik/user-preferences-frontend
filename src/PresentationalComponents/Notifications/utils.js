@@ -5,6 +5,31 @@ import {
   TAB_GROUP,
 } from '../../SmartComponents/FormComponents/componentTypes';
 
+// update bulk select button's state after every change
+const afterChange = (formOptions, newValue, bundle, app) => {
+  if (!newValue) {
+    formOptions.change(
+      `bundles[${bundle}].applications[${app}].eventTypes[${BULK_SELECT_BUTTON}]`,
+      true
+    );
+  } else {
+    const allChecked = Object.entries(
+      formOptions.getState().values.bundles?.[bundle]?.applications?.[app]
+        .eventTypes || {}
+    ).every(([key, value]) => key === BULK_SELECT_BUTTON || value);
+    if (
+      allChecked &&
+      ((bundle !== 'rhel' && app !== 'advisor') ||
+        formOptions.getState().values['is_subscribed'])
+    ) {
+      formOptions.change(
+        `bundles[${bundle}].applications[${app}].eventTypes[${BULK_SELECT_BUTTON}]`,
+        false
+      );
+    }
+  }
+};
+
 export const prepareFields = (notifPref, emailPref, emailConfig) =>
   Object.entries(notifPref).reduce((acc, [bundleKey, bundleData]) => {
     return [
@@ -36,9 +61,13 @@ export const prepareFields = (notifPref, emailPref, emailConfig) =>
                                   'infoMessage',
                                   'checkedWarning',
                                 ]),
-                                group: bundleKey,
-                                section: appKey,
-                                category: 'email-preference',
+                                afterChange: (formOptions, checked) =>
+                                  afterChange(
+                                    formOptions,
+                                    checked,
+                                    bundleKey,
+                                    appKey
+                                  ),
                               };
                             }
                           ),
@@ -68,9 +97,8 @@ export const prepareFields = (notifPref, emailPref, emailConfig) =>
                           'infoMessage',
                           'checkedWarning',
                         ]),
-                        group: bundleKey,
-                        section: appKey,
-                        category: 'notification-preference',
+                        afterChange: (formOptions, checked) =>
+                          afterChange(formOptions, checked, bundleKey, appKey),
                       };
                     }),
                   })),
@@ -87,10 +115,26 @@ export const prepareFields = (notifPref, emailPref, emailConfig) =>
                 fields: [
                   {
                     name: `bundles[${bundleKey}].applications[${appKey}].eventTypes[${BULK_SELECT_BUTTON}]`,
-                    group: bundleKey,
                     section: appKey,
                     initialValue: !selectAllActive,
                     component: BULK_SELECT_BUTTON,
+                    onClick: (formOptions, input) => {
+                      formOptions.batch(() => {
+                        formOptions.getRegisteredFields().forEach((field) => {
+                          if (
+                            ((field.includes(bundleKey) &&
+                              field.includes(appKey)) ||
+                              (field === 'is_subscribed' && // a temporary condition for RHEL Advisor email pref.
+                                bundleKey === 'rhel' &&
+                                appKey == 'advisor')) &&
+                            !field.includes(BULK_SELECT_BUTTON)
+                          ) {
+                            formOptions.change(field, input.value);
+                          }
+                        });
+                      });
+                      input.onChange(!input.value);
+                    },
                   },
                   ...fields,
                 ],

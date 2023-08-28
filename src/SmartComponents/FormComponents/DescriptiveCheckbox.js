@@ -2,6 +2,7 @@ import React from 'react';
 import { Checkbox } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import useFieldApi from '@data-driven-forms/react-form-renderer/use-field-api';
+import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import './descriptiveCheckbox.scss';
 import {
   ExclamationTriangleIcon,
@@ -15,11 +16,13 @@ const DescriptiveCheckbox = (props) => {
     description,
     checkedWarning,
     infoMessage,
+    afterChange,
     input: { onChange, checked, ...input },
   } = useFieldApi({
     ...props,
     type: 'checkbox',
   });
+  const formOptions = useFormApi();
 
   return (
     <Checkbox
@@ -28,6 +31,7 @@ const DescriptiveCheckbox = (props) => {
       id={`descriptive-checkbox-${input.name}`}
       onChange={(checked, event, ...rest) => {
         onChange(checked, event, ...rest);
+        afterChange?.(formOptions, checked);
       }}
       data-type="descriptive-checkbox"
       className="pref-c-descriptive-checkbox"
@@ -64,6 +68,7 @@ DescriptiveCheckbox.propTypes = {
   label: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
+  afterChange: PropTypes.func,
 };
 
 DescriptiveCheckbox.defaultProps = {

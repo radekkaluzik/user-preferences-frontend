@@ -9,18 +9,16 @@ jest.mock('@data-driven-forms/react-form-renderer/use-field-api', () =>
   jest.fn((props) => ({
     ...props,
     input: {
-      onChange: mockInputOnChange,
       value: true,
     },
   }))
 );
 
 describe('BulkSelectButton tests', () => {
-  const onChangeMock = jest.fn();
+  const onClickMock = jest.fn(() => mockInputOnChange());
 
   afterEach(() => {
-    mockInputOnChange.mockReset();
-    onChangeMock.mockReset();
+    onClickMock.mockReset();
   });
 
   it('should render correctly', () => {
@@ -57,7 +55,6 @@ describe('BulkSelectButton tests', () => {
                 internalUnRegisterField: jest.fn(),
                 batch: (callback) => callback(),
                 getRegisteredFields: () => ['rhel[advisor]', 'rhel[sources]'],
-                change: onChangeMock,
               },
             }}
           >
@@ -65,6 +62,7 @@ describe('BulkSelectButton tests', () => {
               label="My button"
               group="rhel"
               section="sources"
+              onClick={onClickMock}
               {...props}
             />
           </RendererContext.Provider>
@@ -73,7 +71,6 @@ describe('BulkSelectButton tests', () => {
     );
 
     fireEvent.click(getByRole(container, 'button'));
-    expect(onChangeMock).toHaveBeenCalledWith('rhel[sources]', true);
-    expect(mockInputOnChange).toHaveBeenCalledWith(false);
+    expect(onClickMock).toHaveBeenCalledTimes(1);
   });
 });

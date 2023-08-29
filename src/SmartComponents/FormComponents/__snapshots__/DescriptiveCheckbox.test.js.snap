@@ -22,11 +22,7 @@ exports[`Descriptive checkbox tests should render correctly 1`] = `
       class="pf-c-check__label"
       for="descriptive-checkbox-"
     >
-      <span
-        class="pref-c-checkbox-label"
-      >
-        test label
-      </span>
+      test label
     </label>
     <span
       class="pf-c-check__description"

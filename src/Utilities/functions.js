@@ -2,7 +2,6 @@ import React from 'react';
 import { Skeleton } from '@redhat-cloud-services/frontend-components/Skeleton';
 import { getEmailSchema } from '../redux/actions/email-actions';
 import { loaderField } from './constants';
-import config from '../config/config.json';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 import { addNotification } from '@redhat-cloud-services/frontend-components-notifications/redux';
 
@@ -20,9 +19,6 @@ const withNegatedFunction = (booleanFunctions) => {
     ),
   };
 };
-
-export const notificationConfigForBundle = (bundleName) =>
-  config['notification-preference']?.[bundleName];
 
 export const useChromePush = () => {
   const push = useChrome(({ chromeHistory: { push } = {} }) => push);

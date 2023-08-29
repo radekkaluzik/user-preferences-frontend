@@ -16,7 +16,7 @@ import * as NotificationsActions from '../../redux/actions/notifications-actions
 import * as EmailActions from '../../redux/actions/email-actions';
 import { Provider } from 'react-redux';
 import {
-  GET_NOTIFICATION_SCHEMAS,
+  GET_NOTIFICATIONS_SCHEMA,
   SAVE_EMAIL_SCHEMA,
   SAVE_NOTIFICATION_SCHEMA,
 } from '../../redux/action-types';
@@ -38,9 +38,9 @@ describe('Notifications tests', () => {
 
   const calculateEmailConfig = jest.spyOn(functions, 'calculateEmailConfig');
   const getApplicationSchema = jest.spyOn(API, 'getApplicationSchema');
-  const getNotificationSchemasSpy = jest.spyOn(
+  const getNotificationsSchemaSpy = jest.spyOn(
     NotificationsActions,
-    'getNotificationSchemas'
+    'getNotificationsSchema'
   );
   const saveNotificationValues = jest.spyOn(
     NotificationsActions,
@@ -59,20 +59,17 @@ describe('Notifications tests', () => {
   afterEach(() => {
     calculateEmailConfig.mockReset();
     getApplicationSchema.mockReset();
-    getNotificationSchemasSpy.mockReset();
+    getNotificationsSchemaSpy.mockReset();
     saveNotificationValues.mockReset();
     saveEmailValues.mockReset();
   });
 
   it('should render correctly', async () => {
     getApplicationSchema.mockImplementation(() => emptyResolve);
-    calculateEmailConfig.mockImplementation(() =>
-      Promise.resolve(calculateEmailConfigResponse)
-    );
-    getNotificationSchemasSpy.mockImplementation(() => ({
-      type: GET_NOTIFICATION_SCHEMAS,
+    getNotificationsSchemaSpy.mockImplementation(() => ({
+      type: GET_NOTIFICATIONS_SCHEMA,
       payload: Promise.resolve({
-        fields: [],
+        bundles: {},
       }),
     }));
     let wrapper;
@@ -88,13 +85,10 @@ describe('Notifications tests', () => {
 
   it('should render empty state on filter', async () => {
     getApplicationSchema.mockImplementation(() => emptyResolve);
-    calculateEmailConfig.mockImplementation(() =>
-      Promise.resolve(calculateEmailConfigResponse)
-    );
-    getNotificationSchemasSpy.mockImplementation(() => ({
-      type: GET_NOTIFICATION_SCHEMAS,
+    getNotificationsSchemaSpy.mockImplementation(() => ({
+      type: GET_NOTIFICATIONS_SCHEMA,
       payload: Promise.resolve({
-        fields: [],
+        bundles: {},
       }),
     }));
     let wrapper;
@@ -120,13 +114,11 @@ describe('Notifications tests', () => {
 
   it('should submit correctly', async () => {
     getApplicationSchema.mockImplementation(() => emptyResolve);
-    calculateEmailConfig.mockImplementation(() =>
-      Promise.resolve(calculateEmailConfigResponse)
-    );
-    getNotificationSchemasSpy.mockImplementation(() => ({
-      type: GET_NOTIFICATION_SCHEMAS,
+    calculateEmailConfig.mockImplementation(() => calculateEmailConfigResponse);
+    getNotificationsSchemaSpy.mockImplementation(() => ({
+      type: GET_NOTIFICATIONS_SCHEMA,
       payload: Promise.resolve({
-        fields: [],
+        bundles: {},
       }),
     }));
     saveNotificationValues.mockImplementation(() => ({
@@ -149,20 +141,19 @@ describe('Notifications tests', () => {
     fireEvent.click(getAllByRole(wrapper.container, 'checkbox').at(0));
     fireEvent.click(getAllByRole(wrapper.container, 'checkbox').at(1));
     expect(getByText(wrapper.container, 'Save')).toBeEnabled();
+    fireEvent.click(getByText(wrapper.container, 'Cancel'));
+    expect(queryByText(wrapper.container, 'Save')).toEqual(null);
+    fireEvent.click(getAllByRole(wrapper.container, 'checkbox').at(0));
+    fireEvent.click(getAllByRole(wrapper.container, 'checkbox').at(1));
     fireEvent.click(getByText(wrapper.container, 'Save'));
     expect(queryByText(wrapper.container, 'Save')).toEqual(null);
     expect(saveNotificationValues).toHaveBeenCalledTimes(1);
     expect(saveNotificationValues).toHaveBeenCalledWith({
-      bundleName: 'console',
-      values: {
-        bundles: {
-          console: {
-            applications: {
-              sources: {
-                notifications: {
-                  INSTANT: false,
-                },
-              },
+      bundles: {
+        console: {
+          applications: {
+            sources: {
+              eventTypes: {},
             },
           },
         },
@@ -173,7 +164,7 @@ describe('Notifications tests', () => {
       apiName: 'insights',
       application: 'advisor',
       url: '/user-preferences/',
-      values: { is_subscribed: false },
+      values: { is_subscribed: true },
     });
   });
 });

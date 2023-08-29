@@ -102,10 +102,10 @@ exports[`Tabs tests should render correctly 1`] = `
       data-ouia-component-type="PF4/Title"
       data-ouia-safe="true"
     >
-      Advisor | Red Hat Enterprise Linux
+      Advisor | RHEL
     </h3>
     <p
-      class="pf-u-mb-xl"
+      class="pf-u-mb-md"
       data-ouia-component-id="OUIA-Generated-Text-1"
       data-ouia-component-type="PF4/Text"
       data-ouia-safe="true"
@@ -213,7 +213,7 @@ exports[`Tabs tests should render loading correctly 1`] = `
       undefined | undefined
     </h3>
     <p
-      class="pf-u-mb-xl"
+      class="pf-u-mb-md"
       data-ouia-component-id="OUIA-Generated-Text-2"
       data-ouia-component-type="PF4/Text"
       data-ouia-safe="true"

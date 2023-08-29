@@ -55,7 +55,12 @@ describe('Tabs tests', () => {
                 },
               }}
             >
-              <Tabs search="" fields={fields} isLoading={false} />
+              <Tabs
+                search=""
+                fields={fields}
+                isLoading={false}
+                bundles={{ rhel: { label: 'RHEL' } }}
+              />
             </RendererContext.Provider>
           )}
         </Form>
@@ -76,7 +81,7 @@ describe('Tabs tests', () => {
                 },
               }}
             >
-              <Tabs search="" fields={[]} isLoading />
+              <Tabs search="" fields={[]} bundles={{}} isLoading />
             </RendererContext.Provider>
           )}
         </Form>
@@ -97,7 +102,7 @@ describe('Tabs tests', () => {
                 },
               }}
             >
-              <Tabs search="" fields={fields} isLoading={false} />
+              <Tabs search="" fields={fields} isLoading={false} bundles={{}} />
             </RendererContext.Provider>
           )}
         </Form>

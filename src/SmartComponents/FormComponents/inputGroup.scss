@@ -1,0 +1,15 @@
+.pref-c-input-category {
+    .pf-c-form__label-text {
+        font-size: var(--pf-global--FontSize--lg);
+        font-weight: var(--pf-global--FontWeight--normal);
+    }
+}
+
+.pref-c-input-group {
+    padding-top: var(--pf-global--spacer--sm);
+    padding-bottom: var(--pf-global--spacer--sm);
+    .pf-c-form__label-text {
+        font-size: var(--pf-global--FontSize--md);
+        font-weight: var(--pf-global--FontWeight--bold);
+    }
+}

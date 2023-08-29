@@ -1,38 +1,25 @@
-import {
-  GET_NOTIFICATION_SCHEMA,
-  GET_NOTIFICATION_SCHEMAS,
-} from '../action-types';
+import { GET_NOTIFICATIONS_SCHEMA } from '../action-types';
 
 export const notificationsInitialState = {};
 
-export const setLoadingState = (store, { meta }) => {
+export const setLoadingState = (store) => {
   return {
     ...store,
-    bundleName: meta.bundleName,
-    schema: {},
     loaded: false,
   };
 };
 
-export const setSchemas = (store, { payload }) => ({
+export const setSchema = (store, { payload, meta }) => ({
   ...store,
-  bundles: payload,
+  bundles: payload?.bundles || {},
+  meta,
+  loaded: true,
 });
 
-export const setSchema = (store, { payload, meta }) => {
-  return {
-    ...store,
-    bundleName: meta.bundleName,
-    schema: payload || {},
-    loaded: true,
-  };
-};
-
 export default {
-  [GET_NOTIFICATION_SCHEMAS]: setSchemas,
-  [GET_NOTIFICATION_SCHEMA]: setSchema,
-  [`${GET_NOTIFICATION_SCHEMA}_FULFILLED`]: setSchema,
-  [`${GET_NOTIFICATION_SCHEMA}_PENDING`]: setLoadingState,
-  [`${GET_NOTIFICATION_SCHEMA}_REJECTED`]: (state, { payload, ...action }) =>
+  [GET_NOTIFICATIONS_SCHEMA]: setSchema,
+  [`${GET_NOTIFICATIONS_SCHEMA}_FULFILLED`]: setSchema,
+  [`${GET_NOTIFICATIONS_SCHEMA}_PENDING`]: setLoadingState,
+  [`${GET_NOTIFICATIONS_SCHEMA}_REJECTED`]: (state, { payload, ...action }) =>
     setSchema(state, action),
 };

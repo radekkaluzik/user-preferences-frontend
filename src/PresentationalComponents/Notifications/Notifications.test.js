@@ -23,12 +23,13 @@ import {
 import * as functions from '../../Utilities/functions';
 import { calculateEmailConfigResponse, userPrefInitialState } from './testData';
 
+const mockedNavigate = jest.fn();
+const mockedLocation = jest.fn(() => ({}));
+
 jest.mock('react-router-dom', () => ({
-  useHistory: () => ({
-    push: jest.fn(),
-    replace: jest.fn(),
-    location: {},
-  }),
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedNavigate,
+  useLocation: () => mockedLocation,
 }));
 
 describe('Notifications tests', () => {
@@ -62,6 +63,8 @@ describe('Notifications tests', () => {
     getNotificationsSchemaSpy.mockReset();
     saveNotificationValues.mockReset();
     saveEmailValues.mockReset();
+    mockedNavigate.mockReset();
+    mockedLocation.mockReset();
   });
 
   it('should render correctly', async () => {

@@ -2,7 +2,6 @@ import React from 'react';
 import { Skeleton } from '@redhat-cloud-services/frontend-components/Skeleton';
 import { getEmailSchema } from '../redux/actions/email-actions';
 import { loaderField } from './constants';
-import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 import { addNotification } from '@redhat-cloud-services/frontend-components-notifications/redux';
 
 export const getSchema = (app) =>
@@ -17,16 +16,6 @@ const withNegatedFunction = (booleanFunctions) => {
         (...args) => !booleanFunctions[methodName](...args),
       ])
     ),
-  };
-};
-
-export const useChromePush = () => {
-  const push = useChrome(({ chromeHistory: { push } = {} }) => push);
-  return (e, link) => {
-    if (typeof push === 'function') {
-      e.preventDefault();
-      push(link.replace(/^.\//, '/'));
-    }
   };
 };
 

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 import { Text, Title } from '@patternfly/react-core';
-import { useHistory } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormState } from 'react-final-form';
 import { getNavFromURL, setNavToURL } from './urlSync';
 import TabsMenu from './TabsMenu';
@@ -19,7 +19,8 @@ const renderPageHeading = (bundleTitle, sectionTitle) => (
 );
 
 const FormTabs = ({ fields, titleRef, bundles }) => {
-  const history = useHistory();
+  const location = useLocation();
+  const navigate = useNavigate();
   const formOptions = useFormApi();
   const searchRef = useRef(null);
   const navConfig = useRef({});
@@ -58,7 +59,7 @@ const FormTabs = ({ fields, titleRef, bundles }) => {
       handleResize();
     }
 
-    navConfig.current = getNavFromURL(history, fields, {
+    navConfig.current = getNavFromURL(location, navigate, fields, {
       bundle: fields?.[0]?.name,
       app: fields?.[0]?.fields?.[0]?.name,
     });
@@ -104,7 +105,7 @@ const FormTabs = ({ fields, titleRef, bundles }) => {
               bundle: bundleName,
               app: sectionName,
             };
-            setNavToURL(history, navConfig.current);
+            setNavToURL(location, navigate, navConfig.current);
           }}
         />
       </div>

@@ -1,12 +1,13 @@
 import React, { Fragment, Suspense, lazy, useMemo } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import pckg from '../package.json';
+import pathnames from './Utilities/pathnames';
+import { InvalidObject } from '@redhat-cloud-services/frontend-components';
 
 const Notifications = lazy(() => import('./PresentationalComponents/Notifications/Notifications'));
 
 const routes = [
   {
-    path: pckg.routes.notifications,
+    path: pathnames.notifications.route,
     element: Notifications,
   },
 ];
@@ -31,7 +32,7 @@ export const Routing = () => {
     <Routes>
       {renderedRoutes}
       {/* Catch all unmatched routes */}
-      <Route path="*" element={<Navigate to={pckg.routes.notifications} />} />
+      <Route path="*" element={<InvalidObject />} />
     </Routes>
   </Suspense>
 )}

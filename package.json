@@ -96,9 +96,6 @@
     "verify": "npm-run-all build lint test",
     "nightly": "npm run deploy"
   },
-  "routes": {
-    "notifications": "/notifications"
-  },
   "insights": {
     "appname": "user-preferences"
   }

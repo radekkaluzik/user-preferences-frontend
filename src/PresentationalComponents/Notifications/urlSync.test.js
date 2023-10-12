@@ -1,20 +1,40 @@
 import { getNavFromURL, setNavToURL } from './urlSync';
 
+const mockedNavigate = jest.fn();
+const mockedLocation = jest.fn(() => ({}));
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedNavigate,
+  useLocation: () => mockedLocation,
+}));
+
 describe('getNavFromURL', () => {
+  afterEach(() => {
+    mockedLocation.mockReset();
+    mockedNavigate.mockReset();
+  });
+
   it('should return default output', () => {
     const result = getNavFromURL(
-      { location: {}, replace: () => null },
+      mockedLocation,
+      mockedNavigate,
       [],
       { bundle: 'rhel', app: 'advisor' },
       false
     );
     const expected = { bundle: 'rhel', app: 'advisor' };
+    expect(mockedNavigate).toBeCalledWith(
+      { pathname: undefined, search: 'bundle=rhel&app=advisor' },
+      { replace: true }
+    );
     expect(result).toMatchObject(expected);
   });
 
   it('should return output from URL', () => {
     const result = getNavFromURL(
-      { location: { search: '?bundle=group&app=test' }, replace: () => null },
+      { search: '?bundle=group&app=test' },
+      mockedNavigate,
       [{ name: 'group', fields: [{ name: 'test' }] }],
       { bundle: 'rhel', app: 'advisor' },
       false
@@ -26,14 +46,16 @@ describe('getNavFromURL', () => {
 
 describe('setNavToURL', () => {
   it('should call replace with correct params', () => {
-    const replace = jest.fn();
-    setNavToURL(
-      { location: { search: '?bundle=rhel&app=advisor' }, replace },
-      { bundle: 'someBundle', app: 'someApp' }
-    );
-    expect(replace).toHaveBeenCalledWith({
-      pathname: undefined,
-      search: 'bundle=someBundle&app=someApp',
+    setNavToURL({ search: '?bundle=rhel&app=advisor' }, mockedNavigate, {
+      bundle: 'someBundle',
+      app: 'someApp',
     });
+    expect(mockedNavigate).toHaveBeenCalledWith(
+      {
+        pathname: undefined,
+        search: 'bundle=someBundle&app=someApp',
+      },
+      { replace: true }
+    );
   });
 });

@@ -8,6 +8,15 @@ import {
 } from '@testing-library/react';
 import TabsMenu from './TabsMenu';
 
+const mockedNavigate = jest.fn();
+const mockedLocation = jest.fn(() => ({}));
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedNavigate,
+  useLocation: () => mockedLocation,
+}));
+
 describe('TabsMenu tests', () => {
   const setSearch = jest.fn();
   const fields = [
@@ -28,6 +37,8 @@ describe('TabsMenu tests', () => {
 
   afterEach(() => {
     setSearch.mockReset();
+    mockedLocation.mockReset();
+    mockedNavigate.mockReset();
   });
 
   it('should render empty state correctly', () => {

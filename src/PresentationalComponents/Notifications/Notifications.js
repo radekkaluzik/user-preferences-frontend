@@ -1,18 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import omit from 'lodash/omit';
-import { FormRenderer } from '@data-driven-forms/react-form-renderer';
-import { componentMapper } from '@data-driven-forms/pf4-component-mapper';
-import { Bullseye, Spinner, Text } from '@patternfly/react-core';
-import { useChrome } from '@redhat-cloud-services/frontend-components/useChrome';
-import { PageHeaderTitle } from '@redhat-cloud-services/frontend-components/PageHeader';
-import { addNotification } from '@redhat-cloud-services/frontend-components-notifications/redux';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  getNotificationsSchema,
-  saveNotificationValues,
-} from '../../redux/actions/notifications-actions';
-import { saveEmailValues } from '../../redux/actions/email-actions';
-import { calculateEmailConfig } from '../../Utilities/functions';
+import './notifications.scss';
+
 import {
   BULK_SELECT_BUTTON,
   BulkSelectButton,
@@ -27,12 +14,29 @@ import {
   Loader,
   TAB_GROUP,
 } from '../../SmartComponents/FormComponents';
-import config from '../../config/config.json';
-import FormTabs from './Tabs';
+import { Bullseye, Spinner, Text } from '@patternfly/react-core';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  getNotificationsSchema,
+  saveNotificationValues,
+} from '../../redux/actions/notifications-actions';
+import { useDispatch, useSelector } from 'react-redux';
+
+import AsynComponent from '@redhat-cloud-services/frontend-components/AsyncComponent';
+import { FormRenderer } from '@data-driven-forms/react-form-renderer';
 import FormTabGroup from './TabGroup';
-import { prepareFields } from './utils';
+import FormTabs from './Tabs';
 import FormTemplate from './NotificationTemplate';
-import './notifications.scss';
+import { PageHeaderTitle } from '@redhat-cloud-services/frontend-components/PageHeader';
+import { ScalprumComponent } from '@scalprum/react-core';
+import { addNotification } from '@redhat-cloud-services/frontend-components-notifications/redux';
+import { calculateEmailConfig } from '../../Utilities/functions';
+import { componentMapper } from '@data-driven-forms/pf4-component-mapper';
+import config from '../../config/config.json';
+import omit from 'lodash/omit';
+import { prepareFields } from './utils';
+import { saveEmailValues } from '../../redux/actions/email-actions';
+import { useChrome } from '@redhat-cloud-services/frontend-components/useChrome';
 
 const Notifications = () => {
   const { auth } = useChrome();
@@ -132,6 +136,9 @@ const Notifications = () => {
               which notifications you can or can not receive in their{' '}
               <a href={`/settings/notifications`}>Settings</a>.
             </Text>
+            <ScalprumComponent
+              appName="notifications"
+              module="./TimeConfig"/>
           </div>
 
           <FormRenderer

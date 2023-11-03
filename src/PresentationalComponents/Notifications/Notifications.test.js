@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as API from '../../api';
 import * as EmailActions from '../../redux/actions/email-actions';
 import * as NotificationsActions from '../../redux/actions/notifications-actions';
@@ -36,7 +37,7 @@ jest.mock('react-router-dom', () => ({
   useLocation: () => mockedLocation,
 }));
 
-const NotificationsWrapper = ({store, children}) => (
+const NotificationsWrapper = ({ store, children }) => (
   <ScalprumProvider
     api={{
       chrome: {

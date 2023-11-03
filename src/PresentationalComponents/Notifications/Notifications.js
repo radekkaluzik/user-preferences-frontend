@@ -22,7 +22,6 @@ import {
 } from '../../redux/actions/notifications-actions';
 import { useDispatch, useSelector } from 'react-redux';
 
-import AsynComponent from '@redhat-cloud-services/frontend-components/AsyncComponent';
 import { FormRenderer } from '@data-driven-forms/react-form-renderer';
 import FormTabGroup from './TabGroup';
 import FormTabs from './Tabs';
@@ -37,12 +36,14 @@ import omit from 'lodash/omit';
 import { prepareFields } from './utils';
 import { saveEmailValues } from '../../redux/actions/email-actions';
 import { useChrome } from '@redhat-cloud-services/frontend-components/useChrome';
+import { useStore } from 'react-redux';
 
 const Notifications = () => {
   const { auth } = useChrome();
   const dispatch = useDispatch();
   const titleRef = useRef(null);
   const [emailConfig, setEmailConfig] = useState({});
+  const store = useStore();
 
   const emailPref = useSelector(({ emailReducer }) => emailReducer);
   const { bundles: notifPref, loaded } = useSelector(
@@ -135,10 +136,11 @@ const Notifications = () => {
               notifications. Your Organization Administrator has configured
               which notifications you can or can not receive in their{' '}
               <a href={`/settings/notifications`}>Settings</a>.
+              <ScalprumComponent
+              module="./ConnectedTimeConfig"
+              scope="notifications"
+              store={store}/>
             </Text>
-            <ScalprumComponent
-              appName="notifications"
-              module="./TimeConfig"/>
           </div>
 
           <FormRenderer

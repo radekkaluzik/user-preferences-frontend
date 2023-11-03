@@ -40,6 +40,7 @@ exports[`Notifications tests should render correctly 1`] = `
               Settings
             </a>
             .
+            Scalprum Component Mock
           </p>
         </div>
         <form

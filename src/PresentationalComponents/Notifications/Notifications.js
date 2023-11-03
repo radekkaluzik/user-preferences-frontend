@@ -137,9 +137,10 @@ const Notifications = () => {
               which notifications you can or can not receive in their{' '}
               <a href={`/settings/notifications`}>Settings</a>.
               <ScalprumComponent
-              module="./ConnectedTimeConfig"
-              scope="notifications"
-              store={store}/>
+                module="./ConnectedTimeConfig"
+                scope="notifications"
+                store={store}
+              />
             </Text>
           </div>
 

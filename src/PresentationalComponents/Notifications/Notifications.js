@@ -6,7 +6,9 @@ import { Bullseye, Spinner, Text } from '@patternfly/react-core';
 import { useChrome } from '@redhat-cloud-services/frontend-components/useChrome';
 import { PageHeaderTitle } from '@redhat-cloud-services/frontend-components/PageHeader';
 import { addNotification } from '@redhat-cloud-services/frontend-components-notifications/redux';
+import { ScalprumComponent } from '@scalprum/react-core';
 import { useDispatch, useSelector } from 'react-redux';
+import { useStore } from 'react-redux';
 import {
   getNotificationsSchema,
   saveNotificationValues,
@@ -39,6 +41,7 @@ const Notifications = () => {
   const dispatch = useDispatch();
   const titleRef = useRef(null);
   const [emailConfig, setEmailConfig] = useState({});
+  const store = useStore();
 
   const emailPref = useSelector(({ emailReducer }) => emailReducer);
   const { bundles: notifPref, loaded } = useSelector(
@@ -131,6 +134,11 @@ const Notifications = () => {
               notifications. Your Organization Administrator has configured
               which notifications you can or can not receive in their{' '}
               <a href={`/settings/notifications`}>Settings</a>.
+              <ScalprumComponent
+                module="./ConnectedTimeConfig"
+                scope="notifications"
+                store={store}
+              />
             </Text>
           </div>
 

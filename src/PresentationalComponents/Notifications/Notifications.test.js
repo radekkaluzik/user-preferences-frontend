@@ -1,4 +1,14 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
+import * as API from '../../api';
+import * as EmailActions from '../../redux/actions/email-actions';
+import * as NotificationsActions from '../../redux/actions/notifications-actions';
+import * as functions from '../../Utilities/functions';
+
+import {
+  GET_NOTIFICATIONS_SCHEMA,
+  SAVE_EMAIL_SCHEMA,
+  SAVE_NOTIFICATION_SCHEMA,
+} from '../../redux/action-types';
 import {
   act,
   fireEvent,
@@ -8,20 +18,15 @@ import {
   queryByText,
   render,
 } from '@testing-library/react';
+import { calculateEmailConfigResponse, userPrefInitialState } from './testData';
+
+import { MemoryRouter } from 'react-router-dom';
 import Notifications from './Notifications';
+import { Provider } from 'react-redux';
+import React from 'react';
+import { ScalprumProvider } from '@scalprum/react-core';
 import configureStore from 'redux-mock-store';
 import promiseMiddleware from 'redux-promise-middleware';
-import * as API from '../../api';
-import * as NotificationsActions from '../../redux/actions/notifications-actions';
-import * as EmailActions from '../../redux/actions/email-actions';
-import { Provider } from 'react-redux';
-import {
-  GET_NOTIFICATIONS_SCHEMA,
-  SAVE_EMAIL_SCHEMA,
-  SAVE_NOTIFICATION_SCHEMA,
-} from '../../redux/action-types';
-import * as functions from '../../Utilities/functions';
-import { calculateEmailConfigResponse, userPrefInitialState } from './testData';
 
 const mockedNavigate = jest.fn();
 const mockedLocation = jest.fn(() => ({}));
@@ -31,6 +36,22 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockedNavigate,
   useLocation: () => mockedLocation,
 }));
+
+const NotificationsWrapper = ({ store, children }) => (
+  <ScalprumProvider
+    api={{
+      chrome: {
+        getEnvironment: () => '',
+        isProd: () => false,
+        isBeta: () => false,
+      },
+    }}
+  >
+    <Provider store={store}>
+      <MemoryRouter>{children}</MemoryRouter>
+    </Provider>
+  </ScalprumProvider>
+);
 
 describe('Notifications tests', () => {
   const middlewares = [promiseMiddleware];
@@ -78,9 +99,9 @@ describe('Notifications tests', () => {
     let wrapper;
     await act(async () => {
       wrapper = render(
-        <Provider store={mockStore(initialState)}>
+        <NotificationsWrapper store={mockStore(initialState)}>
           <Notifications />
-        </Provider>
+        </NotificationsWrapper>
       );
     });
     expect(wrapper.container).toMatchSnapshot();

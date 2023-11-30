@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import omit from 'lodash/omit';
+import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 import { FormRenderer } from '@data-driven-forms/react-form-renderer';
 import { componentMapper } from '@data-driven-forms/pf4-component-mapper';
 import { Bullseye, Spinner, Text } from '@patternfly/react-core';
-import { useChrome } from '@redhat-cloud-services/frontend-components/useChrome';
 import { PageHeaderTitle } from '@redhat-cloud-services/frontend-components/PageHeader';
 import { addNotification } from '@redhat-cloud-services/frontend-components-notifications/redux';
 import { ScalprumComponent } from '@scalprum/react-core';

@@ -1,5 +1,5 @@
 import React, { Fragment, Suspense, lazy, useMemo } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import pathnames from './Utilities/pathnames';
 import { InvalidObject } from '@redhat-cloud-services/frontend-components';
 

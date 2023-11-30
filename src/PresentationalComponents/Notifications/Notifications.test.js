@@ -37,6 +37,16 @@ jest.mock('react-router-dom', () => ({
   useLocation: () => mockedLocation,
 }));
 
+jest.mock('@redhat-cloud-services/frontend-components/useChrome', () => {
+  return () => ({
+    chromeHistory: {
+      push: jest.fn(),
+      block: jest.fn(() => jest.fn()),
+    },
+    auth: { getUser: () => Promise.resolve() },
+  });
+});
+
 const NotificationsWrapper = ({ store, children }) => (
   <ScalprumProvider
     api={{

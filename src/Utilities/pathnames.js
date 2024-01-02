@@ -1,7 +1,7 @@
 const pathnames = {
   notifications: {
     link: '/notifications',
-    route: 'notifications/*',
+    route: '/*',
   },
 };
 

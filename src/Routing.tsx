@@ -32,7 +32,7 @@ export const Routing = () => {
     <Routes>
       {renderedRoutes}
       {/* Catch all unmatched routes */}
-      <Route path="*" element={<InvalidObject />} />
+      <Route path="*" element={<Notifications />} />
     </Routes>
   </Suspense>
 )}

@@ -4,7 +4,7 @@ import { useFormApi } from '@data-driven-forms/react-form-renderer';
 import WarningModal from '@patternfly/react-component-groups/dist/dynamic/WarningModal';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 import FormButtons from '../shared/FormButtons';
-import pathnames from '../../Utilities/pathnames';
+// import pathnames from '../../Utilities/pathnames';
 
 const NotificationsTemplate = ({ schema, formFields }) => {
   const formApi = useFormApi();
@@ -27,20 +27,21 @@ const NotificationsTemplate = ({ schema, formFields }) => {
     if (navigationAllowed) {
       handleGoToIntendedPage(triggerExit.path);
     }
-    const unblock = chromeHistory.block(({ location }) => {
-      if (
-        !location.pathname?.includes(pathnames.notifications.link) &&
-        formApi.getState().dirty
-      ) {
-        setVisibleDialog(true);
-      }
-      setTriggerExit((obj) => ({ ...obj, path: location.pathname }));
-      return navigationAllowed;
-    });
+    // Let's comment this out to allow proper navigation
+    // const unblock = chromeHistory.block(({ location }) => {
+    //   if (
+    //     !location.pathname?.includes(pathnames.notifications.link) &&
+    //     formApi.getState().dirty
+    //   ) {
+    //     setVisibleDialog(true);
+    //   }
+    //   setTriggerExit((obj) => ({ ...obj, path: location.pathname }));
+    //   return navigationAllowed;
+    // });
 
-    return () => {
-      unblock();
-    };
+    // return () => {
+    //   unblock();
+    // };
   }, [
     handleGoToIntendedPage,
     chromeHistory,

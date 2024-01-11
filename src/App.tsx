@@ -7,7 +7,7 @@ import Routing from './Routing';
 const App = () => {
   const { auth, updateDocumentTitle } = useChrome();
 
-  updateDocumentTitle?.('User Preferences');
+  updateDocumentTitle?.('Notification Preferences');
 
   useEffect(() => {
     (async () => {

@@ -7,7 +7,7 @@ import Routing from './Routing';
 const App = () => {
   const { auth, updateDocumentTitle } = useChrome();
 
-  updateDocumentTitle?.('Notification Preferences');
+  updateDocumentTitle?.('Notification Preferences | Hybrid Cloud Console', true);
 
   useEffect(() => {
     (async () => {

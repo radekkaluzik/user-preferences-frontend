@@ -130,9 +130,9 @@ const Notifications = () => {
               title="My Notifications"
             />
             <Text className="pref-notifications--subtitle">
-              This service allows you to opt-in and out of receiving
-              notifications. Your Organization Administrator has configured
-              which notifications you can or can not receive in their{' '}
+              Opt in or out of receiving notifications, and choose how you want
+              to be notified. Your Organization Administrator has configured
+              which notifications you can or can’t receive in their{' '}
               <a href={`/settings/notifications`}>Settings</a>.
               <ScalprumComponent
                 module="./ConnectedTimeConfig"

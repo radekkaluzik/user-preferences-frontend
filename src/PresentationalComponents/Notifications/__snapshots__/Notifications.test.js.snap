@@ -32,7 +32,7 @@ exports[`Notifications tests should render correctly 1`] = `
             data-ouia-safe="true"
             data-pf-content="true"
           >
-            This service allows you to opt-in and out of receiving notifications. Your Organization Administrator has configured which notifications you can or can not receive in their
+            Opt in or out of receiving notifications, and choose how you want to be notified. Your Organization Administrator has configured which notifications you can or can’t receive in their
              
             <a
               href="/settings/notifications"

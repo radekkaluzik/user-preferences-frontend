@@ -4,7 +4,7 @@ import { useFormApi } from '@data-driven-forms/react-form-renderer';
 import WarningModal from '@patternfly/react-component-groups/dist/dynamic/WarningModal';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 import FormButtons from '../shared/FormButtons';
-// import pathnames from '../../Utilities/pathnames';
+import pathnames from '../../Utilities/pathnames';
 
 const NotificationsTemplate = ({ schema, formFields }) => {
   const formApi = useFormApi();
@@ -13,41 +13,49 @@ const NotificationsTemplate = ({ schema, formFields }) => {
   const { chromeHistory } = useChrome();
   const [triggerExit, setTriggerExit] = useState({
     confirmed: false,
-    path: '',
+    pathname: '',
+    search: '',
   });
 
   const handleGoToIntendedPage = useCallback(
-    (location) => chromeHistory.push(location),
+    (pathname, search) =>
+      search.length > 0
+        ? chromeHistory.push({ pathname, search })
+        : chromeHistory.push(pathname),
     [chromeHistory]
   );
 
   useEffect(() => {
     const navigationAllowed =
-      !formApi.getState().dirty || triggerExit.confirmed;
-    if (navigationAllowed) {
-      handleGoToIntendedPage(triggerExit.path);
-    }
-    // Let's comment this out to allow proper navigation
-    // const unblock = chromeHistory.block(({ location }) => {
-    //   if (
-    //     !location.pathname?.includes(pathnames.notifications.link) &&
-    //     formApi.getState().dirty
-    //   ) {
-    //     setVisibleDialog(true);
-    //   }
-    //   setTriggerExit((obj) => ({ ...obj, path: location.pathname }));
-    //   return navigationAllowed;
-    // });
+      !formApi.getState().dirty ||
+      triggerExit.confirmed ||
+      triggerExit.search.length > 0;
+    navigationAllowed &&
+      handleGoToIntendedPage(triggerExit.pathname, triggerExit.search);
 
-    // return () => {
-    //   unblock();
-    // };
-  }, [
-    handleGoToIntendedPage,
-    chromeHistory,
-    triggerExit.confirmed,
-    triggerExit.path,
-  ]);
+    const unblock = chromeHistory.block(({ location }) => {
+      if (
+        formApi.getState().dirty &&
+        location.search?.length === 0 &&
+        !(
+          location.pathname?.includes(pathnames.notifications.link) &&
+          location.pathname?.includes('user-preferences')
+        )
+      ) {
+        setVisibleDialog(true);
+      }
+      setTriggerExit((obj) => ({
+        ...obj,
+        pathname: location.pathname,
+        search: location.search,
+      }));
+      return navigationAllowed;
+    });
+
+    return () => {
+      unblock();
+    };
+  }, [triggerExit.confirmed, triggerExit.pathname, triggerExit.search]);
 
   return (
     <>

@@ -63,6 +63,8 @@
     "@redhat-cloud-services/frontend-components-config": "^4.7.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.5",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
     "axios-mock-adapter": "^1.19.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-plugin-lodash": "^3.3.4",
@@ -81,6 +83,7 @@
     "stylelint": "^13.12.0",
     "stylelint-config-recommended-scss": "^4.2.0",
     "stylelint-scss": "^3.19.0",
+    "typescript": "^5.3.3",
     "webpack-bundle-analyzer": "^4.4.0"
   },
   "transformIgnorePatterns": [

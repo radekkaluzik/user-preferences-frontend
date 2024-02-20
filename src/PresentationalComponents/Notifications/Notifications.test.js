@@ -137,11 +137,11 @@ describe('Notifications tests', () => {
       target: { value: 'someText' },
     });
     expect(
-      getByText(wrapper.container, 'No matching applications found')
+      getByText(wrapper.container, 'No matching services found')
     ).toBeVisible();
     fireEvent.click(getByText(wrapper.container, 'Clear filters'));
     expect(
-      queryByText(wrapper.container, 'No matching applications found')
+      queryByText(wrapper.container, 'No matching services found')
     ).toEqual(null);
     expect(getByText(wrapper.container, 'Console')).toBeVisible();
   });

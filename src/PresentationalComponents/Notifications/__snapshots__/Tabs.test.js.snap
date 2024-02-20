@@ -21,7 +21,7 @@ exports[`Tabs tests should render correctly 1`] = `
           data-ouia-component-id="OUIA-Generated-TextInputBase-1"
           data-ouia-component-type="PF4/TextInput"
           data-ouia-safe="true"
-          placeholder="Search applications"
+          placeholder="Search services"
           type="search"
           value=""
         />
@@ -141,7 +141,7 @@ exports[`Tabs tests should render loading correctly 1`] = `
           data-ouia-component-id="OUIA-Generated-TextInputBase-2"
           data-ouia-component-type="PF4/TextInput"
           data-ouia-safe="true"
-          placeholder="Search applications"
+          placeholder="Search services"
           type="search"
           value=""
         />
@@ -179,12 +179,12 @@ exports[`Tabs tests should render loading correctly 1`] = `
               data-ouia-component-type="PF4/Title"
               data-ouia-safe="true"
             >
-              No matching applications found
+              No matching services found
             </h4>
             <div
               class="pf-c-empty-state__body"
             >
-              Adjust you filters and try again.
+              Adjust your filters and try again.
             </div>
             <button
               aria-disabled="false"

@@ -25,9 +25,9 @@ const renderEmptyState = (setSearch) => (
   <EmptyState variant={EmptyStateVariant.small} className="pf-u-mt-lg">
     <EmptyStateIcon icon={SearchIcon} />
     <Title headingLevel="h4" size="lg">
-      No matching applications found
+      No matching services found
     </Title>
-    <EmptyStateBody>Adjust you filters and try again.</EmptyStateBody>
+    <EmptyStateBody>Adjust your filters and try again.</EmptyStateBody>
     <Button variant={ButtonVariant.link} onClick={() => setSearch('')}>
       Clear filters
     </Button>
@@ -48,7 +48,7 @@ const TabsMenu = ({ searchRef, search, setSearch, fields, onClick }) => {
       <MenuInput ref={searchRef} className="pf-u-mx-sm">
         <TextInput
           aria-label="Filter menu items"
-          placeholder="Search applications"
+          placeholder="Search services"
           iconVariant="search"
           type="search"
           onChange={(value) => setSearch(value)}

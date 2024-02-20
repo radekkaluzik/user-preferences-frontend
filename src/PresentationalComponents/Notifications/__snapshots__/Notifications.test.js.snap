@@ -65,7 +65,7 @@ exports[`Notifications tests should render correctly 1`] = `
                   data-ouia-component-id="OUIA-Generated-TextInputBase-1"
                   data-ouia-component-type="PF4/TextInput"
                   data-ouia-safe="true"
-                  placeholder="Search applications"
+                  placeholder="Search services"
                   type="search"
                   value=""
                 />

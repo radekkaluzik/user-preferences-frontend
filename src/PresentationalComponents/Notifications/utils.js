@@ -52,7 +52,7 @@ export const prepareFields = (notifPref, emailPref, emailConfig) =>
                           name: 'email-reports',
                           component: INPUT_GROUP,
                           level: 1,
-                          fields: emailSection[1].schema[0]?.fields.map(
+                          fields: emailSection[1].schema[0]?.fields?.map(
                             (field) => {
                               selectAllActive =
                                 selectAllActive && field.initialValue;

@@ -50,7 +50,7 @@ const Notifications = () => {
       bundles: Object.entries(notificationsReducer?.bundles || {})?.reduce(
         (acc, [key, value]) => ({
           ...acc,
-          [key]: value
+          [key]: value,
         }),
         {}
       ),

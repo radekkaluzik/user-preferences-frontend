@@ -2,7 +2,7 @@ import notificationsReducer, {
   notificationsInitialState,
 } from './notifications-reducer';
 import { callReducer } from '../../test/redux-helpers';
-import { GET_EMAIL_SCHEMA, GET_NOTIFICATIONS_SCHEMA } from '../action-types';
+import { GET_NOTIFICATIONS_SCHEMA } from '../action-types';
 
 describe('Email reducer', () => {
   let initialState;

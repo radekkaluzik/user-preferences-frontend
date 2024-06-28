@@ -22,6 +22,5 @@
             "title": "",
             "localFile": "data/unsubscribe.json"
         }
-    },
-    "notification-preference": ["openshift", "rhel", "ansible", "console", "application-services"]
+    }
 }

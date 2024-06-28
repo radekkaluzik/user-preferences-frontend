@@ -50,9 +50,7 @@ const Notifications = () => {
       bundles: Object.entries(notificationsReducer?.bundles || {})?.reduce(
         (acc, [key, value]) => ({
           ...acc,
-          ...(config['notification-preference'].includes(key)
-            ? { [key]: value }
-            : {}),
+          [key]: value
         }),
         {}
       ),

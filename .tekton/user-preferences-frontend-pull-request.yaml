@@ -269,7 +269,7 @@ spec:
         - name: dist-folder
           value: $(tasks.parse-build-deploy-script.results.dist-folder)
       runAfter:
-      - parse-build-deploy-script
+      -  create-frontend-dockerfile
     - name: build-container
       params:
       - name: IMAGE

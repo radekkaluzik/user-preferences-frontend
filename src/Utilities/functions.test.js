@@ -57,17 +57,15 @@ describe('getSection', () => {
     expect(section).toMatchObject({ fields: loaderField });
   });
 
-  it('should call success function', (done) => {
+  it('should call success function', async () => {
     const success = jest.fn();
     const section = getSection('first', { isVisible: false }, {}, success);
     expect(section).toMatchObject({
       name: 'first',
       fields: loaderField,
     });
-    setTimeout(() => {
-      expect(success).toHaveBeenCalled();
-      done();
-    });
+    await success();
+    expect(success).toHaveBeenCalled();
   });
 });
 

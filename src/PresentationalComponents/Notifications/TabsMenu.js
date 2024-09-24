@@ -10,11 +10,11 @@ import {
   Menu,
   MenuContent,
   MenuGroup,
-  MenuInput,
   MenuItem,
   MenuList,
-  TextInput,
-  Title,
+  MenuSearch,
+  MenuSearchInput,
+  TextInput, EmptyStateHeader, EmptyStateFooter,
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -22,16 +22,13 @@ import PropTypes from 'prop-types';
 import { getNavFromURL } from './urlSync';
 
 const renderEmptyState = (setSearch) => (
-  <EmptyState variant={EmptyStateVariant.small} className="pf-u-mt-lg">
-    <EmptyStateIcon icon={SearchIcon} />
-    <Title headingLevel="h4" size="lg">
-      No matching services found
-    </Title>
-    <EmptyStateBody>Adjust your filters and try again.</EmptyStateBody>
+  <EmptyState variant={EmptyStateVariant.sm} className="pf-u-mt-lg">
+    <EmptyStateHeader titleText="No matching services found" icon={<EmptyStateIcon icon={SearchIcon} />} headingLevel="h4" />
+    <EmptyStateBody>Adjust your filters and try again.</EmptyStateBody><EmptyStateFooter>
     <Button variant={ButtonVariant.link} onClick={() => setSearch('')}>
       Clear filters
     </Button>
-  </EmptyState>
+  </EmptyStateFooter></EmptyState>
 );
 
 const TabsMenu = ({ searchRef, search, setSearch, fields, onClick }) => {
@@ -45,16 +42,18 @@ const TabsMenu = ({ searchRef, search, setSearch, fields, onClick }) => {
 
   return (
     <Menu isPlain isScrollable>
-      <MenuInput ref={searchRef} className="pf-u-mx-sm">
-        <TextInput
-          aria-label="Filter menu items"
-          placeholder="Search services"
-          iconVariant="search"
-          type="search"
-          onChange={(value) => setSearch(value)}
-          value={search}
-        />
-      </MenuInput>
+      <MenuSearch>
+        <MenuSearchInput ref={searchRef} className="pf-u-mx-sm">
+          <TextInput
+            aria-label="Filter menu items"
+            placeholder="Search services"
+            customIcon="search"
+            type="search"
+            onChange={(_e, value) => setSearch(value)}
+            value={search}
+          />
+        </MenuSearchInput>
+      </MenuSearch>
       <Divider />
       <MenuContent id="notifications-menu-content">
         {fields.some((bundle) => bundle.fields.length > 0)

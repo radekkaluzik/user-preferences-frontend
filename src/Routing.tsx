@@ -28,7 +28,7 @@ const renderRoutes = (routes: RouteType[] = []) =>
 
 export const Routing = () => {
   const renderedRoutes = useMemo(() => renderRoutes(routes), [routes]);
-  return (<Suspense fallback={Fragment}>
+  return (<Suspense fallback="">
     <Routes>
       {renderedRoutes}
       {/* Catch all unmatched routes */}

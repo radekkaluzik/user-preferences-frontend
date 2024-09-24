@@ -3,10 +3,10 @@
 exports[`getSection should return loader 1`] = `
 <div>
   <div
-    class="pf-c-skeleton ins-c-skeleton ins-c-skeleton__md"
+    class="pf-v5-c-skeleton ins-c-skeleton ins-c-skeleton__md"
   >
     <span
-      class="pf-u-screen-reader"
+      class="pf-v5-screen-reader"
     />
   </div>
 </div>

@@ -46,7 +46,7 @@ const FormTabs = ({ fields, titleRef, bundles }) => {
         container.getBoundingClientRect().height -
         titleRef.current.getBoundingClientRect().height -
         searchRef.current.getBoundingClientRect().height -
-        (menuMaxHeight < menu.scrollHeight ? buttonsHeight : 0) -
+        (menu.style.height < menu.scrollHeight ? buttonsHeight : 0) -
         1;
       menu.style.maxHeight = `${menuMaxHeight}px`;
       menu.style.height = `${menuMaxHeight - buttonsHeight}px`;

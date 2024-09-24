@@ -5,6 +5,8 @@ import {
   Divider,
   EmptyState,
   EmptyStateBody,
+  EmptyStateFooter,
+  EmptyStateHeader,
   EmptyStateIcon,
   EmptyStateVariant,
   Menu,
@@ -14,7 +16,7 @@ import {
   MenuList,
   MenuSearch,
   MenuSearchInput,
-  TextInput, EmptyStateHeader, EmptyStateFooter,
+  TextInput,
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -23,12 +25,18 @@ import { getNavFromURL } from './urlSync';
 
 const renderEmptyState = (setSearch) => (
   <EmptyState variant={EmptyStateVariant.sm} className="pf-u-mt-lg">
-    <EmptyStateHeader titleText="No matching services found" icon={<EmptyStateIcon icon={SearchIcon} />} headingLevel="h4" />
-    <EmptyStateBody>Adjust your filters and try again.</EmptyStateBody><EmptyStateFooter>
-    <Button variant={ButtonVariant.link} onClick={() => setSearch('')}>
-      Clear filters
-    </Button>
-  </EmptyStateFooter></EmptyState>
+    <EmptyStateHeader
+      titleText="No matching services found"
+      icon={<EmptyStateIcon icon={SearchIcon} />}
+      headingLevel="h4"
+    />
+    <EmptyStateBody>Adjust your filters and try again.</EmptyStateBody>
+    <EmptyStateFooter>
+      <Button variant={ButtonVariant.link} onClick={() => setSearch('')}>
+        Clear filters
+      </Button>
+    </EmptyStateFooter>
+  </EmptyState>
 );
 
 const TabsMenu = ({ searchRef, search, setSearch, fields, onClick }) => {

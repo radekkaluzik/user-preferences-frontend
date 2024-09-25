@@ -54,6 +54,7 @@ const TabsMenu = ({ searchRef, search, setSearch, fields, onClick }) => {
       <MenuSearch>
         <MenuSearchInput ref={searchRef} className="pf-u-mx-sm">
           <SearchInput
+            data-testid="search-input"
             aria-label="Filter menu items"
             placeholder="Search services"
             customIcon={<SearchIcon />}

@@ -5,6 +5,7 @@ import {
   getByRole,
   getByText,
   render,
+  screen,
 } from '@testing-library/react';
 import TabsMenu from './TabsMenu';
 
@@ -130,11 +131,12 @@ describe('TabsMenu tests', () => {
         )}
       </Form>
     );
-    fireEvent.change(getByRole(container, 'searchbox'), {
+    const input = screen.getByPlaceholderText('Search services');
+    fireEvent.change(input, {
       target: { value: 'someText' },
     });
-    expect(setSearch).toBeCalledTimes(1);
-    expect(setSearch).toBeCalledWith('someText');
+    expect(setSearch).toHaveBeenCalledTimes(1);
+    expect(setSearch).toHaveBeenCalledWith('someText');
   });
   it('should call onClick callback correctly', () => {
     const onClick = jest.fn();

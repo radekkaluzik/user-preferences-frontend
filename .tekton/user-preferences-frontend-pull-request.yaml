@@ -16,6 +16,8 @@ metadata:
   name: user-preferences-frontend-on-pull-request
   namespace: rh-platform-experien-tenant
 spec:
+  timeouts:
+    pipeline: "0h6m0s"
   params:
   - name: git-url
     value: '{{source_url}}'

@@ -55,7 +55,7 @@ const TabsMenu = ({ searchRef, search, setSearch, fields, onClick }) => {
           <TextInput
             aria-label="Filter menu items"
             placeholder="Search services"
-            customIcon="search"
+            customIcon={<SearchIcon />}
             type="search"
             onChange={(_e, value) => setSearch(value)}
             value={search}

@@ -16,6 +16,7 @@ import {
   MenuList,
   MenuSearch,
   MenuSearchInput,
+  SearchInput,
   TextInput,
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
@@ -52,12 +53,13 @@ const TabsMenu = ({ searchRef, search, setSearch, fields, onClick }) => {
     <Menu isPlain isScrollable>
       <MenuSearch>
         <MenuSearchInput ref={searchRef} className="pf-u-mx-sm">
-          <TextInput
+          <SearchInput
             aria-label="Filter menu items"
             placeholder="Search services"
             customIcon={<SearchIcon />}
             type="search"
             onChange={(_e, value) => setSearch(value)}
+            onClear={(_e) => setSearch('')}
             value={search}
           />
         </MenuSearchInput>

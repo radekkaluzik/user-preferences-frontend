@@ -16,7 +16,7 @@ metadata:
   namespace: rh-platform-experien-tenant
 spec:
   timeouts:
-  pipeline: "0h8m0s"
+    pipeline: "0h15m0s"
   params:
   - name: git-url
     value: '{{source_url}}'

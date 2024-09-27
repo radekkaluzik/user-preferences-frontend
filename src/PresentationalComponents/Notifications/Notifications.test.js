@@ -13,10 +13,12 @@ import {
   act,
   fireEvent,
   getAllByRole,
+  getByLabelText,
   getByRole,
   getByText,
   queryByText,
   render,
+  screen,
 } from '@testing-library/react';
 import { calculateEmailConfigResponse, userPrefInitialState } from './testData';
 
@@ -125,15 +127,13 @@ describe('Notifications tests', () => {
         bundles: {},
       }),
     }));
-    let wrapper;
-    await act(async () => {
-      wrapper = render(
-        <Provider store={mockStore(initialState)}>
-          <Notifications />
-        </Provider>
-      );
-    });
-    fireEvent.change(getByRole(wrapper.container, 'searchbox'), {
+    const wrapper = render(
+      <Provider store={mockStore(initialState)}>
+        <Notifications />
+      </Provider>
+    );
+    const input = screen.getByPlaceholderText('Search services');
+    fireEvent.change(input, {
       target: { value: 'someText' },
     });
     expect(

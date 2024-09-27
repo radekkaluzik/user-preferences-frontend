@@ -31,8 +31,8 @@ const DescriptiveCheckbox = (props) => {
       isChecked={checked}
       isDisabled={disabled}
       id={`descriptive-checkbox-${input.name}`}
-      onChange={(checked, event, ...rest) => {
-        onChange(checked, event, ...rest);
+      onChange={(event, checked, ...rest) => {
+        onChange(event, checked, ...rest);
         afterChange?.(formOptions, checked);
       }}
       data-type="descriptive-checkbox"

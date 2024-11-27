@@ -63,6 +63,13 @@ export const calculateEmailConfig = (
                 getEmailSchema({ application: key, url, apiName, apiVersion })
               );
             }
+          } else {
+            dispatch(
+              getEmailSchema({
+                schema: Promise.resolve(),
+                application: key,
+              })
+            );
           }
         })();
 

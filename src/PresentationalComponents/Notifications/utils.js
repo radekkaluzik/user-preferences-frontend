@@ -42,17 +42,18 @@ export const prepareFields = (notifPref, emailPref, emailConfig) =>
             let selectAllActive = true;
             const fields = [
               ...Object.entries(emailPref).reduce(
-                (acc, emailSection) => [
+                (acc, [emailSectionKey, emailSectionValue]) => [
                   ...acc,
-                  ...(emailSection[0] === appKey &&
-                  emailConfig[emailSection[0]]?.bundle === bundleKey
+                  ...(emailSectionKey === appKey &&
+                  emailConfig[emailSectionKey]?.bundle === bundleKey &&
+                  emailSectionValue.schema.length !== 0
                     ? [
                         {
                           label: 'Reports',
                           name: 'email-reports',
                           component: INPUT_GROUP,
                           level: 1,
-                          fields: emailSection[1].schema[0]?.fields?.map(
+                          fields: emailSectionValue.schema[0]?.fields?.map(
                             (field) => {
                               selectAllActive =
                                 selectAllActive && field.initialValue;
